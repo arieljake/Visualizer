@@ -1,0 +1,90 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="/js-lib/css/external/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/js-lib/css/external/bootstrap/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="/js-lib/css/external/jquery/jquery.tooltip.css">
+
+	<script src="/js-lib/js/external/jquery/jquery-1.7.2.min.js" ></script>
+	<script src="/js-lib/js/external/jquery/jquery-ui-1.8.21.custom.min.js" ></script>
+	<script src="/js-lib/js/external/jquery/jquery.tooltip.min.js" ></script>
+	<script src="/js-lib/js/external/d3/d3.v2.js" ></script>
+	<script src="/js-lib/js/external/underscore/underscore-min.js"></script>
+	<script src="/js-lib/js/external/underscore/underscore.strings.js"></script>
+
+	<script src="/javascripts/model/TeamMatchups.js"></script>
+	<script src="/javascripts/model/Matchup.js"></script>
+	<script src="/javascripts/model/Team.js"></script>
+
+	<script>
+
+		var matchups;
+
+		$(document).ready(function()
+		{
+			$.get("/values/team7matchups", function(_matchups)
+			{
+				matchups = new TeamMatchups(_matchups);
+
+				var weekList = $('<ul id="weekList"></ul>');
+				weekList.appendTo("#content");
+
+				var matchupDiv = $('<div id="matchup"></div>');
+				matchupDiv.appendTo("#content");
+
+				matchups.getMatchups().forEach(function(matchup)
+				{
+					var weekItem = $('<li></li>');
+					var weekLink = weekItem.append('<a href="#">' + matchup.getWeek() + '</a>');
+					weekItem.appendTo(weekList);
+
+					weekLink.bind('click', function(e)
+					{
+						showMatchupWeek(matchup.getWeek());
+					});
+				});
+			});
+		});
+
+		function showMatchupWeek(weekNo)
+		{
+			var matchup = matchups.getWeekMatchup(weekNo);
+
+			var matchupDiv = $('#matchup');
+			matchupDiv.children().remove();
+
+			var matchupHeader = matchupDiv.append('<div id="matchupHeader"></div>');
+			matchup.getTeams().forEach(function(team)
+			{
+				var teamScore = matchupHeader.append('<div class="teamScore"></div>');
+				teamScore.append('<h2>' + team.getName() +' </h2>');
+				teamScore.append('<span>' + team.getPointsScored() + '</span>');
+			})
+
+
+		}
+
+	</script>
+	<style>
+
+		body.app {
+			overflow: auto;
+		}
+
+		#content {
+			position: absolute;
+			top: 30px;
+			left: 0;
+			z-index: 100;
+		}
+
+	</style>
+</head>
+<body class="app">
+
+	<div id="content">
+
+	</div>
+
+</body>
+</html>

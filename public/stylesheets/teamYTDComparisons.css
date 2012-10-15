@@ -1,0 +1,138 @@
+
+/* Structure */
+
+body {
+    overflow: auto;
+}
+
+#main {
+    position: absolute;
+    top: 70px;
+    left: 360px;
+    height: 100%;
+}
+
+#sidebar {
+    position: absolute;
+    top: 70px;
+    left: 5px;
+    width: 260px;
+    height: 100%;
+}
+
+.teamYTD {
+
+}
+
+.teamYTD label {
+    display: inline-block;
+    width: 250px;
+    position: relative;
+}
+
+.teamGames {
+    display: inline-block;
+}
+
+.col {
+    display: inline-block;
+}
+
+.teamGameSummary {
+    display: inline-block;
+}
+
+/* Style */
+
+body {
+    background-color: #FFF;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+}
+
+#main {
+    /*border-left: 1px solid black;*/
+    padding-left: 10px;
+}
+
+#sidebar {
+    background-color: #FFF;
+    padding: 25px 0;
+    border: 1px solid black;
+}
+
+#sidebar h3 {
+    padding-left: 10px;
+}
+
+.teamYTD .teamInfo {
+    font-size: 20pt;
+    padding-bottom: 20px;
+}
+
+.gameSummary .field {
+    padding: 5px 0;
+}
+
+.gameSummary .field, .gameSummary label {
+    font-size: 13pt;
+    font-family: serif;
+}
+
+.gameSummary .weekNo, .gameSummary .weekNo label {
+    font-size: 16pt;
+    font-weight: normal;
+}
+
+.gameSummary .weekNo {
+    border-bottom: 1px dashed #777;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+}
+
+.teamGames .gameSummary {
+    padding: 10px 10px;
+}
+
+.teamGames .row0 {
+    background-color: #DDD;
+}
+
+.teamGames .row1 {
+    background-color: #BBB;
+}
+
+ul#uiElementsMenu {
+    list-style: none;
+    width: 100%;
+    padding: 0 0;
+    margin: 0 0;
+}
+
+#uiElements h3 {
+	font-size: 13pt;
+}
+
+#uiElementsMenu li {
+    font-size: 12pt;
+    display: block;
+    width: 100%;
+    border-top: 1px dashed black;
+}
+
+#uiElementsMenu li:hover {
+    background-color: #FFFFCC;
+    border-top: 1px solid black;
+}
+
+#uiElementsMenu a {
+    display: block;
+    padding: 10px 20px;
+}
+
+#uiElementsMenu a:hover {
+    text-decoration: none;
+}

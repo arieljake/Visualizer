@@ -1,0 +1,22 @@
+{
+    "name":"Project",
+    "version":"0.0.1",
+    "private":true,
+    "scripts":{
+        "start":"node program"
+    },
+    "dependencies":{
+        "commander":"1.0.x",
+        "express":"*",
+        "file-utils": "0.2.4",
+        "jade":"*",
+        "loggly":"0.3.11",
+	    "mongodb": ">= 0.9.8",
+        "mongoskin":"0.3.x",
+        "neo4j":"0.2.x",
+        "node-gearman":"0.2.x",
+        "socket.io": "0.9.10",
+        "underscore":"*",
+        "underscore.string":"*"
+	}
+}

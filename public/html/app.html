@@ -1,0 +1,170 @@
+
+<html>
+<head>
+	<link rel="stylesheet" href="/js-lib/css/external/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/js-lib/css/external/bootstrap/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="/js-lib/css/external/jquery/jquery.tooltip.css">
+
+	<script src="/js-lib/js/external/jquery/jquery-1.7.2.min.js" ></script>
+	<script src="/js-lib/js/external/jquery/jquery-ui-1.8.21.custom.min.js" ></script>
+	<script src="/js-lib/js/external/jquery/jquery.tooltip.min.js" ></script>
+	<script src="/js-lib/js/external/d3/d3.v2.js" ></script>
+	<script src="/js-lib/js/external/underscore/underscore-min.js"></script>
+	<script src="/js-lib/js/external/underscore/underscore.strings.js"></script>
+
+	<script src="/node-lib/interfaces/IDatabase.js"></script>
+	<script src="/js-lib/js/graphs/IGraphDatasource.js" ></script>
+	<script src="/js-lib/js/external/canvg/rgbcolor.js" ></script>
+	<script src="/js-lib/js/external/canvg/canvg.js" ></script>
+	<script src="/js-lib/js/graphs/SaveGraphToImg.js" ></script>
+
+	<script>
+
+		var graphW = 600;
+		var graphH = 600;
+
+		$(document).ready(function()
+		{
+			var params = window.location.href.split("?").pop();
+			var props = _.toQueryParams(params);
+
+			var datasource = new IGraphDatasource({
+				getData: function(cb)
+				{
+					if (props.dataUrl !== undefined)
+					{
+						$.get(props.dataUrl, function(data)
+						{
+							cb(null,data);
+						})
+					}
+					else
+					{
+						cb([]);
+					}
+				}
+			});
+
+			if (props.graphType !== undefined)
+			{
+				$.getScript(props.graphType, function(data)
+				{
+					var graphClassName = props.graphType.split("/").pop().split(".").shift();
+					var graphClass = window[graphClassName];
+					var graph = new graphClass("#chart",graphW,graphH,datasource);
+					graph.init();
+					graph.load();
+				});
+			}
+
+			var toImg;
+
+			$("#canvasBtn").bind('click', function(e)
+			{
+				toImg = new SaveGraphToImg();
+				toImg.convertSVG("#myCanvas","#chart");
+				$("#js-output").val(toImg.getCanvasInstructions());
+			});
+
+			$("#imgBtn").bind('click', function(e)
+			{
+				$("#canvasCopy").remove();
+
+				if (toImg)
+				{
+					var canvas = document.getElementById("myCanvas");
+					var img    = canvas.toDataURL("image/png");
+					$("body").append('<img id="canvasCopy" src="'+img+'"/>');
+				}
+			});
+
+			$("#uploadBtn").bind('click', function(e)
+			{
+				if ($("#canvasCopy").length > 0)
+				{
+					var img = $("#canvasCopy");
+					var src = img.attr('src');
+					var postData = '["' + src + '"]';
+
+					$.ajax({
+						url: "/images/" + ((new Date()).getTime() + ".png"),
+						type: "POST",
+						data: postData,
+						contentType: "application/json"
+					})
+				}
+			});
+
+			$("#testBtn").bind('click', function(e)
+			{
+				var testScript = $("#js-output").val().trim();
+
+				if (testScript.length > 0)
+				{
+					var canvas = $("#myCanvas")[0];
+					var ctx = canvas.getContext('2d');
+
+					var fn = new Function('ctx',testScript);
+					fn(ctx);
+				}
+			});
+		});
+
+	</script>
+	<style>
+
+		body.app {
+			overflow: auto;
+		}
+
+		#chart {
+			position: absolute;
+			top: 30px;
+			left: 0;
+			z-index: 100;
+		}
+
+		#myCanvas {
+			position: absolute;
+			top: 30px;
+			left: 600px;
+			z-index: 100;
+		}
+
+		#canvasCopy {
+			position: absolute;
+			top: 30px;
+			left: 1200px;
+			z-index: 100;
+		}
+
+		#js-output {
+			position: absolute;
+			top: 700px;
+			left: 0;
+		}
+
+		#testBtn {
+			position: absolute;
+			top: 680px;
+			left: 0;
+		}
+
+	</style>
+</head>
+<body class="app">
+
+	<div id="content">
+		<button id="canvasBtn">As Canvas</button>
+		<button id="imgBtn">As Image</button>
+		<button id="uploadBtn">Upload Image</button>
+
+		<div id="chart"></div>
+		<canvas id="myCanvas" width="600" height="600"></canvas>
+
+		<button id="testBtn">Run Script</button>
+		<textarea id="js-output" style="width:600px;height:192px"></textarea>
+	</div>
+
+</body>
+</html>
