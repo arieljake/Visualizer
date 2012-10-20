@@ -1,6 +1,8 @@
 .idea
-data
+db
 node_modules
 lib/node-lib
 public/js-lib
 *~
+.gitignore~
+.DS_Store

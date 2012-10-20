@@ -1,0 +1,6 @@
+.idea
+db
+node_modules
+lib/node-lib
+public/js-lib
+*~
