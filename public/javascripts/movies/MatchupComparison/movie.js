@@ -1,5 +1,5 @@
 
-var _scenes = [""];
+var _scenes = ["QBComparisons"];
 
 define(RequireImports.new()
 	.add("/javascripts/movies", ["Movie.js"])

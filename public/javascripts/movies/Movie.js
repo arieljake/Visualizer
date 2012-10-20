@@ -1,110 +1,127 @@
 
 
-
-var Movie = function()
+define(RequireImports.new()
+	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
+	.add("/js-lib/js/graphs", ["Transitions.js"])
+	.toArray(), function ()
 {
-
-};
-
-Movie.prototype.start = function()
-{
-	window.curMovie = this;
-
-	var self = this;
-	self.data = {};
-
-	self.scenes = _.map(self.sceneNames, function(sceneName)
+	(function (context, movieName, sceneNames)
 	{
-		var sceneType = window[sceneName];
-		var scene = new sceneType(self);
-
-		return scene;
-	});
-
-	self.vis = this.parent.append("svg:svg")
-		.classed("movie",1)
-		.attr("width", this.w)
-		.attr("height", this.h);
-
-	var sequence = new CommandSequence(self.scenes.concat());
-	sequence.execute();
-};
-
-Movie.prototype.getXFn = function(selector)
-{
-	return this.getPositionFn(selector,"x");
-};
-
-Movie.prototype.getYFn = function(selector)
-{
-	return this.getPositionFn(selector,"y");
-};
-
-Movie.prototype.getPositionFn = function(selector,attr)
-{
-	var self = this;
-	var positions = this.getPositionsOf(selector);
-
-	return (function(posArray,field)
-	{
-		return function(d,i)
+		var thing = context[movieName] = function ()
 		{
-			return posArray[i][field];
+			
 		};
-	})(positions,attr);
-};
 
-Movie.prototype.getPositionsOf = function(selector)
-{
-	var self = this;
-	var items = typeof selector == "string" ? this.vis.selectAll(selector) : selector;
-	var positions = [];
+		thing.prototype.start = function(cb)
+		{
+			window.curMovie = this;
+	
+			var self = this;
+			self.data = {};
+	
+			self.scenes = _.map(self.sceneNames, function(sceneName)
+			{
+				console.log("Movie loading scene: " + sceneName);
 
-	items.each(function(d,i)
-	{
-		positions.push({
-			x: self.getX(this),
-			y: self.getY(this)
-		});
-	});
+				var sceneType = window[sceneName];
+				var scene = new sceneType(self);
+	
+				return scene;
+			});
+	
+			self.vis = this.parent.append("svg:svg")
+				.classed("movie",1)
+				.attr("width", this.w)
+				.attr("height", this.h);
+	
+			var sequence = new CommandSequence(self.scenes.concat());
+			sequence.execute(null,function()
+			{
+				console.log(movieName + " movie complete.");
 
-	return positions;
-};
+				if (cb)
+					cb();
+			});
+		};
 
-Movie.prototype.getX = function(obj)
-{
-	obj = d3.select(obj);
+		thing.prototype.getXFn = function(selector)
+		{
+			return this.getPositionFn(selector,"x");
+		};
 
-	if (obj.length == 0)
-		return 0;
+		thing.prototype.getYFn = function(selector)
+		{
+			return this.getPositionFn(selector,"y");
+		};
 
-	var objType = obj[0][0].toString();
+		thing.prototype.getPositionFn = function(selector,attr)
+		{
+			var self = this;
+			var positions = this.getPositionsOf(selector);
 
-	if (objType.indexOf("SVGGElement") > 0)
-	{
-		return obj.attr("transform") ? parseFloat(obj.attr("transform").replace("translate(","").split(",").shift()) : 0;
-	}
-	else
-	{
-		return parseFloat(obj.attr("x")) ? parseFloat(obj.attr("x")) : 0;
-	}
-};
+			return (function(posArray,field)
+			{
+				return function(d,i)
+				{
+					return posArray[i][field];
+				};
+			})(positions,attr);
+		};
 
-Movie.prototype.getY = function(obj)
-{
-	obj = d3.select(obj);
+		thing.prototype.getPositionsOf = function(selector)
+		{
+			var self = this;
+			var items = typeof selector == "string" ? this.vis.selectAll(selector) : selector;
+			var positions = [];
 
-	if (obj.length == 0)
-		return 0;
+			items.each(function(d,i)
+			{
+				positions.push({
+					x: self.getX(this),
+					y: self.getY(this)
+				});
+			});
 
-	var objType = obj[0][0].toString();
+			return positions;
+		};
 
-	if (objType.indexOf("SVGGElement") > 0)
-	{
-		return obj.attr("transform") ? parseFloat(obj.attr("transform").replace("translate(","").split(",").pop()) : 0;
-	}
-	else
-	{
-		return parseFloat(obj.attr("x")) ? parseFloat(obj.attr("y")) : 0;
-	}
-};
+		thing.prototype.getX = function(obj)
+		{
+			obj = d3.select(obj);
+
+			if (obj.length == 0)
+				return 0;
+
+			var objType = obj[0][0].toString();
+
+			if (objType.indexOf("SVGGElement") > 0)
+			{
+				return obj.attr("transform") ? parseFloat(obj.attr("transform").replace("translate(","").split(",").shift()) : 0;
+			}
+			else
+			{
+				return parseFloat(obj.attr("x")) ? parseFloat(obj.attr("x")) : 0;
+			}
+		};
+
+		thing.prototype.getY = function(obj)
+		{
+			obj = d3.select(obj);
+
+			if (obj.length == 0)
+				return 0;
+
+			var objType = obj[0][0].toString();
+
+			if (objType.indexOf("SVGGElement") > 0)
+			{
+				return obj.attr("transform") ? parseFloat(obj.attr("transform").replace("translate(","").split(",").pop()) : 0;
+			}
+			else
+			{
+				return parseFloat(obj.attr("x")) ? parseFloat(obj.attr("y")) : 0;
+			}
+		};
+
+	})(window, "Movie", _scenes);
+});
