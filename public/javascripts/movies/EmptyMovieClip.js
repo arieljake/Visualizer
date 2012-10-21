@@ -12,7 +12,7 @@ define(RequireImports.new()
 			this.movie = movie;
 		};
 
-		scene.prototype = new MovieClip();
+		scene.prototype = new MovieClip("EmptyMovieClip");
 
 		scene.prototype.execute = function(params,cb)
 		{
@@ -21,12 +21,8 @@ define(RequireImports.new()
 			Teams.get(null,function(err,teams)
 			{
 				self.data = teams;
-
-				var vis = self.movie.vis;
-
-
-
-				cb();
+				self.vis = self.createVis();
+				self.once("end", cb);
 			});
 		}
 

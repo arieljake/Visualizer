@@ -3,20 +3,18 @@
 define(RequireImports.new()
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
-	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
 	.add("/javascripts/movies/",["MovieClip.js"])
-	.add("/javascripts/movies/MatchupComparison",["PosComparison.js","MatchupsAgenda.js"])
+	.add("/javascripts/movies/MatchupComparison",["PosComparison.js"])
 	.toArray(),function()
 {
 	(function (context, varName)
 	{
-		var scene = context[varName] = function (movie,matchupParams)
+		var scene = context[varName] = function (movie)
 		{
 			this.movie = movie;
-			this.matchupParams = matchupParams;
 		};
 
-		scene.prototype = new MovieClip("QBComparisons");
+		scene.prototype = new MovieClip();
 
 		scene.prototype.execute = function(params,cb)
 		{
@@ -48,5 +46,5 @@ define(RequireImports.new()
 			});
 		}
 
-	})(window, "QBComparisons");
+	})(window, "2TeamComparison");
 });

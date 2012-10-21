@@ -69,8 +69,7 @@ define(RequireImports.new()
 
 					self.vis.remove();
 					$(document).unbind("keypress", keypressHandler);
-					$(document).unbind("click", keypressHandler);
-					$(document).unbind("tap", keypressHandler);
+					$("g.pressSpacebarToContinue").bind("click", keypressHandler);
 
 					if (cb)
 						cb();
@@ -78,8 +77,7 @@ define(RequireImports.new()
 			};
 
 			$(document).bind("keypress", keypressHandler);
-			$(document).bind("click", keypressHandler);
-			$(document).bind("tap", keypressHandler);
+			$("g.pressSpacebarToContinue").bind("click", keypressHandler);
 		}
 
 		scene.prototype.fadeOut = function(cb)

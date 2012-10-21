@@ -8,48 +8,60 @@ define(RequireImports.new()
 {
 	(function (context, varName)
 	{
-		var scene = context[varName] = function (movie,pos,matchup)
+		var scene = context[varName] = function (movie,pos,params)
 		{
 			this.movie = movie;
 			this.pos = pos;
-			this.matchup = new Matchup(matchup);
+			this.teams = this.createTeams(params);
 		};
 
 		scene.prototype = new MovieClip("posComparisonGroup");
 
+		scene.prototype.createTeams = function(params)
+		{
+			var self = this;
+
+			if (params.toString() == "Matchup")
+			{
+				var matchup = params;
+
+				var team1 = {
+					name: matchup.getTeam1().getTeamName(),
+					playerColl: matchup.getTeam1().getActivePlayers().toPlayerCollection().filter(function(item)
+					{
+						return item.getPosition() == self.pos;
+					})
+				};
+
+				var team2 = {
+					name: matchup.getTeam2().getTeamName(),
+					playerColl: matchup.getTeam2().getActivePlayers().toPlayerCollection().filter(function(item)
+					{
+						return item.getPosition() == self.pos;
+					})
+				};
+
+				return [team1,team2];
+			}
+			else if (_.isArray(params))
+			{
+				return params;
+			}
+		};
+
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
-			self.vis = self.createVis()
-				.attr("transform",self.writeTranslate(300,135));
-			self.once("end", function()
-			{
-				cb();
-			});
+			self.vis = self.createVis();
+			self.once("end", cb	);
 
-			var team1 = {
-				name: self.matchup.getTeam1().getTeamName(),
-				playerColl: self.matchup.getTeam1().getActivePlayers().toPlayerCollection().filter(function(item)
-				{
-					return item.getPosition() == self.pos;
-				}),
-				x: 5,
-				y: 40
-			};
+			self.teams[0].x = 5;
+			self.teams[0].y = 40;
+			self.teams[0].opponent = self.teams[1];
 
-			var team2 = {
-				name: self.matchup.getTeam2().getTeamName(),
-				playerColl: self.matchup.getTeam2().getActivePlayers().toPlayerCollection().filter(function(item)
-				{
-					return item.getPosition() == self.pos;
-				}),
-				x: 225,
-				y: 40
-			};
-
-			team1.opponent = team2;
-			team2.opponent = team1;
-			var teams = [team1,team2];
+			self.teams[1].x = 225;
+			self.teams[1].y = 40;
+			self.teams[1].opponent = self.teams[0];
 
 			self.vis.append("text").classed("title",1)
 				.text(self.pos + " Comparison")
@@ -63,7 +75,7 @@ define(RequireImports.new()
 				.duration(1250)
 				.attr("opacity",1);
 
-			self.callIn("showTeams",950,cb,teams);
+			self.callIn("showTeams",950,cb,self.teams);
 		};
 
 		scene.prototype.showTeams = function(teams,cb)

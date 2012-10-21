@@ -5,11 +5,11 @@ define(RequireImports.new()
 	.add("/js-lib/js/graphs", ["Transitions.js"])
 	.toArray(), function ()
 {
-	(function (context, movieName, sceneNames)
+	(function (context, movieName)
 	{
 		var thing = context[movieName] = function ()
 		{
-			
+			this.name = movieName;
 		};
 
 		thing.prototype.start = function(cb)
@@ -18,17 +18,6 @@ define(RequireImports.new()
 	
 			var self = this;
 			self.data = {};
-	
-			self.scenes = _.map(self.sceneNames, function(sceneName)
-			{
-				console.log("Movie loading scene: " + sceneName);
-
-				var sceneType = window[sceneName];
-				var scene = new sceneType(self);
-	
-				return scene;
-			});
-	
 			self.vis = this.parent.append("svg:svg")
 				.classed("movie",1)
 				.attr("width", this.w)
@@ -37,7 +26,7 @@ define(RequireImports.new()
 			var sequence = new CommandSequence(self.scenes.concat());
 			sequence.execute(null,function()
 			{
-				console.log(movieName + " movie complete.");
+				console.log(self.name + " movie complete.");
 
 				if (cb)
 					cb();
@@ -123,5 +112,5 @@ define(RequireImports.new()
 			}
 		};
 
-	})(window, "Movie", _scenes);
+	})(window, "Movie");
 });

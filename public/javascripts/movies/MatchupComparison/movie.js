@@ -1,9 +1,7 @@
 
-var _scenes = ["QBComparisons"];
-
 define(RequireImports.new()
 	.add("/javascripts/movies", ["Movie.js"])
-	.add("/javascripts/movies/MatchupComparison", _.map(_scenes,function(filename) { return filename + ".js";}))
+	.add("/javascripts/movies/MatchupComparison", ["QBComparisons.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName, sceneNames)
@@ -14,7 +12,9 @@ define(RequireImports.new()
 			this.parent = d3.selectAll(parentSelector);
 			this.w = 2000;
 			this.h = 2000;
-			this.sceneNames = sceneNames;
+			this.scenes = [
+				(new QBComparisons(this,{weekNo: 6})).setPosition(100,50)
+			];
 			this.constants = {
 
 			};
@@ -23,5 +23,5 @@ define(RequireImports.new()
 
 		movie.prototype = new Movie();
 
-	})(window, "MatchupComparison", _scenes);
+	})(window, "MatchupComparison");
 });

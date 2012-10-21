@@ -1219,8 +1219,6 @@ div.popupwrap span {
 }
 #yspadNT1 {
   text-align:center;
-  padding:3px 0 3px 0;
-  background:#fff;
   margin-bottom:6px;
 }
 #yspadNT1 table {
@@ -1390,6 +1388,40 @@ a.view-video {
     border-color: #ea2502;
     
 }
+.proleagues-icon {
+    display: block;
+    font-size: 77%;
+    margin-top: 2px;
+    *margin-top: 4px;
+    background-color: #790000;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    font-weight: bold;
+    height: 13px;
+    padding-top: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 35px;
+}
+#leaguehome-title .proleagues-icon {
+    float: left;
+    font-size: 70%;
+    height: 13px;
+    height: 14px\9;
+    margin: 3px 0 0 5px;
+}
+#settings .proleagues-icon {
+    display: inline-block;
+    margin-left: 5px;
+}
+@-moz-document url-prefix() { 
+    #leaguehome-title .proleagues-icon { margin-top: 5px; height: 15px; padding-top: 2px;}
+}
+#leaguehome-title .proleagues-icon.mlb { background-color: #134304; }
+#leaguehome-title .proleagues-icon.nba { background-color: #A0410D; }
+#leaguehome-title .proleagues-icon.nfl { background-color: #790000; }
+#leaguehome-title .proleagues-icon.nhl { background-color: #216191; }
+
 /* Recommended invisible element by Accessibility Team */
 .el-invisible {
   position: absolute !important;
@@ -5733,71 +5765,71 @@ ENV.ATTRS = {
 
                     },
                     
-                    'ys' : {
+                    'media' : {
                         'combine' : true,
                         'base' : 'http://l.yimg.com/os/mit/media/m/sports/',
                         'comboBase' : 'http://l.yimg.com/zz/combo?',
                         'root' : '/os/mit/media/m/sports/',
                         'modules' :  {
-                            "ys-plugin-overlay-surround" : {
-                                path : 'plugin-overlay-surround-min-145300.js',
+                            "media-overlay-surround" : {
+                                path : 'playernotes/overlay-surround-min-757056.js',
                                 requires : ['plugin', 'base-build', 'node-screen', 'event-resize']
                             },
-                            "ys-plugin-overlay-close" : {
-                                path : 'plugin-overlay-close-min-140631.js',
-                                requires : ['plugin', 'base-build', 'node-event-delegate']
+                            "media-overlay-close" : {
+                                path : 'playernotes/overlay-close-min-855056.js',
+                                requires : ['plugin', 'base-build', 'node-event-delegate', 'event-key']
                             },
-                            "ys-plugin-playernote-view" : {
-                                path : 'plugin-playernote-view-min-145300.js',
-                                requires : ['plugin', 'base-build']
+                            "media-playernote-view" : {
+                                path : 'playernotes/playernote-view-min-757038.js',
+                                requires: ['plugin', 'base-build'] 
                             },
-                            "ys-playernote" : {
-                                path : 'playernote-min-157732.js',
-                                requires : ['overlay', 'io-base', 'json-parse', 'ys-plugin-overlay-surround', 'ys-plugin-overlay-close', 'dd-plugin', 'ys-playernote-css', 'substitute', 'ys-plugin-playernote-view']
+                            "media-playernote" : {
+                                path : 'playernotes/playernote-min-855056.js',
+                                requires : ['overlay', 'io-base', 'json-parse', 'media-overlay-surround', 'media-overlay-close', 'dd-plugin', 'media-playernote-css', 'substitute', 'media-playernote-view', 'media-playernote-tabs', 'transition', 'media-playernote-views-notes', 'media-playernote-views-twitter', 'media-playernote-views-availability', 'media-playernote-views-video']
                             },
-                            "ys-playernotes" : {
-                                path : 'playernotes-min-150286.js',
-                                requires : ['node-event-delegate', 'base-build']
+                            "media-playernotes" : {
+                                path : 'playernotes/playernotes-min-855056.js',
+                                requires : ['node-event-delegate', 'base-build', 'selector-css3', 'media-playernote']
                             },
-                            "ys-playernote-views-notes" : {
-                                path : 'playernote-views-notes-min-140631.js',
-                                requires : ['ys-plugin-playernote-view', 'ys-playernote-views-notes-css', 'node-event-delegate', 'base-build', 'tabview', 'yui2-datasource', 'yui2-datatable']
+                            "media-playernote-views-notes" : {
+                                path : 'playernotes/playernote-views-notes-min-849493.js',
+                                requires : ['media-playernote-view', 'media-playernote-views-notes-css', 'node-event-delegate', 'base-build', 'tabview']
                             },
-                            "ys-playernote-views-notes-css" : {
-                                path : 'playernote-views-notes-min-143140.css',
+                            "media-playernote-views-notes-css" : {
+                                path : 'playernote-views-notes-min-849447.css',
                                 type : 'css'
                             },
-                            "ys-playernote-tabs" : {
-                                path : 'playernote-tabs-min-323571.js',
-                                requires : ['plugin', 'base-build', 'node-event-delegate', 'transition', 'ys-playernote-tabs-css']
+                            "media-playernote-tabs" : {
+                                path : 'playernotes/playernote-tabs-min-757056.js',
+                                requires : ['plugin', 'base-build', 'node-event-delegate', 'transition', 'media-playernote-tabs-css']
                             },
-                            "ys-playernote-tabs-css" : {
+                            "media-playernote-tabs-css" : {
                                 path : 'playernote-tabs-min-323571.css',
                                 type : 'css'
                             },
-                            "ys-playernote-css" : {
-                                path : 'playernote-min-153108.css',
+                            "media-playernote-css" : {
+                                path : 'playernote-min-761788.css',
                                 type : 'css'
                             },
-                            "ys-playernote-views-twitter" : {
-                                path : 'playernote-views-twitter-min-145300.js',
-                                requires : ['ys-plugin-playernote-view', 'ys-playernote-views-twitter-css', 'node-event-delegate', 'node-style', 'selector-css3']
+                            "media-playernote-views-twitter" : {
+                                path : 'playernotes/playernote-views-twitter-min-761788.js',
+                                requires : ['media-playernote-view', 'media-playernote-views-twitter-css', 'node-event-delegate', 'node-style', 'selector-css3']
                             },
-                            "ys-playernote-views-twitter-css" : {
-                                path : 'playernote-views-twitter-min-145300.css',
+                            "media-playernote-views-twitter-css" : {
+                                path : 'playernote-views-twitter-min-261580.css',
                                 type : 'css'
                             },
-                            "ys-playernote-views-video" : {
-                                path : 'playernote-views-video-min-145300.js',
-                                requires : ['ys-plugin-playernote-view', 'ys-playernote-views-video-css']
+                            "media-playernote-views-video" : {
+                                path : 'playernotes/playernote-views-video-min-761788.js',
+                                requires : ['media-playernote-view', 'media-playernote-views-video-css']
                             },
-                            "ys-playernote-views-video-css" : {
+                            "media-playernote-views-video-css" : {
                                 path : 'playernote-views-video-min-145300.css',
                                 type : 'css'
                             },
-                            "ys-playernote-views-availability" : {
-                                path : 'playernote-views-player-availability-min-325189.js',
-                                requires : ['ys-plugin-playernote-view']
+                            "media-playernote-views-availability" : {
+                                path : 'playernotes/playernote-views-player-availability-min-761788.js',
+                                requires : ['media-playernote-view']
                             }
                         }
 
@@ -6199,32 +6231,32 @@ ygagt=navigator.userAgent.toLowerCase();ygd=document;ygdom=(document.getElementB
             "varPRLeague" : "Menlo Park OG\'s Keeper League",
 "varPRCurrTeamID" : 99623546,
 "varPRCurrTeamName" : "ohSHnap!",
-"varPRCurrTeamRank" : 12,
-"varPRCurrTeamWeekScore" : 55.82,
-"varPRCurrTeamLastWeekScore" : 55.82,
-"varPRCurrTeamOverallScore" : 375.46,
-"varPROppTeamID" : 10623546,
-"varPROppTeamLastWeekID" : 10623546,
-"varPROppTeamName" : "Gixxer Gangsta",
-"varPROppTeamLastWeekName" : "Gixxer Gangsta",
-"varPROppTeamRank" : 11,
-"varPROppTeamWeekScore" : 65.08,
-"varPROppTeamLastWeekScore" : 65.08,
-"varPROppTeamOverallScore" : 460.28,
-"varPRLeagueTeams" : {"96623546" : "KickersHaveFeelings2", "92623546" : "On_My_Way", "97623546" : "Rick Rude", "94623546" : "Beer For Breakfast", "95623546" : "BEAST MODE", "12623546" : "OG OG triple OGs", "91623546" : "The Dirty Sanchez", "93623546" : "Tenderloin Trans", "11623546" : "Head Hancho", "98623546" : "Stangs", "10623546" : "Gixxer Gangsta", "99623546" : "ohSHnap!"},
-"varPRMyWinsInRow" : 1,
+"varPRCurrTeamRank" : 11,
+"varPRCurrTeamWeekScore" : 7.00,
+"varPRCurrTeamLastWeekScore" : 7.00,
+"varPRCurrTeamOverallScore" : 448.08,
+"varPROppTeamID" : 11623546,
+"varPROppTeamLastWeekID" : 11623546,
+"varPROppTeamName" : "Head Hancho",
+"varPROppTeamLastWeekName" : "Head Hancho",
+"varPROppTeamRank" : 7,
+"varPROppTeamWeekScore" : 18.20,
+"varPROppTeamLastWeekScore" : 18.20,
+"varPROppTeamOverallScore" : 574.72,
+"varPRLeagueTeams" : {"92623546" : "On_My_Way", "97623546" : "Rick Rude", "96623546" : "KickersHaveFeelings2", "95623546" : "BEAST MODE", "12623546" : "OG OG triple OGs", "94623546" : "Beer For Breakfast", "11623546" : "Head Hancho", "91623546" : "The Dirty Sanchez", "93623546" : "Tenderloin Trans", "98623546" : "Stangs", "99623546" : "ohSHnap!", "10623546" : "Gixxer Gangsta"},
+"varPRMyWinsInRow" : 2,
 "varPRMyLossesInRow" : 0,
 "varPROppWonLastWeek" : "True",
-"varPRCurrTeamWeeklyPointRank" : 11,
+"varPRCurrTeamWeeklyPointRank" : 5,
 "varPRRosterChange" : "True",
 "varPRRosterAdds" : "True",
 "varPRLeagueNumTeams" : 12,
 "varPRLeagueScoringType" : "head",
 "varPRLeagueInPlayoffs" : "False",
 "varPRCurrTeamPlayoffChampionshipContention" : "False",
-"varPRCurrTeamWeekProjectedPts" : 76.81,
-"varPROppTeamWeekProjectedPts" : 94.45,
-"varPRNewPlayerTD" : "True"
+"varPRCurrTeamWeekProjectedPts" : 89.46,
+"varPROppTeamWeekProjectedPts" : 62.08,
+"varPRNewPlayerTD" : "False"
         }
 
         YUI.Fantasy.SmartAd = function() {
@@ -6296,7 +6328,7 @@ ygagt=navigator.userAgent.toLowerCase();ygd=document;ygdom=(document.getElementB
 }
 
 /* fix IE 6 header jumping issue */
-#yuhead-hd {_height:27px;_padding-bottom:0px;}</style><div id="yUnivHead" class="yucs-en-us" data-lang="en-us" data-property="sports" data-flight="1350293983">        <a href="#yuhead-search" class="yucs-skipto-search yucs-activate">Skip to search.</a>        <div id="yuhead-hd" class="yuhead-clearfix">        <div id="yuhead-mepanel-cont">            <ul id="yuhead-mepanel" class="yucs-toolbar yucs-activate"  aria-label="User Services"><li id="yuhead-username" class="yucs-menu yuhead-nodivide yuhead-nopad yucs-um-activate">    <a class="yuhead-firstname yltasis" aria-haspopup="true" rel="nofollow"     target="_top"     href="http://us.lrd.yahoo.com/_ylt=AvD0tnlejtOiikxUciNpKfWncJ8u/SIG=11dhlnvpc/EXP=1351503583/**http%3A//profile.yahoo.com/">            <span class="yucs-avatar yucs-av-activate"     data-user="Ariel"     data-prof="Avatar"     data-crumb="KX3owy7iggO"     data-guid="FQWKQHYGMO7L7F7BVGNSPVJKKM"></span>                <span class="yuhead-hi">Hi,&nbsp;</span><span class="yuhead-name">Ariel</span>    <span class="yucs-menu-access sp yuhead-bullet-down"></span>    </a>    <ul id="yuhead-useroptions" class="yucs-menu-left hide">        <li>        <a href="http://us.lrd.yahoo.com/_ylt=Asnp.C5CpXngnaGS5wSh4KancJ8u/SIG=11dhlnvpc/EXP=1351503583/**http%3A//profile.yahoo.com/"         target="_top"        rel="nofollow">        Profile        </a>        </li>        <li>        <a href="https://us.lrd.yahoo.com/_ylt=AqAKC8tYldN3j8ZqrdLVzUGncJ8u/SIG=17c2ipc44/EXP=1351503583/**https%3A//edit.yahoo.com/mc2.0/eval_profile%3F.intl=us%26.lang=en-US%26.done=http%3A//football.fantasysports.yahoo.com/f1/623546/matchup%253fweek=6%2526mid1=8%2526mid2=11%26amp;.src=spt%26amp;.intl=us%26amp;.lang=en-US"         target="_top"        rel="nofollow">        Account Info        </a>        </li>                <li class="last-child">        You are signed in as: <span class="yuhead-yid">arieljake</span>        </li>    </ul></li><li id="yuhead-me-signout" class="yuhead-me"><a href="http://us.lrd.yahoo.com/_ylt=AswGoA4o_ZORKbK0JdRJ32qncJ8u/SIG=14t1956sv/EXP=1351503583/**http%3A//login.yahoo.com/config/login%3Flogout=1%26.direct=2%26.done=http%3A//www.yahoo.com%26amp;.src=spt%26amp;.intl=us%26amp;.lang=en-US" target="_top" rel="nofollow">    Sign Out</a></li>    <li class="yuhead-me"><a href="http://us.lrd.yahoo.com/_ylt=ArD.FyeWTFwvICn0Udna2LSncJ8u/SIG=11s30r83u/EXP=1351503583/**http%3A//help.yahoo.com/l/us/yahoo/sports/" rel="nofollow" target="_top">Help</a></li></ul>                                </div>        <div id="yuhead-promo"><a href="http://us.lrd.yahoo.com/_ylt=AkIFXAe8BDRvOKE4V2PYMWGncJ8u/SIG=11qvt5741/EXP=1351503583/**http%3A//www.yahoo.com/bin/set/%3Filc=37" target="_top" rel="nofollow">Make Y! My Homepage<abbr title="Yahoo!"></abbr></a></div>        <div id="yuhead-com-links-cont">            <ul id="yuhead-com-links" class="yucs-toolbar yucs-activate" aria-label="Yahoo! Services">                <li class="yucs-notifications yucs-notif-activate yuhead-com-link-item  yucs-wait">    <a class="ynotif-control yltasis" href="#" rel="nofollow" aria-haspopup="true" title="Notifications" aria-label="notifications" role="button"><span class="sp ynotif-ico-bell"></span><span class="ynotif-notif-count-con hide"><span class="ynotif-notif-count"></span></span>&nbsp;</a>    <div class="yucs-notif-panel hide"         data-ylt-bell="/;_ylt=ArnZeBxg11SDZOMS1YoShi2ncJ8u"        data-ylt-profile="/;_ylt=Atz6Hj4utGgsw3d3UULr9kWncJ8u"        data-ylt-app="/;_ylt=Apgl20gvMxsGvWDlOo_9opSncJ8u"        data-ylt-cta="/;_ylt=Amo32PKO..skZZEx9daWf26ncJ8u"        data-ylt-pageurl="/;_ylt=AtIA4FBpNEFxJoeudAaok0ancJ8u"          data-ylt-signin-cta="/;_ylt=Avz6WsgcTqGrLIqy9TpxgY.ncJ8u"        data-guid="FQWKQHYGMO7L7F7BVGNSPVJKKM"        data-crumb="KX3owy7iggO"        data-mode="2"        data-pagesize="10"                        data-view-more-txt="View More"        data-notif-user="A Yahoo! user"        data-intl="en-us"        data-yql-env=""        data-settings-tooltip="Settings"        data-app-aria-txt="App Icon"        data-view-all-txt="See All Notifications"        data-view-url="http://pulse.yahoo.com/y/notifications"        data-no-items-txt="There are currently no items."        data-no-notif-txt="You have no notifications."        data-notif-error-txt="Notifications with errors:"        data-get-notif-txt="Receive notifications when you comment or discuss content with friends on Yahoo!"        data-try-notif-txt="Learn more"        data-try-notif-link="http://help.yahoo.com//l/us/yahoo/comments/notifications/pnotification-03.html"        data-ylt-try-notif="/;_ylt=ApT0jEoAf.HPBZT6GcL0mR.ncJ8u"         data-loading-txt="Loading..."        data-error-unavail-txt="Notifications are temporarily unavailable. Please try again later."        data-middleauth-nonotif-text="You have no new notifications."        data-password-verify-text="Please verify your password to view notifications."        data-authState="signedin"        data-signedout-cta-text="Sign In"        data-popup-login-url="https://login.yahoo.com/config/login_verify2?.pd=c%3DOIVaOGq62e5hAP8Tv..nr5E3&.src=sc"        data-signedout-message="Sign in to view notifications."        data-middleauth-text="You have new notifications.">        <div class="yucs-notif-title-bar yuhead-clearfix">            <span class="yucs-notif-panel-title">Notifications</span>             <a target="_blank" href="http://us.lrd.yahoo.com/_ylt=ArITA0THUsXLGMvCfxpTZsyncJ8u/SIG=12bvr6ei1/EXP=1351503583/**http%3A//help.yahoo.com/l/us/yahoo/comments/notifications" class="yucs-notif-tools">Help</a>        </div>        <ul class="yucs-notif-items-panel" role="menu">        </ul>    </div></li>                <li class="yuhead-com-link-item yucs-mailpreview-ancestor">    <a class="sp yltasis yuhead-ico-mail" href="http://us.lrd.yahoo.com/_ylt=Amv2RVPTGzeDosIcQiXkrMuncJ8u/SIG=1235i50m0/EXP=1351503583/**http%3A//mail.yahoo.com/%3F.intl=us%26.lang=en-US" rel="nofollow" target="_top">Mail<span class="yucs-activate yucs-mail-count hide"     data-authstate=signedin    data-crumb="KX3owy7iggO"    data-mc-crumb="Dg.hwuR0ovC"></span></a><ul class="yucs-mail-preview-panel hide"    data-mail-txt="Mail"    data-mail-view="View all Yahoo! Mail"    data-mail-help-txt="Help"    data-mail-help-url="http://help.yahoo.com/l/us/yahoo/mail/ymail/"    data-mail-loading-txt="Loading..."    data-languagetag="en-us"    data-authstate="signedin"    data-middleauth-signin-text="Click here to view your mail"    data-popup-login-url="https://login.yahoo.com/config/login_verify2?.pd=c%3DOIVaOGq62e5hAP8Tv..nr5E3&.src=sc"    data-middleauthtext="You have {count} new mail."    data-yltmessage-link="http://us.lrd.yahoo.com/_ylt=AiU9IzSiQ_7xCS1jNVKpPEKncJ8u/SIG=12f48k0h1/EXP=1351503583/**http%3A//mrd.mail.yahoo.com/msg%3Fmid=%7BmsgID%7D%26fid=Inbox"    data-yltviewall-link="http://us.lrd.yahoo.com/_ylt=AnoQl9ipDyAXaDj6VFxiW7ancJ8u/SIG=11ab6qck6/EXP=1351503583/**http%3A//mail.yahoo.com/"    data-yltpanelshown="/;_ylt=ApVwxEc5JLawFhUm5sKBs6KncJ8u"></ul></li><li class="yuhead-com-link-item">    <a href="http://my.yahoo.com/;_ylt=AiuEp9SVO5IoPO3HMiAZhtqncJ8u"     rel="nofollow"     target="_top">   My Y!    </a></li><li id="yuhead-com-home"><a class="sp yuhead-ico-home" href="http://us.lrd.yahoo.com/_ylt=AhjKSGiY1uvUMZg8kYeTky2ncJ8u/SIG=119cvnk18/EXP=1351503583/**http%3A//www.yahoo.com/" rel="nofollow" target="_top">Yahoo!</a></li>            </ul>        </div>    </div>    <div id="yuhead-bd" class="yuhead-clearfix">        <div class="yuhead-logo">   <style>      .yuhead-logo h2{        width:240px;        height:37px;        background-image:url(http://l.yimg.com/rz/uh/logos/nor/en-us/sports-092012-us.png);        _background-image:url(http://l.yimg.com/rz/uh/logos/nor/en-us/sports-092012-us-383838.gif);      }      .yuhead-logo a{        width:240px;        height:37px;      }      .yuhead-logo div.yuhead-comarketing {       width:240px;      }         </style>   <h2>      <a href="http://sports.yahoo.com/;_ylt=AoLYD6XP35J8yFAP_TNSr_KncJ8u"       target="_top" tabindex="-1">         Yahoo! Sports      </a>   </h2>   <!-- comarketing component --></div>        <div id="yuhead-search">        <div id="yuhead-sform-cont" class="yuhead-s-web yuhead-search-form">        <form role="search" class="yucs-search yucs-activate" target="_top"    action="http://search.yahoo.com/search;_ylt=Ahpd.Ob8uqS.GxOJ2fvjDxencJ8u" method="get"><table role="presentation">   <tbody role="presentation"><tr role="presentation"><td class="yucs-form-input" role="presentation"> <label for="yuhead-sform-searchfield">     <span>Search</span>             </label>                 <input autocomplete="off" type="text" class="sp yuhead-ico-mglass yuhead-search-hint yucs-search-field" name="p"                  data-sh="Search"                  data-satype="rich"                  data-gosurl=""                  id="yuhead-sform-searchfield"                 data-pubid="" /></td><td NOWRAP class="yucs-form-btn" role="presentation"><div class="yucs-btn-wrap">    <button class="yucs-sweb-btn" type="submit">Search Web</button></div>            </td>         </tr>        </tbody></table><input type="hidden" id="fr" name="fr" value="ush-sports" /><!-- desktop device --></form>            </div>    </div>        <div     id="yucs-bnews"     class="yucs-activate slide hide"     data-linktarget="_top"    data-authstate="signedin"     data-lang="en-us"     data-property="sports">        <h3>        <span class="title">Breaking News</span>        <a class="genericlink hide" href="http://news.yahoo.com">Visit Yahoo! News for the latest.</a>     </h3>    <span class="close">&times;<span class="offscreen">Close this window</span></span>     <p class="container">    </p>    </div>    </div>                    <!-- s2s -->    <!-- desktop device -->        </div>
+#yuhead-hd {_height:27px;_padding-bottom:0px;}</style><div id="yUnivHead" class="yucs-en-us" data-lang="en-us" data-property="sports" data-flight="1350726375" data-uhvc="/;_ylt=ApuQFDXO._fYnuAv2aTLxy.ncJ8u">        <a href="#yuhead-search" class="yucs-skipto-search yucs-activate">Skip to search.</a>        <div id="yuhead-hd" class="yuhead-clearfix">        <div id="yuhead-mepanel-cont">            <ul id="yuhead-mepanel" class="yucs-toolbar yucs-activate"  aria-label="User Services"><li id="yuhead-username" class="yucs-menu yuhead-nodivide yuhead-nopad yucs-um-activate">    <a class="yuhead-firstname yltasis" aria-haspopup="true" rel="nofollow"     target="_top"     href="http://us.lrd.yahoo.com/_ylt=AlTQ_VWcMylpyZArTjkaRuKncJ8u/SIG=11d0heesu/EXP=1351935975/**http%3A//profile.yahoo.com/">            <span class="yucs-avatar yucs-av-activate"     data-user="Ariel"     data-prof="Avatar"     data-crumb="ZCahqsZ0NRi"     data-guid="FQWKQHYGMO7L7F7BVGNSPVJKKM"></span>                <span class="yuhead-hi">Hi,&nbsp;</span><span class="yuhead-name">Ariel</span>    <span class="yucs-menu-access sp yuhead-bullet-down"></span>    </a>    <ul id="yuhead-useroptions" class="yucs-menu-left hide">        <li>        <a href="http://us.lrd.yahoo.com/_ylt=Aj6NzNEr6NwHJwwEJVSDGxincJ8u/SIG=11d0heesu/EXP=1351935975/**http%3A//profile.yahoo.com/"         target="_top"        rel="nofollow">        Profile        </a>        </li>        <li>        <a href="https://us.lrd.yahoo.com/_ylt=Aj2iinU781mEsMGjVUAFKNOncJ8u/SIG=17cpei58f/EXP=1351935975/**https%3A//edit.yahoo.com/mc2.0/eval_profile%3F.intl=us%26.lang=en-US%26.done=http%3A//football.fantasysports.yahoo.com/f1/623546/matchup%253fweek=6%2526mid1=8%2526mid2=11%26amp;.src=spt%26amp;.intl=us%26amp;.lang=en-US"         target="_top"        rel="nofollow">        Account Info        </a>        </li>                <li class="last-child">        You are signed in as: <span class="yuhead-yid">arieljake</span>        </li>    </ul></li><li id="yuhead-me-signout" class="yuhead-me"><a href="http://us.lrd.yahoo.com/_ylt=AuMMoipJ.w8kZrOG..uYs1OncJ8u/SIG=14to6efg5/EXP=1351935975/**http%3A//login.yahoo.com/config/login%3Flogout=1%26.direct=2%26.done=http%3A//www.yahoo.com%26amp;.src=spt%26amp;.intl=us%26amp;.lang=en-US" target="_top" rel="nofollow">    Sign Out</a></li>    <li class="yuhead-me"><a href="http://us.lrd.yahoo.com/_ylt=Av8VORnGckQwW33PRSorRmCncJ8u/SIG=11s46q5g3/EXP=1351935975/**http%3A//help.yahoo.com/l/us/yahoo/sports/" rel="nofollow" target="_top">Help</a></li></ul>                                </div>        <div id="yuhead-promo"><a href="http://us.lrd.yahoo.com/_ylt=AsXZ0VnZ0CEc3S1eks3.6NWncJ8u/SIG=11q9pjpe0/EXP=1351935975/**http%3A//www.yahoo.com/bin/set/%3Filc=37" target="_top" rel="nofollow">Make Y! My Homepage<abbr title="Yahoo!"></abbr></a></div>        <div id="yuhead-com-links-cont">            <ul id="yuhead-com-links" class="yucs-toolbar yucs-activate" aria-label="Yahoo! Services">                <li class="yucs-notifications yucs-notif-activate yuhead-com-link-item  yucs-wait">    <a class="ynotif-control yltasis" href="#" rel="nofollow" aria-haspopup="true" title="Notifications" aria-label="notifications" role="button"><span class="sp ynotif-ico-bell"></span><span class="ynotif-notif-count-con hide"><span class="ynotif-notif-count"></span></span>&nbsp;</a>    <div class="yucs-notif-panel hide"         data-ylt-bell="/;_ylt=AkHtYgwvFw29siq5qbLgWHmncJ8u"        data-ylt-profile="/;_ylt=AiK0oRAIqtrp4I0IcTEZCHCncJ8u"        data-ylt-app="/;_ylt=Ao0k32LloD8vfCq_ulzw5yancJ8u"        data-ylt-cta="/;_ylt=AtxjVrKmF3yEQAeP9KF15q6ncJ8u"        data-ylt-pageurl="/;_ylt=AgRqw6Gn9Sl_5E_QfXiGAOSncJ8u"          data-ylt-signin-cta="/;_ylt=AtkdarywWniEk_t.fluGhuGncJ8u"        data-guid="FQWKQHYGMO7L7F7BVGNSPVJKKM"        data-crumb="ZCahqsZ0NRi"        data-mode="2"        data-pagesize="10"                        data-view-more-txt="View More"        data-notif-user="A Yahoo! user"        data-intl="en-us"        data-yql-env=""        data-settings-tooltip="Settings"        data-app-aria-txt="App Icon"        data-view-all-txt="See All Notifications"        data-view-url="http://pulse.yahoo.com/y/notifications"        data-no-items-txt="There are currently no items."        data-no-notif-txt="You have no notifications."        data-notif-error-txt="Notifications with errors:"        data-get-notif-txt="Receive notifications when you comment or discuss content with friends on Yahoo!"        data-try-notif-txt="Learn more"        data-try-notif-link="http://help.yahoo.com//l/us/yahoo/comments/notifications/pnotification-03.html"        data-ylt-try-notif="/;_ylt=AtGj07zuVLfcFNqYDS9Kya.ncJ8u"         data-loading-txt="Loading..."        data-error-unavail-txt="Notifications are temporarily unavailable. Please try again later."        data-middleauth-nonotif-text="You have no new notifications."        data-password-verify-text="Please verify your password to view notifications."        data-authState="middleauth"        data-signedout-cta-text="Sign In"        data-popup-login-url="https://login.yahoo.com/config/login_verify2?.pd=c%3DOIVaOGq62e5hAP8Tv..nr5E3&.src=sc"        data-signedout-message="Sign in to view notifications."        data-middleauth-text="You have new notifications.">        <div class="yucs-notif-title-bar yuhead-clearfix">            <span class="yucs-notif-panel-title">Notifications</span>             <a target="_blank" href="http://us.lrd.yahoo.com/_ylt=Av514aWX49LxOquKQMZdX7WncJ8u/SIG=12b2gs22s/EXP=1351935975/**http%3A//help.yahoo.com/l/us/yahoo/comments/notifications" class="yucs-notif-tools">Help</a>        </div>        <ul class="yucs-notif-items-panel" role="menu">        </ul>    </div></li>                <li class="yuhead-com-link-item yucs-mailpreview-ancestor">    <a class="sp yltasis yuhead-ico-mail" href="http://us.lrd.yahoo.com/_ylt=Aqy6enLqly6JGmXUIDlL.T6ncJ8u/SIG=123copcl8/EXP=1351935975/**http%3A//mail.yahoo.com/%3F.intl=us%26.lang=en-US" rel="nofollow" target="_top">Mail<span class="yucs-activate yucs-mail-count hide"     data-authstate=middleauth    data-crumb="ZCahqsZ0NRi"    data-mc-crumb="6FTmdfK9yRg"></span></a><ul class="yucs-mail-preview-panel hide"    data-mail-txt="Mail"    data-mail-view="View all Yahoo! Mail"    data-mail-help-txt="Help"    data-mail-help-url="http://help.yahoo.com/l/us/yahoo/mail/ymail/"    data-mail-loading-txt="Loading..."    data-languagetag="en-us"    data-authstate="middleauth"    data-middleauth-signin-text="Click here to view your mail"    data-popup-login-url="https://login.yahoo.com/config/login_verify2?.pd=c%3DOIVaOGq62e5hAP8Tv..nr5E3&.src=sc"    data-middleauthtext="You have {count} new mail."    data-yltmessage-link="http://us.lrd.yahoo.com/_ylt=AjAdCglUXwnrDTaHoJ7Pv4yncJ8u/SIG=12fcnn05s/EXP=1351935975/**http%3A//mrd.mail.yahoo.com/msg%3Fmid=%7BmsgID%7D%26fid=Inbox"    data-yltviewall-link="http://us.lrd.yahoo.com/_ylt=Aq0aKmvdEtqnzlXpeu3qQqCncJ8u/SIG=11ab97sp9/EXP=1351935975/**http%3A//mail.yahoo.com/"    data-yltpanelshown="/;_ylt=AkfRAJvdprTFh.d3d4Fjc_GncJ8u"></ul></li><li class="yuhead-com-link-item">    <a href="http://my.yahoo.com/;_ylt=AkzhSL9NYjZGEJ1UQGew4f6ncJ8u"     rel="nofollow"     target="_top">   My Y!    </a></li><li id="yuhead-com-home"><a class="sp yuhead-ico-home" href="http://us.lrd.yahoo.com/_ylt=Atv1FwXLL5gQQGp9zwdnZjmncJ8u/SIG=119p81nr8/EXP=1351935975/**http%3A//www.yahoo.com/" rel="nofollow" target="_top">Yahoo!</a></li>            </ul>        </div>    </div>    <div id="yuhead-bd" class="yuhead-clearfix">        <div class="yuhead-logo">   <style>      .yuhead-logo h2{        width:240px;        height:37px;        background-image:url(http://l.yimg.com/rz/uh/logos/nor/en-us/sports-092012-us.png);        _background-image:url(http://l.yimg.com/rz/uh/logos/nor/en-us/sports-092012-us-383838.gif);      }      .yuhead-logo a{        width:240px;        height:37px;      }      .yuhead-logo div.yuhead-comarketing {       width:240px;      }         </style>   <h2>      <a href="http://sports.yahoo.com/;_ylt=AlRVu4_4TGNZGw9MWbGg5lCncJ8u"       target="_top" tabindex="-1">         Yahoo! Sports      </a>   </h2>   <!-- comarketing component --></div>        <div id="yuhead-search">        <div id="yuhead-sform-cont" class="yuhead-s-web yuhead-search-form">        <form role="search" class="yucs-search yucs-activate" target="_top"    action="http://search.yahoo.com/search;_ylt=AuTCiusq4E1aOFYTZQg.2MWncJ8u" method="get"><table role="presentation">   <tbody role="presentation"><tr role="presentation"><td class="yucs-form-input" role="presentation"> <label for="yuhead-sform-searchfield">     <span>Search</span>             </label>                 <input autocomplete="off" type="text" class="sp yuhead-ico-mglass yuhead-search-hint yucs-search-field" name="p"                  data-sh="Search"                  data-satype="rich"                  data-gosurl=""                  id="yuhead-sform-searchfield"                 data-pubid="" /></td><td NOWRAP class="yucs-form-btn" role="presentation"><div class="yucs-btn-wrap">    <button class="yucs-sweb-btn" type="submit">Search Web</button></div>            </td>         </tr>        </tbody></table><input type="hidden" id="fr" name="fr" value="ush-sports" /><!-- desktop device --></form>            </div>    </div>        <div     id="yucs-bnews"     class="yucs-activate slide hide"     data-linktarget="_top"    data-authstate="middleauth"     data-lang="en-us"     data-property="sports">        <h3>        <span class="title">Breaking News</span>        <a class="genericlink hide" href="http://news.yahoo.com">Visit Yahoo! News for the latest.</a>     </h3>    <span class="close">&times;<span class="offscreen">Close this window</span></span>     <p class="container">    </p>    </div>    </div>                    <!-- s2s -->    <!-- desktop device -->        </div>
 
 <div id="yspnocss">
  <hr>
@@ -6316,11 +6348,12 @@ ygagt=navigator.userAgent.toLowerCase();ygd=document;ygdom=(document.getElementB
 <!-- gd2-status-2 --><!-- SpaceID=782200999 loc=M2 noad -->
 <script language=javascript>
 if(window.yzq_d==null)window.yzq_d=new Object();
-window.yzq_d['kE0TX2KL5Us-']='&U=12ag94qe2%2fN%3dkE0TX2KL5Us-%2fC%3d-1%2fD%3dM2%2fB%3d-1%2fV%3d0';
-</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1fch4nvpe%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d1012076617%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3d34C7FA3F&U=12ag94qe2%2fN%3dkE0TX2KL5Us-%2fC%3d-1%2fD%3dM2%2fB%3d-1%2fV%3d0"></noscript><!--QYZ CMS_NONE_AVAIL,,98.139.228.48;;M2;782200999;2;--><div id="yspadHB"><a href=http://clicks.beap.bc.yahoo.com/yc/YnY9MS4wLjAmYnM9KDE0bWZsMjRkYyhnaWQkTEZXU1RHS0w2dzBnOE9BZFVFYjd6aGNvVEg1Q1dGQjcyZDhBQllpUSxzdCQxMzUwMjkzOTgzNDE0MzgzLHNpJDQ0NTc1NTEsdiQxLjAsYWlkJFR1QTNVbUtMNEhnLSxjdCQyNSx5YngkVGpXTWRKR2tyaE9qV2tITkViNExsQSxyJDAscmQkMTc4cGttbmkxKSk/1/*http://global.ard.yahoo.com/SIG=15jqapd0g/M=999999.999999.999999.999999/D=sports/S=782200999:HB/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=TuA3UmKL4Hg-/J=1350293983471804/K=5hWO7iVu7CkngggmP4vfLw/A=6084253038444239395/R=0/X=6/SIG=10a4lnpp8/*https://></a><!-- blank --><!--QYZ 1452810551,2851543051,98.139.228.48;;HB;782200999;1;--><script language=javascript>
-if(window.xzq_d==null)window.xzq_d=new Object();
-window.xzq_d['TuA3UmKL4Hg-']='(as$12djstrfb,aid$TuA3UmKL4Hg-,bi$1452810551,ct$25,at$H)';
-</script><noscript><img width=1 height=1 alt="" src="http://csc.beap.bc.yahoo.com/yi?bv=1.0.0&bs=(128fm2ivk(gid$LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ,st$1350293983414383,v$1.0))&t=J_3-D_3&al=(as$12djstrfb,aid$TuA3UmKL4Hg-,bi$1452810551,ct$25,at$H)"></noscript></div></div>
+window.yzq_d['h6FadWKL5WU-']='&U=12a016h1r%2fN%3dh6FadWKL5WU-%2fC%3d-1%2fD%3dM2%2fB%3d-1%2fV%3d0';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fckci3j4%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d2174222689%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=12a016h1r%2fN%3dh6FadWKL5WU-%2fC%3d-1%2fD%3dM2%2fB%3d-1%2fV%3d0"></noscript><!--QYZ CMS_NONE_AVAIL,,98.139.229.183;;M2;782200999;2;--><!-- gd2-status-2 --><!-- SpaceID=782200999 loc=HB noad -->
+<script language=javascript>
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['hqFadWKL5WU-']='&U=12alq6es1%2fN%3dhqFadWKL5WU-%2fC%3d-1%2fD%3dHB%2fB%3d-1%2fV%3d0';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fcop97vm%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d1307011754%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=12alq6es1%2fN%3dhqFadWKL5WU-%2fC%3d-1%2fD%3dHB%2fB%3d-1%2fV%3d0"></noscript><!--QYZ CMS_NONE_SELECTED,,98.139.229.183;;HB;782200999;2;--></div>
 
 
 <div id="yspteammh"  class="">
@@ -6341,8 +6374,8 @@ window.xzq_d['TuA3UmKL4Hg-']='(as$12djstrfb,aid$TuA3UmKL4Hg-,bi$1452810551,ct$25
 <!-- gd2-status-2 --><!-- SpaceID=782200999 loc=NT1 noad -->
 <script language=javascript>
 if(window.yzq_d==null)window.yzq_d=new Object();
-window.yzq_d['kU0TX2KL5Us-']='&U=12b2pf33h%2fN%3dkU0TX2KL5Us-%2fC%3d-1%2fD%3dNT1%2fB%3d-1%2fV%3d0';
-</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1fcq97blb%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d2333253440%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3d34C7FA3F&U=12b2pf33h%2fN%3dkU0TX2KL5Us-%2fC%3d-1%2fD%3dNT1%2fB%3d-1%2fV%3d0"></noscript><!--QYZ CMS_NONE_AVAIL,,98.139.228.48;;NT1;782200999;2;-->    <!-- league_nav_main -->
+window.yzq_d['iKFadWKL5WU-']='&U=12be60mib%2fN%3diKFadWKL5WU-%2fC%3d-1%2fD%3dNT1%2fB%3d-1%2fV%3d0';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fcgsjd78%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d3769286919%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=12be60mib%2fN%3diKFadWKL5WU-%2fC%3d-1%2fD%3dNT1%2fB%3d-1%2fV%3d0"></noscript><!--QYZ CMS_NONE_AVAIL,,98.139.229.183;;NT1;782200999;2;-->    <!-- league_nav_main -->
     <div id="yspnav" class="navlist yuimenubar yuimenubarnav mainnav-matchup nav-league">
         <div class="bd">
             <a name="mainnav" class="anchor"></a>
@@ -6358,7 +6391,6 @@ window.yzq_d['kU0TX2KL5Us-']='&U=12b2pf33h%2fN%3dkU0TX2KL5Us-%2fC%3d-1%2fD%3dNT1
                                 <li class="yuimenuitem"><a href="http://sports.yahoo.com/fantasy/message-boards/football/" class="yuimenuitemlabel">Message Boards</a></li>        
                                 <li class="yuimenuitem"><a href="/f1/leaderboard?lid=623546" class="yuimenuitemlabel">Leaders</a></li>        
                                 <li class="yuimenuitem"><a href="/f1/premiumaddons?lid=623546" class="yuimenuitemlabel">Premium Add-Ons</a></li>        
-                                <li class="yuimenuitem"><a href="/f1/signup" class="yuimenuitemlabel">Get Another Team</a></li>        
                                 <li class="yuimenuitem"><a href="/f1/features?lid=623546" class="yuimenuitemlabel">What's New</a></li>        
                                 <li class="yuimenuitem"><a href="http://profiles.sports.yahoo.com" class="yuimenuitemlabel">Fantasy Profile</a></li>        
                                 <li class="new_window mobile-link yuimenuitem"><a href="http://sports.yahoo.com/fantasy/football/mobile/" class="yuimenuitemlabel" target="mobileapps">Mobile</a></li>        
@@ -6407,14 +6439,14 @@ window.yzq_d['kU0TX2KL5Us-']='&U=12b2pf33h%2fN%3dkU0TX2KL5Us-%2fC%3d-1%2fD%3dNT1
                     </div>            
                 </li>            
                 <li class="selected yuimenuitem">
-                    <a href="/f1/623546/matchup?week=6&mid1=9&mid2=10" class="yuimenuitemlabel">Matchup</a>    
+                    <a href="/f1/623546/matchup?week=7&mid1=9&mid2=11" class="yuimenuitemlabel">Matchup</a>    
                     <div class="yuimenu ysfnavflyout">
                         <div class="bd">
                             <h5>Matchup Navigation</h5>
                             <ul>        
-                                <li class="yuimenuitem first"><a href="/f1/623546/matchup?week=6&mid1=9&mid2=10" class="yuimenuitemlabel">This Week's Matchup</a></li>        
+                                <li class="yuimenuitem first"><a href="/f1/623546/matchup?week=7&mid1=9&mid2=11" class="yuimenuitemlabel">This Week's Matchup</a></li>        
                                 <li class="yuimenuitem"><a href="/f1/623546/allmatchups" class="yuimenuitemlabel">All Matchups</a></li>        
-                                <li class="yuimenuitem last"><a href="/f1/623546/recap?week=5&mid1=9&mid2=12" class="yuimenuitemlabel">Last Week's Recap</a></li>
+                                <li class="yuimenuitem last"><a href="/f1/623546/recap?week=6&mid1=9&mid2=10" class="yuimenuitemlabel">Last Week's Recap</a></li>
                             </ul>
                         </div>
                     </div>            
@@ -6506,9 +6538,9 @@ window.yzq_d['kU0TX2KL5Us-']='&U=12b2pf33h%2fN%3dkU0TX2KL5Us-%2fC%3d-1%2fD%3dNT1
         
 <h4>Matchup Section Navigation</h4>
 <ul>
-	<li class="first "><a href="/f1/623546/matchup?week=6&mid1=9&mid2=10">This Week's Matchup</a></li>
+	<li class="first "><a href="/f1/623546/matchup?week=7&mid1=9&mid2=11">This Week's Matchup</a></li>
 	<li><a href="/f1/623546/allmatchups">All Matchups</a></li>
-	<li class="last "><a href="/f1/623546/recap?week=5&mid1=9&mid2=12">Last Week's Recap</a></li>
+	<li class="last "><a href="/f1/623546/recap?week=6&mid1=9&mid2=10">Last Week's Recap</a></li>
 </ul>
 
         </div>
@@ -6541,7 +6573,7 @@ TEMPLATE -->
 </div>
 </div>
                     <div id="matchup-h1" >
-    <h1>Week 6: Oct 9 - Oct 15 </h1>
+    <h1>Week 6: Oct 9 - Oct 15 <span class="header-recap-link"><a  href="/f1/623546/recap?week=6&mid1=8&mid2=11">View Recap</a></span></h1>
 
 
     </div>
@@ -6562,7 +6594,7 @@ TEMPLATE -->
                         </tr>
                     </thead>
                     <tbody>
-<tr class="losing"> <td class="team-name">Stangs</td> <td class="points">46.20</td></tr><tr class="winning"> <td class="team-name">Head Hancho</td> <td class="points">115.88</td></tr>                    </tbody>
+<tr class="losing"> <td class="team-name">Stangs</td> <td class="points">66.04</td></tr><tr class="winning"> <td class="team-name">Head Hancho</td> <td class="points">118.58</td></tr>                    </tbody>
                 </table>
             </div>
             <div class="ft">
@@ -6582,7 +6614,7 @@ TEMPLATE -->
                     <input type="hidden" name="tid1" value="8" />
                     <input type="hidden" name="tid2" value="11" />
                     <input type="hidden" name="week" value="6" />
-                    <input type="hidden" name="crumb" value="PtgZMElx7zx" />
+                    <input type="hidden" name="crumb" value="PwTl9MOgqqG" />
                     <fieldset id="matchup-form-fieldset">                
                         <label for="matchup-message" class="el-invisible">Smack Talk:</label>
                         <textarea name="msg" id="matchup-message" rows="4" cols="15"></textarea>
@@ -6604,7 +6636,7 @@ TEMPLATE -->
 <div id="matchup"> 
   <div id="matchups">
       <div class="matchupheader" id="matchupheader1">
-      <img class="logo" src="http://l.yimg.com/a/i/us/sp/fn/default/full/1x1clear.gif" width="96" height="96" border="0" alt="" realimg="http://l.yimg.com/a/i/us/sp/fn/default/full/nfl/icon_11_100.gif">      <h2><a href="/f1/623546/8" title="Stangs">Stangs</a> <em>2-3-0</em></h2>
+      <img class="logo" src="http://l.yimg.com/a/i/us/sp/fn/default/full/1x1clear.gif" width="96" height="96" border="0" alt="" realimg="http://l.yimg.com/a/i/us/sp/fn/default/full/nfl/icon_11_100.gif">      <h2><a href="/f1/623546/8" title="Stangs">Stangs</a> <em>2-4-0</em></h2>
           </div>
       <div class="matchupheader" id="matchupheader2">
       <div class="avatarflash"><script charset="utf-8" language="JavaScript" type="text/javascript">
@@ -6645,7 +6677,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <noscript><img src="http://lookup.avatars.yahoo.com/images?yid=gigalo8207&size=large&type=jpg&pty=3000" alt=""></noscript>
 
 
-</div>      <h2><a href="/f1/623546/11" title="Head Hancho">Head Hancho</a> <em>2-3-0</em></h2>
+</div>      <h2><a href="/f1/623546/11" title="Head Hancho">Head Hancho</a> <em>3-3-0</em></h2>
           </div>
   
 
@@ -6659,49 +6691,49 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 </tr><tr valign="bottom"  class="headerRow1"><th class="pos first" ><div nowrap>Pos</div></th><th class="player" ><div nowrap>Player</div></th><th class="opp" ><div nowrap>Opp</div></th><th class="gametime" ><div nowrap>Status</div></th><th class="stat wide desc"><div nowrap>Projected</div></th>
 <th class="pts stat last desc"><div nowrap>Actual</div></th>
 </tr></thead><tbody><tr  class="odd first" ><td class="pos first">QB</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6763" target="sports" class="name">Philip Rivers</a> </div> <div class="detail"><span>(SD - QB)</span>   <a href="http://sports.yahoo.com/nfl/players/6763/news" target="sports" class="playernote" data-ys-playerid="6763" data-ys-playernote-view="notes" id="playernote-6763"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6763" target="sports" class="name">Philip Rivers</a> </div> <div class="detail"><span>(SD - QB)</span>   <a href="http://sports.yahoo.com/nfl/players/6763/news" target="sports" class="playernote" data-ys-playerid="6763" data-ys-playernote-view="notes" id="playernote-6763"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Den</td>
-<td class="gametime"><a href="http://sports.yahoo.com/nfl/preview?gid=20121015024" target="sports" onclick="pop(this)">Mon<br>5:30 pm</a></td>
+<td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121015024" target="sports" onclick="pop(this)">L, 35-24</a></td>
 <td  class="stat wide">18.09</td>
-<td  class="pts stat last">0.00</td>
+<td  class="pts stat last">9.64</td>
 </tr><tr  class="even" ><td class="pos first">WR</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8277" target="sports" class="name">Dwayne Bowe</a> </div> <div class="detail"><span>(KC - WR)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/8277/news" target="sports" class="playernote" data-ys-playerid="8277" data-ys-playernote-view="notes" id="playernote-8277"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8277" target="sports" class="name">Dwayne Bowe</a> </div> <div class="detail"><span>(KC - WR)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/8277/news" target="sports" class="playernote" data-ys-playerid="8277" data-ys-playernote-view="notes" id="playernote-8277"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@TB</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014027" target="sports" onclick="pop(this)">L, 38-10</a></td>
 <td  class="stat wide">8.90</td>
-<td  class="pts stat last">2.10</td>
+<td  class="pts stat last">2.50</td>
 </tr><tr  class="odd" ><td class="pos first">WR</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8021" target="sports" class="name">Miles Austin</a> </div> <div class="detail"><span>(Dal - WR)</span>  <span class="status">P</span> <a href="http://sports.yahoo.com/nfl/players/8021/news" target="sports" class="playernote" data-ys-playerid="8021" data-ys-playernote-view="notes" id="playernote-8021"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8021" target="sports" class="name">Miles Austin</a> </div> <div class="detail"><span>(Dal - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/8021/news" target="sports" class="playernote" data-ys-playerid="8021" data-ys-playernote-view="notes" id="playernote-8021"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@Bal</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014033" target="sports" onclick="pop(this)">L, 31-29</a></td>
 <td  class="stat wide">10.90</td>
 <td  class="pts stat last">3.10</td>
 </tr><tr  class="even" ><td class="pos first">RB</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6359" target="sports" class="name">Willis McGahee</a> </div> <div class="detail"><span>(Den - RB)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/6359/news" target="sports" class="playernote" data-ys-playerid="6359" data-ys-playernote-view="notes" id="playernote-6359"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6359" target="sports" class="name">Willis McGahee</a> </div> <div class="detail"><span>(Den - RB)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/6359/news" target="sports" class="playernote" data-ys-playerid="6359" data-ys-playernote-view="notes" id="playernote-6359"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
 <td class="opp">@SD</td>
-<td class="gametime"><a href="http://sports.yahoo.com/nfl/preview?gid=20121015024" target="sports" onclick="pop(this)">Mon<br>5:30 pm</a></td>
+<td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121015024" target="sports" onclick="pop(this)">W, 35-24</a></td>
 <td  class="stat wide">9.52</td>
-<td  class="pts stat last">0.00</td>
+<td  class="pts stat last">9.80</td>
 </tr><tr  class="odd" ><td class="pos first">RB</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24844" target="sports" class="name">Mikel LeShoure</a> </div> <div class="detail"><span>(Det - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/24844/news" target="sports" class="playernote" data-ys-playerid="24844" data-ys-playernote-view="notes" id="playernote-24844"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24844" target="sports" class="name">Mikel LeShoure</a> </div> <div class="detail"><span>(Det - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/24844/news" target="sports" class="playernote" data-ys-playerid="24844" data-ys-playernote-view="notes" id="playernote-24844"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@Phi</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014021" target="sports" onclick="pop(this)">W, 26-23</a></td>
 <td  class="stat wide">8.17</td>
 <td  class="pts stat last">9.40</td>
 </tr><tr  class="even" ><td class="pos first">TE</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8416" target="sports" class="name">Brent Celek</a> </div> <div class="detail"><span>(Phi - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8416/news" target="sports" class="playernote" data-ys-playerid="8416" data-ys-playernote-view="notes" id="playernote-8416"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8416" target="sports" class="name">Brent Celek</a> </div> <div class="detail"><span>(Phi - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8416/news" target="sports" class="playernote" data-ys-playerid="8416" data-ys-playernote-view="notes" id="playernote-8416"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Det</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014021" target="sports" onclick="pop(this)">L, 26-23</a></td>
 <td  class="stat wide">6.31</td>
 <td  class="pts stat last">3.30</td>
 </tr><tr  class="odd" ><td class="pos first">W/R</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8063" target="sports" class="name">Fred Jackson</a> </div> <div class="detail"><span>(Buf - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/8063/news" target="sports" class="playernote" data-ys-playerid="8063" data-ys-playernote-view="notes" id="playernote-8063"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8063" target="sports" class="name">Fred Jackson</a> </div> <div class="detail"><span>(Buf - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/8063/news" target="sports" class="playernote" data-ys-playerid="8063" data-ys-playernote-view="notes" id="playernote-8063"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@Ari</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014022" target="sports" onclick="pop(this)">W, 19-16</a></td>
 <td  class="stat wide">8.61</td>
 <td  class="pts stat last">12.30</td>
 </tr><tr  class="even" ><td class="pos first">K</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25881" target="sports" class="name">Greg Zuerlein</a> </div> <div class="detail"><span>(StL - K)</span>   <a href="http://sports.yahoo.com/nfl/players/25881/news" target="sports" class="playernote" data-ys-playerid="25881" data-ys-playernote-view="notes" id="playernote-25881"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25881" target="sports" class="name">Greg Zuerlein</a> </div> <div class="detail"><span>(StL - K)</span>   <a href="http://sports.yahoo.com/nfl/players/25881/news" target="sports" class="playernote" data-ys-playerid="25881" data-ys-playernote-view="notes" id="playernote-25881"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@Mia</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014015" target="sports" onclick="pop(this)">L, 17-14</a></td>
 <td  class="stat wide">6.77</td>
@@ -6717,7 +6749,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td class="opp">&nbsp;</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">84.41</td>
-<td  class="pts stat last">46.20</td>
+<td  class="pts stat last">66.04</td>
 </tr></tbody></table></div><div class="matchupcontent" id="matchupcontent2"><table cellpadding="0" cellspacing="0" border="0" id="statTable2" class="teamtable" >
 <thead><tr valign="bottom"  class="headerRow0"><th class="pos first">&nbsp;</th>
 <th class="player">&nbsp;</th>
@@ -6727,25 +6759,25 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 </tr><tr valign="bottom"  class="headerRow1"><th class="pos first" ><div nowrap>Pos</div></th><th class="player" ><div nowrap>Player</div></th><th class="opp" ><div nowrap>Opp</div></th><th class="gametime" ><div nowrap>Status</div></th><th class="stat wide desc"><div nowrap>Projected</div></th>
 <th class="pts stat last desc"><div nowrap>Actual</div></th>
 </tr></thead><tbody><tr  class="odd first" ><td class="pos first">QB</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25712" target="sports" class="name">Robert Griffin III</a> </div> <div class="detail"><span>(Was - QB)</span>  <span class="status">Q</span> <a href="http://sports.yahoo.com/nfl/players/25712/news" target="sports" class="playernote" data-ys-playerid="25712" data-ys-playernote-view="notes" id="playernote-25712"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25712" target="sports" class="name">Robert Griffin III</a> </div> <div class="detail"><span>(Was - QB)</span>   <a href="http://sports.yahoo.com/nfl/players/25712/news" target="sports" class="playernote" data-ys-playerid="25712" data-ys-playernote-view="notes" id="playernote-25712"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Min</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014028" target="sports" onclick="pop(this)">W, 38-26</a></td>
 <td  class="stat wide">21.68</td>
 <td  class="pts stat last">36.08</td>
 </tr><tr  class="even" ><td class="pos first">WR</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8813" target="sports" class="name">Jordy Nelson</a> </div> <div class="detail"><span>(GB - WR)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/8813/news" target="sports" class="playernote" data-ys-playerid="8813" data-ys-playernote-view="notes" id="playernote-8813"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8813" target="sports" class="name">Jordy Nelson</a> </div> <div class="detail"><span>(GB - WR)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/8813/news" target="sports" class="playernote" data-ys-playerid="8813" data-ys-playernote-view="notes" id="playernote-8813"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@Hou</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014034" target="sports" onclick="pop(this)">W, 42-24</a></td>
 <td  class="stat wide">10.11</td>
 <td  class="pts stat last">30.10</td>
 </tr><tr  class="odd" ><td class="pos first">WR</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8982" target="sports" class="name">Pierre Garcon</a> </div> <div class="detail"><span>(Was - WR)</span>  <span class="status">O</span> <a href="http://sports.yahoo.com/nfl/players/8982/news" target="sports" class="playernote" data-ys-playerid="8982" data-ys-playernote-view="notes" id="playernote-8982"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8982" target="sports" class="name">Pierre Garcon</a> </div> <div class="detail"><span>(Was - WR)</span>  <span class="status">D</span> <a href="http://sports.yahoo.com/nfl/players/8982/news" target="sports" class="playernote" data-ys-playerid="8982" data-ys-playernote-view="notes" id="playernote-8982"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
 <td class="opp">Min</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014028" target="sports" onclick="pop(this)">W, 38-26</a></td>
 <td  class="stat wide">6.63</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="even" ><td class="pos first">RB</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6913" target="sports" class="name">Michael Turner</a> </div> <div class="detail"><span>(Atl - RB)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/6913/news" target="sports" class="playernote" data-ys-playerid="6913" data-ys-playernote-view="notes" id="playernote-6913"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/6913" target="sports" class="name">Michael Turner</a> </div> <div class="detail"><span>(Atl - RB)</span> <img src="http://l.yimg.com/a/i/us/sp/fn/default/keeper_indicator.gif" height="7" width="6" alt="This player is a keeper." border="0">  <a href="http://sports.yahoo.com/nfl/players/6913/news" target="sports" class="playernote" data-ys-playerid="6913" data-ys-playernote-view="notes" id="playernote-6913"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Oak</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014001" target="sports" onclick="pop(this)">W, 23-20</a></td>
 <td  class="stat wide">10.85</td>
@@ -6757,11 +6789,11 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td  class="stat wide">12.65</td>
 <td  class="pts stat last">5.60</td>
 </tr><tr  class="even" ><td class="pos first">TE</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8916" target="sports" class="name">Jacob Tamme</a> </div> <div class="detail"><span>(Den - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8916/news" target="sports" class="playernote" data-ys-playerid="8916" data-ys-playernote-view="notes" id="playernote-8916"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8916" target="sports" class="name">Jacob Tamme</a> </div> <div class="detail"><span>(Den - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8916/news" target="sports" class="playernote" data-ys-playerid="8916" data-ys-playernote-view="notes" id="playernote-8916"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">@SD</td>
-<td class="gametime"><a href="http://sports.yahoo.com/nfl/preview?gid=20121015024" target="sports" onclick="pop(this)">Mon<br>5:30 pm</a></td>
+<td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121015024" target="sports" onclick="pop(this)">W, 35-24</a></td>
 <td  class="stat wide">4.14</td>
-<td  class="pts stat last">0.00</td>
+<td  class="pts stat last">2.70</td>
 </tr><tr  class="odd" ><td class="pos first">W/R</td>
 <td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/9001" target="sports" class="name">Stevie Johnson</a> </div> <div class="detail"><span>(Buf - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/9001/news" target="sports" class="playernote" data-ys-playerid="9001" data-ys-playernote-view="notes" id="playernote-9001"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
 <td class="opp">@Ari</td>
@@ -6769,7 +6801,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td  class="stat wide">7.85</td>
 <td  class="pts stat last">8.20</td>
 </tr><tr  class="even" ><td class="pos first">K</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7434" target="sports" class="name">Rob Bironas</a> </div> <div class="detail"><span>(Ten - K)</span>   <a href="http://sports.yahoo.com/nfl/players/7434/news" target="sports" class="playernote" data-ys-playerid="7434" data-ys-playernote-view="notes" id="playernote-7434"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7434" target="sports" class="name">Rob Bironas</a> </div> <div class="detail"><span>(Ten - K)</span>   <a href="http://sports.yahoo.com/nfl/players/7434/news" target="sports" class="playernote" data-ys-playerid="7434" data-ys-playernote-view="notes" id="playernote-7434"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
 <td class="opp">Pit</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121011010" target="sports" onclick="pop(this)">W, 26-23</a></td>
 <td  class="stat wide">7.08</td>
@@ -6785,7 +6817,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td class="opp">&nbsp;</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">91.27</td>
-<td  class="pts stat last">115.88</td>
+<td  class="pts stat last">118.58</td>
 </tr></tbody></table></div><ul class="matchup-starter-footer-content">
             <li id="bench-toggle-container">
             <a role="button" href="#" class="hidden" id="bench-toggle">Show Bench [+]</a>
@@ -6804,7 +6836,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 </tr><tr valign="bottom"  class="headerRow1"><th class="pos first" ><div nowrap>Pos</div></th><th class="player" ><div nowrap>Player</div></th><th class="opp" ><div nowrap>Opp</div></th><th class="gametime" ><div nowrap>Status</div></th><th class="stat wide desc"><div nowrap>Projected</div></th>
 <th class="pts stat last desc"><div nowrap>Actual</div></th>
 </tr></thead><tbody><tr  class="odd first" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7492" target="sports" class="name">Nate Washington</a> </div> <div class="detail"><span>(Ten - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/7492/news" target="sports" class="playernote" data-ys-playerid="7492" data-ys-playernote-view="notes" id="playernote-7492"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7492" target="sports" class="name">Nate Washington</a> </div> <div class="detail"><span>(Ten - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/7492/news" target="sports" class="playernote" data-ys-playerid="7492" data-ys-playernote-view="notes" id="playernote-7492"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
 <td class="opp">Pit</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121011010" target="sports" onclick="pop(this)">W, 26-23</a></td>
 <td  class="stat wide">4.22</td>
@@ -6816,13 +6848,13 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td  class="stat wide">0.00</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="odd" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8790" target="sports" class="name">Jonathan Stewart</a> </div> <div class="detail"><span>(Car - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/8790/news" target="sports" class="playernote" data-ys-playerid="8790" data-ys-playernote-view="notes" id="playernote-8790"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8790" target="sports" class="name">Jonathan Stewart</a> </div> <div class="detail"><span>(Car - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/8790/news" target="sports" class="playernote" data-ys-playerid="8790" data-ys-playernote-view="notes" id="playernote-8790"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Bye</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">0.00</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="even" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25715" target="sports" class="name">Justin Blackmon</a> </div> <div class="detail"><span>(Jac - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/25715/news" target="sports" class="playernote" data-ys-playerid="25715" data-ys-playernote-view="notes" id="playernote-25715"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/25715" target="sports" class="name">Justin Blackmon</a> </div> <div class="detail"><span>(Jac - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/25715/news" target="sports" class="playernote" data-ys-playerid="25715" data-ys-playernote-view="notes" id="playernote-25715"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Bye</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">0.00</td>
@@ -6840,7 +6872,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td  class="stat wide">16.75</td>
 <td  class="pts stat last">5.50</td>
 </tr><tr  class="odd" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7520" target="sports" class="name">Robbie Gould</a> </div> <div class="detail"><span>(Chi - K)</span>   <a href="http://sports.yahoo.com/nfl/players/7520/news" target="sports" class="playernote" data-ys-playerid="7520" data-ys-playernote-view="notes" id="playernote-7520"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7520" target="sports" class="name">Robbie Gould</a> </div> <div class="detail"><span>(Chi - K)</span>   <a href="http://sports.yahoo.com/nfl/players/7520/news" target="sports" class="playernote" data-ys-playerid="7520" data-ys-playernote-view="notes" id="playernote-7520"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
 <td class="opp">Bye</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">0.00</td>
@@ -6860,19 +6892,19 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 </tr><tr valign="bottom"  class="headerRow1"><th class="pos first" ><div nowrap>Pos</div></th><th class="player" ><div nowrap>Player</div></th><th class="opp" ><div nowrap>Opp</div></th><th class="gametime" ><div nowrap>Status</div></th><th class="stat wide desc"><div nowrap>Projected</div></th>
 <th class="pts stat last desc"><div nowrap>Actual</div></th>
 </tr></thead><tbody><tr  class="odd first" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/9291" target="sports" class="name">Donald Brown</a> </div> <div class="detail"><span>(Ind - RB)</span>  <span class="status">O</span> <a href="http://sports.yahoo.com/nfl/players/9291/news" target="sports" class="playernote" data-ys-playerid="9291" data-ys-playernote-view="notes" id="playernote-9291"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/9291" target="sports" class="name">Donald Brown</a> </div> <div class="detail"><span>(Ind - RB)</span>  <span class="status">O</span> <a href="http://sports.yahoo.com/nfl/players/9291/news" target="sports" class="playernote" data-ys-playerid="9291" data-ys-playernote-view="notes" id="playernote-9291"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
 <td class="opp">@NYJ</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014020" target="sports" onclick="pop(this)">L, 35-9</a></td>
 <td  class="stat wide">0.00</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="even" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8285" target="sports" class="name">Greg Olsen</a> </div> <div class="detail"><span>(Car - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8285/news" target="sports" class="playernote" data-ys-playerid="8285" data-ys-playernote-view="notes" id="playernote-8285"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/8285" target="sports" class="name">Greg Olsen</a> </div> <div class="detail"><span>(Car - TE)</span>   <a href="http://sports.yahoo.com/nfl/players/8285/news" target="sports" class="playernote" data-ys-playerid="8285" data-ys-playernote-view="notes" id="playernote-8285"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
 <td class="opp">Bye</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">0.00</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="odd" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7858" target="sports" class="name">Jason Avant</a> </div> <div class="detail"><span>(Phi - WR)</span>  <span class="status">P</span> <a href="http://sports.yahoo.com/nfl/players/7858/news" target="sports" class="playernote" data-ys-playerid="7858" data-ys-playernote-view="notes" id="playernote-7858"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/7858" target="sports" class="name">Jason Avant</a> </div> <div class="detail"><span>(Phi - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/7858/news" target="sports" class="playernote" data-ys-playerid="7858" data-ys-playernote-view="notes" id="playernote-7858"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Det</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014021" target="sports" onclick="pop(this)">L, 26-23</a></td>
 <td  class="stat wide">3.86</td>
@@ -6890,13 +6922,13 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 <td  class="stat wide">0.00</td>
 <td  class="pts stat last">0.00</td>
 </tr><tr  class="even" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24076" target="sports" class="name">Mike Williams</a> </div> <div class="detail"><span>(TB - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/24076/news" target="sports" class="playernote" data-ys-playerid="24076" data-ys-playernote-view="notes" id="playernote-24076"><img class="playernote-icon-new" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_new.png" width="18" height="11" border="0" alt="New player notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24076" target="sports" class="name">Mike Williams</a> </div> <div class="detail"><span>(TB - WR)</span>   <a href="http://sports.yahoo.com/nfl/players/24076/news" target="sports" class="playernote" data-ys-playerid="24076" data-ys-playernote-view="notes" id="playernote-24076"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">KC</td>
 <td class="gametime"><a href="http://sports.yahoo.com/nfl/recap?gid=20121014027" target="sports" onclick="pop(this)">W, 38-10</a></td>
 <td  class="stat wide">6.13</td>
 <td  class="pts stat last">17.30</td>
 </tr><tr  class="odd" ><td class="pos first">BN</td>
-<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24815" target="sports" class="name">Mark Ingram</a> </div> <div class="detail"><span>(NO - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/24815/news" target="sports" class="playernote" data-ys-playerid="24815" data-ys-playernote-view="notes" id="playernote-24815"><img class="playernote-icon-none" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes_none.png" width="11" height="9" border="0" alt="No new player Notes"></a> </div></td>
+<td class="player"><div nowrap><a href="http://sports.yahoo.com/nfl/players/24815" target="sports" class="name">Mark Ingram</a> </div> <div class="detail"><span>(NO - RB)</span>   <a href="http://sports.yahoo.com/nfl/players/24815/news" target="sports" class="playernote" data-ys-playerid="24815" data-ys-playernote-view="notes" id="playernote-24815"><img class="playernote-icon" src="http://l.yimg.com/a/i/us/sp/fn/default/full/p_notes.png" width="11" height="9" border="0" alt="Player notes"></a> </div></td>
 <td class="opp">Bye</td>
 <td class="gametime">&nbsp;</td>
 <td  class="stat wide">0.00</td>
@@ -6919,7 +6951,7 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 
 
 </div>
-  <img src="http://amch.questionmarket.com/adsc/d441261/4/456604/adscout.php?ord=69442" height="1" width="1" border="0">
+  <img src="http://amch.questionmarket.com/adsc/d441261/4/456604/adscout.php?ord=90741" height="1" width="1" border="0">
 
 <div id="ysf-stat-notes">
     </div>
@@ -6956,8 +6988,8 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
                                     <span class="pickem-avatar"><img class="logo" src="http://l.yimg.com/a/i/us/sp/fn/default/full/1x1clear.gif" width="48" height="48" border="0" alt="" realimg="http://l.yimg.com/a/i/us/sp/fn/default/full/nfl/icon_11_48.gif"></span>
                                     <ul>
                                         <li class="team-name loser">Stangs</li>
-                                        <li><em>2-3-0</em></li>
-                                        <li><strong class="loser">46.20</strong></li>
+                                        <li><em>2-4-0</em></li>
+                                        <li><strong class="loser">66.04</strong></li>
                                     </ul>
 								</td>
 								<td class="radio">
@@ -7009,8 +7041,8 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 </div></span> 
                                     <ul>
                                         <li class="team-name winner">Head Hancho</li>
-                                        <li><em>2-3-0</em></li>
-                                        <li><strong class="winner">115.88</strong></li>
+                                        <li><em>3-3-0</em></li>
+                                        <li><strong class="winner">118.58</strong></li>
                                     </ul>
 								</td>
                                 <td class="votes">
@@ -7046,8 +7078,8 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=3">3</a></li>
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=4">4</a></li>
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=5">5</a></li>
-	<li class="current selected"><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=6" title="Current Week">6</a></li>
-	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=7">7</a></li>
+	<li class="selected"><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=6">6</a></li>
+	<li class="current"><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=7" title="Current Week">7</a></li>
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=8">8</a></li>
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=9">9</a></li>
 	<li><a href="http://football.fantasysports.yahoo.com/f1/623546/matchup?week=6&mid1=8&mid2=11&matchupweek=10">10</a></li>
@@ -7063,12 +7095,12 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
 
 <h4>Fantasy</h4>
 <ul>
-	<li class="first "><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/9">ohSHnap!</a></div></td>      <td class="pts">55.82</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=9&mid2=10" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/10">Gixxer Gangsta</a></div></td>      <td class="pts">65.08</td>    </tr></table></li>
-	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/1">The Dirty Sanchez</a></div></td>      <td class="pts">81.02</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=1&mid2=7" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/7">Rick Rude</a></div></td>      <td class="pts">89.14</td>    </tr></table></li>
-	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/2">On_My_Way</a></div></td>      <td class="pts">110.84</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=2&mid2=6" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/6">KickersHaveFeelings2</a></div></td>      <td class="pts">76.20</td>    </tr></table></li>
-	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/3">Tenderloin Trans</a></div></td>      <td class="pts">77.00</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=3&mid2=5" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/5">BEAST MODE</a></div></td>      <td class="pts">111.46</td>    </tr></table></li>
-	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/4">Beer For Breakfast</a></div></td>      <td class="pts">77.16</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=4&mid2=12" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/12">OG OG triple OGs</a></div></td>      <td class="pts">90.02</td>    </tr></table></li>
-	<li class="last current"><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/8">Stangs</a></div></td>      <td class="pts">46.20</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=8&mid2=11" class="game-status">Match Up</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/11">Head Hancho</a></div></td>      <td class="pts">115.88</td>    </tr></table></li>
+	<li class="first "><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/9">ohSHnap!</a></div></td>      <td class="pts win">72.62</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=9&mid2=10" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=9&mid2=10">Recap</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/10">Gixxer Gangsta</a></div></td>      <td class="pts">65.08</td>    </tr></table></li>
+	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/1">The Dirty Sanchez</a></div></td>      <td class="pts">81.02</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=1&mid2=7" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=1&mid2=7">Recap</a></td>    </tr>    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/7">Rick Rude</a></div></td>      <td class="pts win">94.84</td>    </tr></table></li>
+	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/2">On_My_Way</a></div></td>      <td class="pts win">120.54</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=2&mid2=6" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=2&mid2=6">Recap</a></td>    </tr>    <tr>      <td class="first"><div nowrap><a href="/f1/623546/6">KickersHaveFeelings2</a></div></td>      <td class="pts">99.36</td>    </tr></table></li>
+	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/3">Tenderloin Trans</a></div></td>      <td class="pts">86.30</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=3&mid2=5" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=3&mid2=5">Recap</a></td>    </tr>    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/5">BEAST MODE</a></div></td>      <td class="pts win">111.46</td>    </tr></table></li>
+	<li class=""><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/4">Beer For Breakfast</a></div></td>      <td class="pts">83.16</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=4&mid2=12" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=4&mid2=12">Recap</a></td>    </tr>    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/12">OG OG triple OGs</a></div></td>      <td class="pts win">90.02</td>    </tr></table></li>
+	<li class="last current"><table cellpadding="0" cellspacing="0" border="0">    <tr>      <td class="first"><div nowrap><a href="/f1/623546/8">Stangs</a></div></td>      <td class="pts">66.04</td>      <td class="last" rowspan="2"><a href="/f1/623546/matchup?week=6&mid1=8&mid2=11" class="game-status final"><strong>Final</strong></a><a href="/f1/623546/recap?week=6&mid1=8&mid2=11">Recap</a></td>    </tr>    <tr>      <td class="first win"><div nowrap><a href="/f1/623546/11">Head Hancho</a></div></td>      <td class="pts win">118.58</td>    </tr></table></li>
 </ul>
 </div>
 </div>
@@ -7077,46 +7109,22 @@ if (hasReqestedVersion) {  // if we've detected an acceptable version
             </div>
             <div class="yui-b" id="yspsub">
                 <a name="subcontent" class="anchor" id="subcontent"></a>
-                <div id="yspadSKY"><!--Vendor: PointRoll-AJAX/DARLA, Format: Expandable SmartAd, IO: 123456-->
-<script type="text/javascript">
-function pr_swfver(){var osf,osfd,i,axo=1,v=0,nv=navigator;
-if(nv.plugins&&nv.mimeTypes.length){osf=nv.plugins["Shockwave Flash"];if(osf&&osf.description){osfd=osf.description;v=osfd.substring(osfd.indexOf(".")-2,osfd.indexOf(".")+2)}}
-else{try{try{v=new ActiveXObject("ShockwaveFlash.ShockwaveFlash").getVariable('$version').match(/[0-9]+.[0-9]/gi)[0].replace(/,/,".");}catch(f){for(i=5;axo!=null;i++){axo=new ActiveXObject("ShockwaveFlash.ShockwaveFlash."+i);v=i}}}catch(e){}}
-return v;}
-var pr_d=new Date();pr_d=pr_d.getDay()+"|"+pr_d.getHours()+":"+pr_d.getMinutes()+"|"+-pr_d.getTimezoneOffset()/60;
-var pr_postal="%userzip%";
-var pr_data = "enc:smpv%3d3%26ed%3d9uSGorymgRKdS27R65SPSZ20cdk2jdsnDpF9TOQqGCbh96RbT6L61qkfnnwT2akaOMwQocFvVfgSjkpOkv1YnJfZ8Gr8cqsRNC25oTa9lgU7I2BDY6v5y1HmA7EIaJeJqSqGQsAtecn.EfddXLJFhADWFEgkN6SxMzd1sQv5MuxNOHSO_PvHPZEMCrj17hJPGZ8vypoaX8ImCzOtB2LNcnVXmJZMv60irfbp0d_bI9jL70b5QtLbOElyCwI1S01N75F2.nV.KSwPNnkbvvPqRCfwMyM-";
-var pr_ies="";
-var prinif=((window!=top)?1:0);
-var pr_redir="http://clicks.beap.bc.yahoo.com/yc/YnY9MS4wLjAmYnM9KDE0bXQzaGNwbihnaWQkTEZXU1RHS0w2dzBnOE9BZFVFYjd6aGNvVEg1Q1dGQjcyZDhBQllpUSxzdCQxMzUwMjkzOTgzNDE0MzgzLHNpJDQ0NTc1NTEsdiQxLjAsYWlkJDFpWTVVbUtMNEhnLSxjdCQyNSx5YngkVGpXTWRKR2tyaE9qV2tITkViNExsQSxyJDAscmQkMTZpdGE1MW5hKSk/1/*http://global.ard.yahoo.com/SIG=15kbsmnst/M=999999.999999.999999.999999/D=sports/S=782200999:SKY/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=1iY5UmKL4Hg-/J=1350293983472401/K=5hWO7iVu7CkngggmP4vfLw/A=6084250890960591700/R=0/X=6/*$CTURL$";
-var pr_nua=navigator.userAgent.toLowerCase();
-var prHost=(("https:"==document.location.protocol)?"https://":"http://");var pr_sec=((prHost=='https://')?'&secure=1':'');
-var pr_pos="",pr_inif=(window!=top);
-if(pr_inif){try{pr_pos=(typeof(parent.document)!="unknown")?(((typeof(inDapIF)!="undefined")&&(inDapIF))||(parent.document.domain==document.domain))?"&pos=s":"&pos=x":"&pos=x";}
-catch(e){pr_pos="&pos=x";}if(pr_pos=="&pos=x"){var pr_u=new RegExp("[A-Za-z]+:[/][/][A-Za-z0-9.-]+");var pr_t=this.window.document.referrer;
-var pr_m=pr_t.match(pr_u);if(pr_m!=null){pr_pos+="&dom="+pr_m[0];}}else{if(((typeof(inDapMgrIf)!="undefined")&&(inDapMgrIf))||((typeof(isAJAX)!="undefined")&&(isAJAX))){pr_pos+="&ajx=1"}}}
-if(pr_postal!=""){var przipmatch=/^\d{5}$/;if(przipmatch.test(pr_postal)){pr_pos+="&postal="+pr_postal;}}
-if((pr_data!="")&&(pr_data.indexOf("&")<0)){pr_pos+="&data="+pr_data;}
-if((pr_ies!="")&&(pr_ies.indexOf("&")<0)){pr_pos+="&ies="+pr_ies;}
-var pr_s="ads.pointroll.com/PortalServe/?pid=1828864P56620120905163718&flash="+pr_swfver()+"&time="+pr_d+"&redir="+pr_redir+pr_pos+pr_sec+"&inif="+prinif+"&r="+Math.random();
-document.write("<scr"+"ipt type='text/javascript' src='"+prHost+pr_s+"'></scr"+"ipt>");
-</script>
-<noscript><a HREF="http://clicks.beap.bc.yahoo.com/yc/YnY9MS4wLjAmYnM9KDE0bXZoNGI4ZihnaWQkTEZXU1RHS0w2dzBnOE9BZFVFYjd6aGNvVEg1Q1dGQjcyZDhBQllpUSxzdCQxMzUwMjkzOTgzNDE0MzgzLHNpJDQ0NTc1NTEsdiQxLjAsYWlkJDFpWTVVbUtMNEhnLSxjdCQyNSx5YngkVGpXTWRKR2tyaE9qV2tITkViNExsQSxyJDEscmQkMTl0MG5pMjhxKSk/1/*http://global.ard.yahoo.com/SIG=15kbsmnst/M=999999.999999.999999.999999/D=sports/S=782200999:SKY/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=1iY5UmKL4Hg-/J=1350293983472401/K=5hWO7iVu7CkngggmP4vfLw/A=6084250890960591700/R=1/X=6/SIG=12vgl4eba/*http://ads.pointroll.com/PortalServe/?pid=1828864P56620120905163718&pos=c&r=1350293983.472401"><img border="0" width="160" height="600" src="http://ads.pointroll.com/PortalServe/?pid=1828864P56620120905163718&pos=i&r=1350293983.472401"></a></noscript><!--QYZ 1452810051,2851700551,98.139.228.48;;SKY;782200999;1;--><script language=javascript>
-if(window.xzq_d==null)window.xzq_d=new Object();
-window.xzq_d['1iY5UmKL4Hg-']='(as$12dq51r1a,aid$1iY5UmKL4Hg-,bi$1452810051,ct$25,at$H)';
-</script><noscript><img width=1 height=1 alt="" src="http://csc.beap.bc.yahoo.com/yi?bv=1.0.0&bs=(128fm2ivk(gid$LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ,st$1350293983414383,v$1.0))&t=J_3-D_3&al=(as$12dq51r1a,aid$1iY5UmKL4Hg-,bi$1452810051,ct$25,at$H)"></noscript></div>            </div>
+                <div id="yspadSKY"><IFRAME FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=160 HEIGHT=600 SRC="http://ad.yieldmanager.com/st?_PVID=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&cnt=yan&ad_type=iframe&ad_size=160x600&site=140509&section_code=14487123&cb=1350726376015453&promote_sizes=1&yud=zip%3D%26ycg%3Dm%26yyob%3D1980&pub_redirect_unencoded=1&pub_redirect=http://global.ard.yahoo.com/SIG=15qgc45je/M=787833.14487123.14324488.12458984/D=sports/S=782200999:SKY/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=iaFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=6261246/R=0/*"></IFRAME><script language=javascript>
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['iaFadWKL5WU-']='&U=13f8v55mc%2fN%3diaFadWKL5WU-%2fC%3d787833.14487123.14324488.12458984%2fD%3dSKY%2fB%3d6261246%2fV%3d1';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fcmv9m7b%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d2070150239%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=13f8v55mc%2fN%3diaFadWKL5WU-%2fC%3d787833.14487123.14324488.12458984%2fD%3dSKY%2fB%3d6261246%2fV%3d1"></noscript><!--QYZ CMS_NONE_SELECTED,,98.139.229.183;;SKY;782200999;2;--></div>            </div>
                             </div>
         <div id="ft">
           <div id="yspfooter">
            <div id="yspcopyright">
- <p>Copyright &copy; 2012 Yahoo! Inc. All rights reserved. <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=0/SIG=1136qnvkg/*http://docs.yahoo.com/info/terms/">Terms of Service</a> - <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=1/SIG=11gn55mhg/*http://football.fantasysports.yahoo.com/f1/tos">Additional Terms of Service</a> - <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=2/SIG=15u77k5lf/*http://feedback.help.yahoo.com/feedback.php?.src=YFSPORTS&.done=http://football.fantasysports.yahoo.com%2ff1%2f623546%2fmatchup%3fweek%3d6%26amp%3bmid1%3d8%26amp%3bmid2%3d11&.from=football">Send Feedback</a> - <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=3/SIG=121mj017n/*http://help.yahoo.com/l/us/yahoo/sports/fantasysports/football/">Help</a></p><p>Portions Copyright &copy; 2012 <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=4/SIG=10maki6m0/*http://www.stats.com">STATS LLC</a>. All rights reserved.</p><p>Portions Copyright &copy; 2012 <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=5/SIG=10qi49kth/*http://www.accuscore.com">AccuScore</a>. All rights reserved.</p><p>NOTICE: We collect personal information on this site. To learn more about how we use your information, see our <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=6/SIG=11skktb1u/*http://info.yahoo.com/privacy/us/yahoo/sports/details.html">Privacy Policy</a> - <a href="http://global.ard.yahoo.com/SIG=15rpn7h7l/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350301183/L=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ/B=j00TX2KL5Us-/J=1350293983489997/K=5hWO7iVu7CkngggmP4vfLw/A=5815013/R=7/SIG=11475d5s1/*http://info.yahoo.com/relevantads/">About Our Ads</a>.</p><img src="http://ads.bluelithium.com/pixel?id=1881342&t=2" width="1" height="1" /><script language=javascript>
+ <p>Copyright &copy; 2012 Yahoo! Inc. All rights reserved. <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=0/SIG=1136qnvkg/*http://docs.yahoo.com/info/terms/">Terms of Service</a> - <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=1/SIG=11gn55mhg/*http://football.fantasysports.yahoo.com/f1/tos">Additional Terms of Service</a> - <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=2/SIG=15u77k5lf/*http://feedback.help.yahoo.com/feedback.php?.src=YFSPORTS&.done=http://football.fantasysports.yahoo.com%2ff1%2f623546%2fmatchup%3fweek%3d6%26amp%3bmid1%3d8%26amp%3bmid2%3d11&.from=football">Send Feedback</a> - <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=3/SIG=121mj017n/*http://help.yahoo.com/l/us/yahoo/sports/fantasysports/football/">Help</a></p><p>Portions Copyright &copy; 2012 <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=4/SIG=10maki6m0/*http://www.stats.com">STATS LLC</a>. All rights reserved.</p><p>Portions Copyright &copy; 2012 <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=5/SIG=10qi49kth/*http://www.accuscore.com">AccuScore</a>. All rights reserved.</p><p>NOTICE: We collect personal information on this site. To learn more about how we use your information, see our <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=6/SIG=11skktb1u/*http://info.yahoo.com/privacy/us/yahoo/sports/details.html">Privacy Policy</a> - <a href="http://global.ard.yahoo.com/SIG=15rlcs3f4/M=289534.12896418.13664459.12351338/D=sports/S=782200999:FOOT/Y=YAHOO/EXP=1350733576/L=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO/B=haFadWKL5WU-/J=1350726376015453/K=28fH1u5hQ97ggKrqWQDFeQ/A=5815013/R=7/SIG=11475d5s1/*http://info.yahoo.com/relevantads/">About Our Ads</a>.</p><img src="http://ads.bluelithium.com/pixel?id=1763240&t=2" width="1" height="1" /><script language=javascript>
 if(window.yzq_d==null)window.yzq_d=new Object();
-window.yzq_d['kk0TX2KL5Us-']='&U=13f27kvac%2fN%3dkk0TX2KL5Us-%2fC%3d774647.15219513.14866725.12549985%2fD%3dSIP%2fB%3d6695423%2fV%3d1';
-</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1fatuqia4%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d54475573%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3d34C7FA3F&U=13f27kvac%2fN%3dkk0TX2KL5Us-%2fC%3d774647.15219513.14866725.12549985%2fD%3dSIP%2fB%3d6695423%2fV%3d1"></noscript> <!-- SpaceID=782200999 loc=FR001 noad -->
+window.yzq_d['k6FadWKL5WU-']='&U=13fm6ohj6%2fN%3dk6FadWKL5WU-%2fC%3d774647.15135342.14800912.12549985%2fD%3dSIP%2fB%3d6642572%2fV%3d1';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fco0vgmq%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d3548023455%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=13fm6ohj6%2fN%3dk6FadWKL5WU-%2fC%3d774647.15135342.14800912.12549985%2fD%3dSIP%2fB%3d6642572%2fV%3d1"></noscript> <!-- SpaceID=782200999 loc=FR001 noad -->
 <script language=javascript>
 if(window.yzq_d==null)window.yzq_d=new Object();
-window.yzq_d['j00TX2KL5Us-']='&U=13gsph6pb%2fN%3dj00TX2KL5Us-%2fC%3d289534.12896418.13664459.12351338%2fD%3dFOOT%2fB%3d5815013%2fV%3d1';
-</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1fcjfcff6%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d1246022973%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3d34C7FA3F&U=13gsph6pb%2fN%3dj00TX2KL5Us-%2fC%3d289534.12896418.13664459.12351338%2fD%3dFOOT%2fB%3d5815013%2fV%3d1"></noscript><!--QYZ FAC_DONT_USE,,98.139.228.48;;;782200999;11;--></div>
+window.yzq_d['haFadWKL5WU-']='&U=13gf1hbj4%2fN%3dhaFadWKL5WU-%2fC%3d289534.12896418.13664459.12351338%2fD%3dFOOT%2fB%3d5815013%2fV%3d1';
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fb4n4qp1%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3dYAHOO%2fF%3d892084715%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62&U=13gf1hbj4%2fN%3dhaFadWKL5WU-%2fC%3d289534.12896418.13664459.12351338%2fD%3dFOOT%2fB%3d5815013%2fV%3d1"></noscript><!--QYZ FAC_DONT_USE,,98.139.229.183;;;782200999;11;--></div>
 <script charset="utf-8" type="text/javascript" language="javascript">
 <!--
 
@@ -7515,7 +7523,7 @@ YUI.Sports.Ads = Y.Sports.Ads;
 </script>
 <script charset="utf-8" type="text/javascript" language="javascript"><!--
 
-YSF.use('ys-playernotes', 'substitute', 'ysf-ads', function(Y) {
+YSF.use('media-playernotes', 'substitute', 'ysf-ads', function(Y) {
     var registeredAds = [];
     
     Y.Sports.PlayerNotes.set('noteUrlFormatter', function() {
@@ -7586,7 +7594,8 @@ YSF.use('ys-playernotes', 'substitute', 'ysf-ads', function(Y) {
 });
 
 // -->
-</script><script charset="utf-8" type="text/javascript" language="javascript"><!--
+</script>
+<script charset="utf-8" type="text/javascript" language="javascript"><!--
 YAHOO.namespace("YAHOO.Fantasy");
 
 (function() {
@@ -10430,13 +10439,13 @@ postLoadImages('bd');  }
 <script language=javascript>
 if(window.yzq_p==null)document.write("<scr"+"ipt language=javascript src=http://l.yimg.com/d/lib/bc/bc_2.0.5.js></scr"+"ipt>");
 </script><script language=javascript>
-if(window.yzq_p)yzq_p('P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1f78do6ut%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d1.1%2fW%3dJ%2fY%3dYAHOO%2fF%3d2329357431%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fS%3d1%2fJ%3d34C7FA3F');
+if(window.yzq_p)yzq_p('P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1f7afr386%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d1.1%2fW%3dJ%2fY%3dYAHOO%2fF%3d2678146754%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fS%3d1%2fJ%3dF11F8B62');
 if(window.yzq_s)yzq_s();
-</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ&T=1fchilrbb%2fX%3d1350293983%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d3.1%2fW%3dJ%2fY%3dYAHOO%2fF%3d3330308028%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJMRldTVEdLTDZ3MGc4T0FkVUViN3poY29USDVDV0ZCNzJkOEFCWWlRIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwMjkzOTgzNDE0MzgzIiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3d34C7FA3F"></noscript><script language=javascript>
+</script><noscript><img width=1 height=1 alt="" src="http://us.bc.yahoo.com/b?P=kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO&T=1fci2mls3%2fX%3d1350726376%2fE%3d782200999%2fR%3dsports%2fK%3d5%2fV%3d3.1%2fW%3dJ%2fY%3dYAHOO%2fF%3d4208606588%2fH%3dY2FjaGVoaW50PSJzcG9ydHMiIGNvbnRlbnQ9ImdhbWU9bmZsOyByZWZ1cmxfZm9vdGJhbGxfZmFudGFzeXNwb3J0c195YWhvb19jb20iIHJlZnVybD0icmVmdXJsX2Zvb3RiYWxsX2ZhbnRhc3lzcG9ydHNfeWFob29fY29tIiBzZXJ2ZUlkPSJrUHVLOUdLTDZ3MzJldDdWVDkuSlR3S2FUSDVDV0ZDQ2N1Y0FEWmNPIiBzaXRlSWQ9IjQ0NTc1NTEiIHRTdG1wPSIxMzUwNzI2Mzc1OTQ3MTA0IiB0b3BpY3M9InJlZnVybF9mb290YmFsbF9mYW50YXN5c3BvcnRzX3lhaG9vX2NvbSIg%2fQ%3d-1%2fS%3d1%2fJ%3dF11F8B62"></noscript><script language=javascript>
 (function(){window.xzq_p=function(R){M=R};window.xzq_svr=function(R){J=R};function F(S){var T=document;if(T.xzq_i==null){T.xzq_i=new Array();T.xzq_i.c=0}var R=T.xzq_i;R[++R.c]=new Image();R[R.c].src=S}window.xzq_sr=function(){var S=window;var Y=S.xzq_d;if(Y==null){return }if(J==null){return }var T=J+M;if(T.length>P){C();return }var X="";var U=0;var W=Math.random();var V=(Y.hasOwnProperty!=null);var R;for(R in Y){if(typeof Y[R]=="string"){if(V&&!Y.hasOwnProperty(R)){continue}if(T.length+X.length+Y[R].length<=P){X+=Y[R]}else{if(T.length+Y[R].length>P){}else{U++;N(T,X,U,W);X=Y[R]}}}}if(U){U++}N(T,X,U,W);C()};function N(R,U,S,T){if(U.length>0){R+="&al="}F(R+U+"&s="+S+"&r="+T)}function C(){window.xzq_d=null;M=null;J=null}function K(R){xzq_sr()}function B(R){xzq_sr()}function L(U,V,W){if(W){var R=W.toString();var T=U;var Y=R.match(new RegExp("\\\\(([^\\\\)]*)\\\\)"));Y=(Y[1].length>0?Y[1]:"e");T=T.replace(new RegExp("\\\\([^\\\\)]*\\\\)","g"),"("+Y+")");if(R.indexOf(T)<0){var X=R.indexOf("{");if(X>0){R=R.substring(X,R.length)}else{return W}R=R.replace(new RegExp("([^a-zA-Z0-9$_])this([^a-zA-Z0-9$_])","g"),"$1xzq_this$2");var Z=T+";var rv = f( "+Y+",this);";var S="{var a0 = '"+Y+"';var ofb = '"+escape(R)+"' ;var f = new Function( a0, 'xzq_this', unescape(ofb));"+Z+"return rv;}";return new Function(Y,S)}else{return W}}return V}window.xzq_eh=function(){if(E||I){this.onload=L("xzq_onload(e)",K,this.onload,0);if(E&&typeof (this.onbeforeunload)!=O){this.onbeforeunload=L("xzq_dobeforeunload(e)",B,this.onbeforeunload,0)}}};window.xzq_s=function(){setTimeout("xzq_sr()",1)};var J=null;var M=null;var Q=navigator.appName;var H=navigator.appVersion;var G=navigator.userAgent;var A=parseInt(H);var D=Q.indexOf("Microsoft");var E=D!=-1&&A>=4;var I=(Q.indexOf("Netscape")!=-1||Q.indexOf("Opera")!=-1)&&A>=4;var O="undefined";var P=2000})();
 </script><script language=javascript>
 if(window.xzq_svr)xzq_svr('http://csc.beap.bc.yahoo.com/');
-if(window.xzq_p)xzq_p('yi?bv=1.0.0&bs=(128fm2ivk(gid$LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ,st$1350293983414383,v$1.0))&t=J_3-D_3');
+if(window.xzq_p)xzq_p('yi?bv=1.0.0&bs=(1354fd1ft(gid$kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO,st$1350726375947104,si$4457551,sp$782200999,pv$1,v$2.0))&t=J_3-D_3');
 if(window.xzq_s)xzq_s();
-</script><noscript><img width=1 height=1 alt="" src="http://csc.beap.bc.yahoo.com/yi?bv=1.0.0&bs=(128fm2ivk(gid$LFWSTGKL6w0g8OAdUEb7zhcoTH5CWFB72d8ABYiQ,st$1350293983414383,v$1.0))&t=J_3-D_3"></noscript>
-<!-- fan123.sports.bf1.yahoo.com compressed/chunked Mon Oct 15 02:39:43 PDT 2012 -->
+</script><noscript><img width=1 height=1 alt="" src="http://csc.beap.bc.yahoo.com/yi?bv=1.0.0&bs=(1354fd1ft(gid$kPuK9GKL6w32et7VT9.JTwKaTH5CWFCCcucADZcO,st$1350726375947104,si$4457551,sp$782200999,pv$1,v$2.0))&t=J_3-D_3"></noscript>
+<!-- fan154.sports.bf1.yahoo.com compressed/chunked Sat Oct 20 02:46:15 PDT 2012 -->

@@ -9,14 +9,43 @@ define(RequireImports.new()
 	{
 		var movieClip = context[sceneName] = function (groupClassName)
 		{
-			this.groupClassName = groupClassName;
+			this.groupClassName = groupClassName || sceneName;
+			this.posX = 0;
+			this.posY = 0;
 		};
 
 		movieClip.prototype = new EventEmitter();
 
+		movieClip.prototype.toString = function()
+		{
+			return sceneName;
+		}
+
+		// CONFIG FUNCTIONS
+
+		movieClip.prototype.setPosition = function(x,y)
+		{
+			this.posX = x;
+			this.posY = y;
+
+			return this;
+		};
+
+		movieClip.prototype.setVisParent = function(parent)
+		{
+			this.visParent = parent;
+
+			return this;
+		}
+
+		// END CONFIG FUNCTIONS
+
 		movieClip.prototype.createVis = function()
 		{
-			return this.movie.vis.append("g").classed(this.groupClassName,1);
+			var parent = this.visParent || this.movie.vis;
+
+			return parent.append("g").classed(this.groupClassName,1)
+				.attr("transform",this.writeTranslate(this.posX,this.posY));
 		};
 
 		movieClip.prototype.getRemoveCommand = function()
