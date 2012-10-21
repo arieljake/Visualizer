@@ -7,20 +7,25 @@ define(RequireImports.new()
 	.add("/javascripts/movies/MatchupComparison",["PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
-	(function (context, varName)
+	(function (varContext, varName)
 	{
-		var scene = context[varName] = function (movie,pos,params)
+		var scene = varContext[varName] = function (movie,pos,params)
 		{
 			this.movie = movie;
 			this.pos = pos;
 			this.teams = this.createTeams(params);
 		};
 
-		scene.prototype = new MovieClip("posComparisonGroup");
+		scene.prototype = new MovieClip(varName);
 
 		scene.prototype.createTeams = function(params)
 		{
 			var self = this;
+
+			if (params.hasOwnProperty("weekNo") && params.hasOwnProperty("matchupId") && params.hasOwnProperty("teams"))
+			{
+				params = new Matchup(params);
+			}
 
 			if (params.toString() == "Matchup")
 			{

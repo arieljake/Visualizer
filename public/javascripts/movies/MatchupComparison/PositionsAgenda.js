@@ -6,9 +6,9 @@ define(RequireImports.new()
 	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
-	(function (context, varName)
+	(function (varContext, varName)
 	{
-		var scene = context[varName] = function (movie,matchup)
+		var scene = varContext[varName] = function (movie,matchup)
 		{
 			this.movie = movie;
 			this.matchup = matchup;
@@ -20,9 +20,12 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			var team1
+			var matchup = new Matchup(self.matchup);
+			var team1ActivePlayers = matchup.getTeam1().getActivePlayers().toPlayerCollection();
+			var team1Positions = team1ActivePlayers.getPositions();
+			var positionOrdering = ["QB","WR","RB","TE","W/R","K","DEF"];
 
-			self.data = ;
+			self.data = _.sortBy(team1Positions,function(d) { return positionOrdering.indexOf(d.position); });
 			self.vis = self.createVis();
 
 			var commands = [];
@@ -39,72 +42,53 @@ define(RequireImports.new()
 			self.agendaGroups = self.vis.selectAll("g.positionAgendaItem").data(self.data).enter().append("g").classed("positionAgendaItem",1);
 
 			self.agendaGroups
-				.attr("opacity",0)
-				.attr("transform",function(d,i)
-				{
-					return self.writeTranslate(160*i,0);
-				});
+				.attr("opacity",0);
 
 			self.agendaGroups.append("rect")
-				.attr("width",150)
-				.attr("height",75)
+				.attr("width",50)
+				.attr("height",50)
 				.attr("stroke","#000")
-				.attr("fill","none");
+				.attr("fill","#FFF");
 
 			self.agendaGroups.append("text")
 				.text(function(d,i)
 				{
-					return "Matchup " + (i+1);
+					return d;
 				})
 				.attr("fill","#000")
-				.attr("font-size","9pt")
+				.attr("font-size","14pt")
 				.attr("x",5)
-				.attr("y",15);
-
-			self.teamGroups = self.agendaGroups.selectAll("g.team").data(function(d,i) { return d.teams; }).enter().append("g").classed("team",1);
-
-			self.teamGroups.append("text")
-				.text(function(d,i)
-				{
-					return d.name;
-				})
-				.attr("fill","#000")
-				.attr("font-size","10pt")
-				.attr("x",5)
-				.attr("y",function(d,i)
-				{
-					return 15 * (i+3);
-				});
+				.attr("y",25);
 
 			self.agendaGroups
 				.transition()
-				.duration(1000)
-				.delay(function(d,i)
+				.duration(1500)
+				.attr("opacity",1)
+				.attr("transform",function(d,i)
 				{
-					return 50 * i;
+					return self.writeTranslate(60*i,0);
 				})
-				.attr("opacity",.5)
- 				.each("end",Transitions.cb(cb));
+				.each("end", Transitions.cb(cb));
 		};
 
-		scene.prototype.getMatchup = function(matchupIndex)
+		scene.prototype.getPositions = function()
 		{
-			return this.data[matchupIndex];
+			return this.data;
 		};
 
-		scene.prototype.setActiveMatchup = function(matchup,cb)
+		scene.prototype.setActivePosition = function(position,cb)
 		{
 			var self = this;
 
-			self.agendaGroups
+			self.agendaGroups.selectAll("rect")
 				.transition()
 				.duration(500)
-				.attr("opacity",function(d,i)
+				.attr("fill",function(d,i)
 				{
-					if (d.matchupId == matchup.matchupId)
-						return 1;
+					if (d == position)
+						return "#EEE";
 					else
-						return .5;
+						return "#FFF";
 				})
 				.each("end",Transitions.cb(cb));
 		};

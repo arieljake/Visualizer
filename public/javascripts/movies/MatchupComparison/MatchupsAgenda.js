@@ -7,9 +7,9 @@ define(RequireImports.new()
 	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
-	(function (context, varName)
+	(function (varContext, varName)
 	{
-		var scene = context[varName] = function (movie,matchupParams)
+		var scene = varContext[varName] = function (movie,matchupParams)
 		{
 			this.movie = movie;
 			this.matchupParams = matchupParams;

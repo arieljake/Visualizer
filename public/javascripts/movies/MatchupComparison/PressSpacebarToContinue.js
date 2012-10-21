@@ -4,9 +4,9 @@ define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.toArray(),function()
 {
-	(function (context, varName)
+	(function (varContext, varName)
 	{
-		var scene = context[varName] = function (movie,parent)
+		var scene = varContext[varName] = function (movie,parent)
 		{
 			this.movie = movie;
 			this.parent = parent;

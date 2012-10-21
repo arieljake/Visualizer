@@ -1,7 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
-	.add("/javascripts/movies/MatchupComparison", ["2TeamComparison.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js"])
+	.add("/javascripts/movies/MatchupComparison", ["WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -23,7 +23,7 @@ define(RequireImports.new()
 				(new ClearMovieVis(self)),
 				function()
 				{
-					return (new 2TeamComparison(self,self.data.matchup)).setPosition(100,50);
+					return (new OneMatchupAllPositions(self,self.data.selectedMatchup)).setPosition(100,50);
 				}
 			];
 			self.curSceneInDev = null;
