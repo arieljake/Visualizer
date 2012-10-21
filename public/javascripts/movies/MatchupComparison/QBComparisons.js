@@ -4,7 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
 	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/javascripts/movies/MatchupComparison",["PosComparison.js","MatchupsAgenda.js"])
 	.toArray(),function()
 {

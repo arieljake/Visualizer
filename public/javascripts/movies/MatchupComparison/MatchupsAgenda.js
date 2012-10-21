@@ -1,9 +1,10 @@
 
 
 define(RequireImports.new()
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
+	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
 	(function (context, varName)
@@ -14,7 +15,7 @@ define(RequireImports.new()
 			this.matchupParams = matchupParams;
 		};
 
-		scene.prototype = new MovieClip("MatchupsAgenda");
+		scene.prototype = new MovieClip(varName);
 
 		scene.prototype.execute = function(params,cb)
 		{
@@ -24,7 +25,6 @@ define(RequireImports.new()
 			{
 				self.data = matchups;
 				self.vis = self.createVis();
-				self.once("end", cb);
 
 				var commands = [];
 				commands.push(new Command(self.createAgendaGroups,null,self));

@@ -2,7 +2,7 @@
 var _scenes = [""];
 
 define(RequireImports.new()
-	.add("/javascripts/movies", ["Movie.js"])
+	.add("/js-lib/js/movies", ["Movie.js"])
 	.add("/javascripts/movies/EmptyMovie", _.map(_scenes,function(filename) { return filename + ".js";}))
 	.toArray(), function ()
 {

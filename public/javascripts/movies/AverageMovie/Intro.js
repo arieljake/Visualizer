@@ -2,7 +2,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/yahoo/20datasets/",["Teams.js"])
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/javascripts/movies/AverageMovie/",["ShowTeamRankings.js"])
 	.toArray(),function()
 {

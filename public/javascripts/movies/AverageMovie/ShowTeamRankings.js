@@ -1,8 +1,8 @@
 
 
 define(RequireImports.new()
-	.add("/javascripts/movies/",["MovieClip.js"])
-	.add("/js-lib/js/yahoo/20datasets/",["Standings.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
+	.add("/js-lib/js/yahoo/20datasets",["Standings.js"])
 	.toArray(),function()
 {
 	(function (context, varName)

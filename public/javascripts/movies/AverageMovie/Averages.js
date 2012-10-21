@@ -1,7 +1,7 @@
 
 
 define(RequireImports.new()
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/javascripts/movies/AverageMovie",["AveragesPrep.js"])
 	.toArray(),function()
 {

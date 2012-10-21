@@ -1,44 +1,42 @@
 
 
 define(RequireImports.new()
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
-	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
+	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
 	(function (context, varName)
 	{
-		var scene = context[varName] = function (movie,matchupParams)
+		var scene = context[varName] = function (movie,matchup)
 		{
 			this.movie = movie;
-			this.matchupParams = matchupParams;
+			this.matchup = matchup;
 		};
 
-		scene.prototype = new MovieClip("MatchupsAgenda");
+		scene.prototype = new MovieClip(varName);
 
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
 
-			Matchups.get(self.matchupParams,function(err,matchups)
-			{
-				self.data = matchups;
-				self.vis = self.createVis();
-				self.once("end", cb);
+			var team1
 
-				var commands = [];
-				commands.push(new Command(self.createAgendaGroups,null,self));
+			self.data = ;
+			self.vis = self.createVis();
 
-				var sequence = new CommandSequence(commands);
-				sequence.execute(null,cb);
-			});
+			var commands = [];
+			commands.push(new Command(self.createAgendaGroups,null,self));
+
+			var sequence = new CommandSequence(commands);
+			sequence.execute(null,cb);
 		};
 
 		scene.prototype.createAgendaGroups = function(params,cb)
 		{
 			var self = this;
 
-			self.agendaGroups = self.vis.selectAll("g.qbCompAgenda").data(self.data).enter().append("g").classed("qbCompAgenda",1);
+			self.agendaGroups = self.vis.selectAll("g.positionAgendaItem").data(self.data).enter().append("g").classed("positionAgendaItem",1);
 
 			self.agendaGroups
 				.attr("opacity",0)
@@ -111,5 +109,5 @@ define(RequireImports.new()
 				.each("end",Transitions.cb(cb));
 		};
 
-	})(window, "MatchupsAgenda");
+	})(window, "PositionsAgenda");
 });

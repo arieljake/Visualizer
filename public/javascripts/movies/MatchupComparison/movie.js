@@ -1,27 +1,35 @@
 
 define(RequireImports.new()
-	.add("/javascripts/movies", ["Movie.js"])
-	.add("/javascripts/movies/MatchupComparison", ["QBComparisons.js"])
+	.add("/js-lib/js/movies", ["Movie.js"])
+	.add("/javascripts/movies/MatchupComparison", ["2TeamComparison.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js"])
 	.toArray(), function ()
 {
-	(function (context, movieName, sceneNames)
+	(function (context, movieName)
 	{
 		var movie = context[movieName] = function (parentSelector)
 		{
-			this.type = movieName;
-			this.parent = d3.selectAll(parentSelector);
-			this.w = 2000;
-			this.h = 2000;
-			this.scenes = [
-				(new QBComparisons(this,{weekNo: 6})).setPosition(100,50)
-			];
-			this.constants = {
+			var self = this;
 
-			};
-			this.curSceneInDev = null;
+			self.parent = d3.selectAll(parentSelector);
+			self.w = 2000;
+			self.h = 2000;
+			self.scenes = [
+				(new WeekSelection(self)).setPosition(100,50).setResultId("selectedWeek"),
+				(new ClearMovieVis(self)),
+				function()
+				{
+					return (new MatchupSelection(self,{weekNo: self.data.selectedWeek})).setPosition(100,50).setResultId("selectedMatchup");
+				},
+				(new ClearMovieVis(self)),
+				function()
+				{
+					return (new 2TeamComparison(self,self.data.matchup)).setPosition(100,50);
+				}
+			];
+			self.curSceneInDev = null;
 		};
 
-		movie.prototype = new Movie();
+		movie.prototype = new Movie(movieName);
 
 	})(window, "MatchupComparison");
 });

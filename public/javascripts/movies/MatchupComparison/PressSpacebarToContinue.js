@@ -1,7 +1,7 @@
 
 
 define(RequireImports.new()
-	.add("/javascripts/movies/",["MovieClip.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
 	.toArray(),function()
 {
 	(function (context, varName)

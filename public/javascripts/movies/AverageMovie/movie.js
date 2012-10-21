@@ -2,7 +2,7 @@
 var _scenes = ["Intro","Averages"];
 
 define(RequireImports.new()
-	.add("/javascripts/movies", ["Movie.js"])
+	.add("/js-lib/js/movies", ["Movie.js"])
 	.add("/javascripts/movies/AverageMovie", _.map(_scenes,function(filename) { return filename + ".js";}))
 	.toArray(), function ()
 {

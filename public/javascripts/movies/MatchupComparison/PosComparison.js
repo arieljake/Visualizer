@@ -3,7 +3,8 @@
 define(RequireImports.new()
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/control", ["Command.js"])
-	.add("/javascripts/movies/",["MovieClip.js","PressSpacebarToContinue.js"])
+	.add("/js-lib/js/movies",["MovieClip.js"])
+	.add("/javascripts/movies/MatchupComparison",["PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
 	(function (context, varName)
@@ -53,7 +54,6 @@ define(RequireImports.new()
 		{
 			var self = this;
 			self.vis = self.createVis();
-			self.once("end", cb	);
 
 			self.teams[0].x = 5;
 			self.teams[0].y = 40;
