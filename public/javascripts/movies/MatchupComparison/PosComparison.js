@@ -11,12 +11,60 @@ define(RequireImports.new()
 	{
 		var scene = varContext[varName] = function (movie,pos,params)
 		{
+			var self = this;
+
 			this.movie = movie;
 			this.pos = pos;
 			this.teams = this.createTeams(params);
 			this.constants = {
 				bkgdWidth: 600,
-				bkgdFill: "#EEE"
+				bkgdFill: "#EEE",
+				stats: [
+					{
+						label: "projected " + self.pos + " result",
+						fill: "#3C3",
+						y: 15,
+						calculate: function(team)
+						{
+							var teamPlayers = team.playerColl;
+							var teamProjection = teamPlayers.getPointsProjected();
+
+							var oppPlayers = team.opponent.playerColl;
+							var oppProjection = oppPlayers.getPointsProjected();
+
+							if (teamProjection > oppProjection)
+							{
+								return "+ " + numFormat(teamProjection - oppProjection);
+							}
+							else
+							{
+								return "";
+							}
+						}
+					},
+					{
+						label: "actual " + self.pos + " result",
+						fill: "#360",
+						y: 40,
+						calculate: function(team)
+						{
+							var teamPlayers = team.playerColl;
+							var teamScore = teamPlayers.getPointsScored();
+
+							var oppPlayers = team.opponent.playerColl;
+							var oppScore = oppPlayers.getPointsScored();
+
+							if (teamScore > oppScore)
+							{
+								return "+ " + numFormat(teamScore - oppScore);
+							}
+							else
+							{
+								return "";
+							}
+						}
+					}
+				]
 			}
 		};
 
@@ -39,7 +87,7 @@ define(RequireImports.new()
 					name: matchup.getTeam1().getTeamName(),
 					playerColl: matchup.getTeam1().getActivePlayers().toPlayerCollection().filter(function(item)
 					{
-						return item.getPosition() == self.pos;
+						return item.getSlot() == self.pos;
 					})
 				};
 
@@ -47,7 +95,7 @@ define(RequireImports.new()
 					name: matchup.getTeam2().getTeamName(),
 					playerColl: matchup.getTeam2().getActivePlayers().toPlayerCollection().filter(function(item)
 					{
-						return item.getPosition() == self.pos;
+						return item.getSlot() == self.pos;
 					})
 				};
 
@@ -74,7 +122,7 @@ define(RequireImports.new()
 
 			self.vis.append("rect")
 				.attr("width",self.constants.bkgdWidth)
-				.attr("height",270)
+				.attr("height",175)
 				.attr("fill",self.constants.bkgdFill)
 				.attr("stroke","none");
 
@@ -119,7 +167,7 @@ define(RequireImports.new()
 				.text(function(d,i){ return d.name; })
 				.attr("font-size","13pt")
 				.attr("opacity",.8)
-				.attr("fill","#666")
+				.attr("fill","#333")
 				.attr("transform",self.writeTranslate(10,5));
 
 			self.callIn("showPlayers",1000,cb);
@@ -275,86 +323,46 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.vis.append("text")
-				.text("projected " + self.pos + " result")
-				.attr("opacity",0)
+			self.posSummaryGroup = self.vis.append("g").classed("posSummaryGroup",1)
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(0,176);
+				});
+
+			self.posSummaryGroup.append("rect")
+				.attr("width",self.constants.bkgdWidth)
+				.attr("height",50)
+				.attr("fill",self.constants.bkgdFill)
+				.attr("stroke","none");
+
+			self.posSummaryStatGroups = self.posSummaryGroup.selectAll("g.posSummaryStatGroup").data(self.constants.stats).enter().append("g").classed("posSummaryStatGroup",1);
+
+			self.posSummaryStatGroups.append("text")
+				.text(function(d,i) { return d.label; })
 				.attr("font-size","13pt")
-				.attr("fill","#3C3")
+				.attr("fill",function(d,i) { return d.fill; })
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,200);
-				})
-				.transition()
-				.duration(100)
-				.delay(0)
-				.attr("opacity",1);
+					return self.writeTranslate(0, d.y);
+				});
 
-			self.vis.append("text")
-				.text("actual " + self.pos + " result")
-				.attr("opacity",0)
+			self.valueGroups = self.posSummaryStatGroups.selectAll("g.value").data(self.teams).enter().append("g").classed("value",1)
+				.attr("transform", function(d,i,j) {
+					var stat = self.constants.stats[j];
+					var team = self.teams[i];
+					return self.writeTranslate(team.x + 195, stat.y);
+				});
+
+			self.valueGroups.append("text")
+				.text(function(d,i,j) {
+					var stat = self.constants.stats[j];
+					var team = self.teams[i];
+					return stat.calculate(team);
+				})
 				.attr("font-size","13pt")
-				.attr("fill","#360")
-				.attr("transform", function(d,i) {
-					return self.writeTranslate(0, 225);
-				})
-				.transition()
-				.duration(100)
-				.delay(1000)
-				.attr("opacity",1);
-
-			self.posSummaryGroup = self.teamGroups.append("g").classed("posSummary",1);
-
-			self.posSummaryGroup.append("text")
-				.text(function(d,i)
-				{
-					var teamPlayers = d.playerColl;
-					var oppPlayers = d.opponent.playerColl;
-
-					if (teamPlayers.getPointsProjected() > oppPlayers.getPointsProjected())
-					{
-						return "+ " + numFormat(teamPlayers.getPointsProjected() - oppPlayers.getPointsProjected());
-					}
-					else
-					{
-						return "";
-					}
-				})
-				.attr("opacity",0)
-				.attr("font-size","18pt")
-				.attr("fill","#3C3")
-				.attr("transform", function(d,i) {
-					return self.writeTranslate(185,160);
-				})
-				.transition()
-				.duration(100)
-				.delay(500)
-				.attr("opacity",1);
-
-
-			self.posSummaryGroup.append("text")
-				.text(function(d,i)
-				{
-					var teamPlayers = d.playerColl;
-					var oppPlayers = d.opponent.playerColl;
-
-					if (teamPlayers.getPointsScored() > oppPlayers.getPointsScored())
-					{
-						return "+ " + numFormat(teamPlayers.getPointsScored() - oppPlayers.getPointsScored());
-					}
-					else
-					{
-						return "";
-					}
-				})
-				.attr("opacity",0)
-				.attr("font-size","18pt")
-				.attr("fill","#360")
-				.attr("transform", function(d,i) {
-					return self.writeTranslate(185,185);
-				})
-				.transition()
-				.duration(100)
-				.delay(1500)
-				.attr("opacity",1);
+				.attr("fill",function(d,i,j){
+					var stat = self.constants.stats[j];
+					var team = self.teams[i];
+					return stat.fill;
+				});
 
 			// DONE
 			setTimeout(function()

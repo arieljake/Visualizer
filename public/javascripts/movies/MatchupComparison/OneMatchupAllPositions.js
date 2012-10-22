@@ -37,7 +37,8 @@ define(RequireImports.new()
 
 						var posComparison = new PosComparison(self.movie,position,self.matchup);
 						posComparison.setVisParent(self.vis);
-						posComparison.setPosition(60,110);
+						posComparison.setPosition(80,110);
+						posComparison.setResultId("comparison" + position);
 
 						commands.push(posComparison);
 						commands.push(posComparison.getRemoveCommand());

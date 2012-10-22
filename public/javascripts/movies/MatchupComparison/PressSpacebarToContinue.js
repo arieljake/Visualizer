@@ -6,10 +6,10 @@ define(RequireImports.new()
 {
 	(function (varContext, varName)
 	{
-		var scene = varContext[varName] = function (movie,parent)
+		var scene = varContext[varName] = function (movie,visParent)
 		{
 			this.movie = movie;
-			this.parent = parent;
+			this.visParent = visParent;
 			this.constants = {
 				delayOut: 1750,
 				delayIn: 350
@@ -21,8 +21,7 @@ define(RequireImports.new()
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
-			self.vis = self.parent.append("g").classed("pressSpacebarToContinue",1)
-				.attr("opacity",0);
+			self.vis = self.createVis();
 
 			var rectX = params && params.x ? params.x : 0;
 			var rectY = params && params.y ? params.y : 0;
@@ -30,13 +29,16 @@ define(RequireImports.new()
 			var rectH = 75;
 			var rectDist = (2*rectW) + (2*rectH);
 
+			self.vis
+				.attr("opacity",0)
+				.attr("transform",self.writeTranslate(rectX,rectY));
+
 			self.vis.append("rect")
 				.style("stroke-width",3)
 				.style("stroke","#00F")
-				.style("fill","none")
+				.style("fill","#FFF")
 				.attr("width",rectW)
 				.attr("height",rectH)
-				.attr("transform",self.writeTranslate(rectX,rectY))
 				.style("stroke-dasharray","" + (rectDist/40) + "," + (rectDist/40))
 				.style("stroke-dashoffset",0);
 
@@ -44,13 +46,19 @@ define(RequireImports.new()
 				.text("press spacebar")
 				.attr("font-size","16pt")
 				.attr("fill","#00F")
-				.attr("transform",self.writeTranslate(rectX + 30,rectY + 30));
+				.attr("transform",self.writeTranslate(30,20));
+
+			self.vis.append("text")
+				.text("or click")
+				.attr("font-size","16pt")
+				.attr("fill","#00F")
+				.attr("transform",self.writeTranslate(60,42));
 
 			self.vis.append("text")
 				.text("to continue")
 				.attr("font-size","16pt")
 				.attr("fill","#00F")
-				.attr("transform",self.writeTranslate(rectX + 45,rectY + 55));
+				.attr("transform",self.writeTranslate(45,65));
 
 			self.fadeIn();
 			self.monitorForSpacebar(cb);
@@ -69,7 +77,7 @@ define(RequireImports.new()
 
 					self.vis.remove();
 					$(document).unbind("keypress", keypressHandler);
-					$("g.pressSpacebarToContinue").bind("click", keypressHandler);
+					$(document).unbind("click", keypressHandler);
 
 					if (cb)
 						cb();
@@ -77,7 +85,7 @@ define(RequireImports.new()
 			};
 
 			$(document).bind("keypress", keypressHandler);
-			$("g.pressSpacebarToContinue").bind("click", keypressHandler);
+			$(document).bind("click", keypressHandler);
 		}
 
 		scene.prototype.fadeOut = function(cb)

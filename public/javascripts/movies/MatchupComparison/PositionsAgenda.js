@@ -22,10 +22,10 @@ define(RequireImports.new()
 
 			var matchup = new Matchup(self.matchup);
 			var team1ActivePlayers = matchup.getTeam1().getActivePlayers().toPlayerCollection();
-			var team1Positions = team1ActivePlayers.getPositions();
-			var positionOrdering = ["QB","WR","RB","TE","W/R","K","DEF"];
+			var team1Slots = team1ActivePlayers.getSlots();
+			var slotOrdering = ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"];
 
-			self.data = _.sortBy(team1Positions,function(d) { return positionOrdering.indexOf(d.position); });
+			self.data = _.sortBy(team1Slots,function(d) { return slotOrdering.indexOf(d.slot); });
 			self.vis = self.createVis();
 
 			var commands = [];

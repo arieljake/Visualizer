@@ -1,14 +1,13 @@
 
+$("body").append('<div id="movie"></div>');
 
-$(document).ready(function()
+require(RequireImports.new()
+	.add("/javascripts/movies/MatchupComparison",["movie.js"])
+	.toArray(), function()
 {
-	$("body").append('<div id="movie"></div>');
-
-	require(RequireImports.new()
-		.add("/javascripts/movies/MatchupComparison",["movie.js"])
-		.toArray(), function()
+	if (window.curMovie == undefined)
 	{
-		var movie = new MatchupComparison("#movie");
-		movie.start();
-	});
+		window.curMovie = new MatchupComparison("#movie");
+		window.curMovie.start();
+	}
 });
