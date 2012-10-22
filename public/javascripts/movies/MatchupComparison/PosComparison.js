@@ -373,7 +373,9 @@ define(RequireImports.new()
 					y: 220
 				},function()
 				{
-					self.emit("end");
+					self.emit("end",{
+
+					});
 				});
 			},4000);
 		};
