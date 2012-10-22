@@ -14,13 +14,25 @@ define(RequireImports.new()
 			self.w = 2000;
 			self.h = 2000;
 			self.scenes = [
-				(new WeekSelection(self)).setPosition(100,50).setResultId("selectedWeek"),
-				(new ClearMovieVis(self)),
-				function()
+//				(new WeekSelection(self)).setPosition(100,50).setResultId("selectedWeek"),
+//				(new ClearMovieVis(self)),
+//				function()
+//				{
+//					return (new MatchupSelection(self,{weekNo: self.data.selectedWeek})).setPosition(100,50).setResultId("selectedMatchup");
+//				},
+//				(new ClearMovieVis(self)),
+//				function()
+//				{
+//					return (new OneMatchupAllPositions(self,self.data.selectedMatchup)).setPosition(100,50);
+//				}
+				(new Command(function(params,cb)
 				{
-					return (new MatchupSelection(self,{weekNo: self.data.selectedWeek})).setPosition(100,50).setResultId("selectedMatchup");
-				},
-				(new ClearMovieVis(self)),
+					$.get("/data/samples/matchup.json",function(data)
+					{
+						self.data.selectedMatchup = data;
+						cb();
+					});
+				})),
 				function()
 				{
 					return (new OneMatchupAllPositions(self,self.data.selectedMatchup)).setPosition(100,50);

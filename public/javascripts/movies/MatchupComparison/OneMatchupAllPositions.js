@@ -4,7 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/control",["Command.js"])
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/movies",["MovieClip.js"])
-	.add("/javascripts/movies/MatchupComparison",["PosComparison.js","PositionsAgenda.js"])
+	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -22,25 +22,30 @@ define(RequireImports.new()
 			var self = this;
 			self.vis = self.createVis();
 
-			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,0);
-			self.agenda.execute(null,function()
+			self.header = (new MatchupHeader(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,0);
+			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,400);
+
+			self.header.execute(null,function()
 			{
-				var commands = [];
-
-				self.agenda.getPositions().forEach(function(position)
+				self.agenda.execute(null,function()
 				{
-					commands.push(new Command(self.agenda.setActivePosition,position,self.agenda));
+					var commands = [];
 
-					var posComparison = new PosComparison(self.movie,position,self.matchup);
-					posComparison.setVisParent(self.vis);
-					posComparison.setPosition(0,120);
+					self.agenda.getPositions().forEach(function(position)
+					{
+						commands.push(new Command(self.agenda.setActivePosition,position,self.agenda));
 
-					commands.push(posComparison);
-					commands.push(posComparison.getRemoveCommand());
+						var posComparison = new PosComparison(self.movie,position,self.matchup);
+						posComparison.setVisParent(self.vis);
+						posComparison.setPosition(0,110);
+
+						commands.push(posComparison);
+						commands.push(posComparison.getRemoveCommand());
+					});
+
+					var sequence = new CommandSequence(commands);
+					sequence.execute(null,cb);
 				});
-
-				var sequence = new CommandSequence(commands);
-				sequence.execute(null,cb);
 			});
 		}
 

@@ -23,6 +23,8 @@ WebAppFactory.createWebApp(new WebAppDelegate(
 	{
 		configureRoutes: function ()
 		{
+			this.expressApp.get("/1", function(req,res) { res.redirect("/views/matchupComparison"); });
+
 			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(this.expressApp);
 			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({})).attachToApp(this.expressApp);
 			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(this.expressApp);

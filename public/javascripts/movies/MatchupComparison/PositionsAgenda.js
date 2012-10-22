@@ -45,8 +45,8 @@ define(RequireImports.new()
 				.attr("opacity",0);
 
 			self.agendaGroups.append("rect")
-				.attr("width",50)
-				.attr("height",50)
+				.attr("width",15)
+				.attr("height",15)
 				.attr("stroke","#000")
 				.attr("fill","#FFF");
 
@@ -55,10 +55,10 @@ define(RequireImports.new()
 				{
 					return d;
 				})
-				.attr("fill","#000")
-				.attr("font-size","14pt")
-				.attr("x",5)
-				.attr("y",25);
+				.attr("fill","#666")
+				.attr("font-size","12pt")
+				.attr("x",18)
+				.attr("y",13);
 
 			self.agendaGroups
 				.transition()
@@ -80,15 +80,26 @@ define(RequireImports.new()
 		{
 			var self = this;
 
+			self.agendaGroups.selectAll("text")
+				.transition()
+				.duration(500)
+				.attr("fill", function(d,i)
+				{
+					if (d == position)
+						return "#F00";
+					else
+						return "#000";
+				});
+
 			self.agendaGroups.selectAll("rect")
 				.transition()
 				.duration(500)
-				.attr("fill",function(d,i)
+				.attr("stroke", function(d,i)
 				{
 					if (d == position)
-						return "#EEE";
+						return "#F00";
 					else
-						return "#FFF";
+						return "#000";
 				})
 				.each("end",Transitions.cb(cb));
 		};

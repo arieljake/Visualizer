@@ -68,19 +68,38 @@ define(RequireImports.new()
 			self.teams[1].y = 40;
 			self.teams[1].opponent = self.teams[0];
 
+			self.vis.append("rect")
+				.attr("width",430)
+				.attr("height",270)
+				.attr("fill","#EEE")
+				.attr("stroke","none");
+
 			self.vis.append("text").classed("title",1)
 				.text(self.pos + " Comparison")
 				.attr("font-size","18pt")
 				.attr("fill","#930")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,0);
+					return self.writeTranslate(0,-3);
 				})
 				.attr("opacity",0)
 				.transition()
-				.duration(1250)
+				.duration(1000)
 				.attr("opacity",1);
 
-			self.callIn("showTeams",950,cb,self.teams);
+			self.vis.append("path")
+				.attr("d","M 0 0 L 0 0 z")
+				.attr("y",21)
+				.attr("x",0)
+				.attr("fill","none")
+				.attr("stroke","#930")
+				.attr("stroke-width",2)
+				.transition()
+				.duration(1000)
+				.attr("d","M 0 0 L 430 0 z")
+				.each("end",Transitions.cb(function()
+			{
+				self.callIn("showTeams",100,cb,self.teams);
+			}));
 		};
 
 		scene.prototype.showTeams = function(teams,cb)
@@ -95,38 +114,9 @@ define(RequireImports.new()
 			self.teamGroups.append("text").classed("teamName",1)
 				.text(function(d,i){ return d.name; })
 				.attr("font-size","11pt")
-				.attr("transform",self.writeTranslate(0,5))
-				.attr("opacity",0)
-				.transition()
-				.duration(1150)
-				.delay(600)
-				.attr("opacity",1)
-				.each("end", Transitions.cb(function()
-			{
-				var rectW = 200;
-				var rectH = 140;
-				var rectDist = (2*rectW) + (2*rectH);
-				self.teamGroups.append("rect")
-					.attr("width",rectW)
-					.attr("height",rectH)
-					.attr("y",-15)
-					.attr("x",-5)
-					.attr("fill","none")
-					.attr("stroke","#930")
-					.style("stroke-dasharray","" + rectDist + "," + rectDist)
-					.style("stroke-dashoffset",rectDist)
-					.transition()
-					.duration(5000)
-					.style("stroke-dashoffset",0)
-					.each("end",Transitions.cb(function()
-				{
-					self.callIn("showPlayers",500,cb);
-				}));
-			}));
+				.attr("transform",self.writeTranslate(0,5));
 
-
-
-			// self.callIn("showPlayers",2500,cb);
+			self.callIn("showPlayers",1000,cb);
 		};
 
 		scene.prototype.showPlayers = function(params,cb)

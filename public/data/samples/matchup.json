@@ -1,0 +1,244 @@
+{
+	"weekNo": 6,
+	"matchupId": 3,
+	"teams": [
+		{
+			"name": "The Dirty Sanchez",
+			"record": "2-3-0",
+			"id": "1",
+			"players": [
+				{
+					"position": "QB",
+					"name": "Aaron Rodgers",
+					"isKeeper": true,
+					"projectedPoints": 21.63,
+					"actualPoints": 39.22
+				},
+				{
+					"position": "WR",
+					"name": "Calvin Johnson",
+					"isKeeper": true,
+					"projectedPoints": 13.93,
+					"actualPoints": 13.5
+				},
+				{
+					"position": "WR",
+					"name": "Brian Hartline",
+					"isKeeper": false,
+					"projectedPoints": 5.84,
+					"actualPoints": 0
+				},
+				{
+					"position": "RB",
+					"name": "LeSean McCoy",
+					"isKeeper": true,
+					"projectedPoints": 17.79,
+					"actualPoints": 10.8
+				},
+				{
+					"position": "RB",
+					"name": "Jacquizz Rodgers",
+					"isKeeper": false,
+					"projectedPoints": 3.52,
+					"actualPoints": 1.9
+				},
+				{
+					"position": "TE",
+					"name": "Dustin Keller",
+					"isKeeper": false,
+					"projectedPoints": 5.67,
+					"actualPoints": 0.6
+				},
+				{
+					"position": "W/R",
+					"name": "Antonio Brown",
+					"isKeeper": false,
+					"projectedPoints": 8.25,
+					"actualPoints": 2
+				},
+				{
+					"position": "K",
+					"name": "Shayne Graham",
+					"isKeeper": false,
+					"projectedPoints": 8.48,
+					"actualPoints": 8
+				},
+				{
+					"position": "DEF",
+					"name": "Pittsburgh",
+					"isKeeper": false,
+					"projectedPoints": 8.29,
+					"actualPoints": 5
+				},
+				{
+					"position": "BN",
+					"name": "Ben Tate",
+					"isKeeper": false,
+					"projectedPoints": 7.29,
+					"actualPoints": 1.4
+				},
+				{
+					"position": "BN",
+					"name": "Kyle Rudolph",
+					"isKeeper": false,
+					"projectedPoints": 4.99,
+					"actualPoints": 13.6
+				},
+				{
+					"position": "BN",
+					"name": "Vincent Jackson",
+					"isKeeper": false,
+					"projectedPoints": 8.61,
+					"actualPoints": 18.6
+				},
+				{
+					"position": "BN",
+					"name": "Marques Colston",
+					"isKeeper": false,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Andre Brown",
+					"isKeeper": false,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Peyton Hillis",
+					"isKeeper": false,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "David Wilson",
+					"isKeeper": false,
+					"projectedPoints": 2.32,
+					"actualPoints": 3.5
+				}
+			]
+		},
+		{
+			"name": "Rick Rude",
+			"record": "3-2-0",
+			"id": "7",
+			"players": [
+				{
+					"position": "QB",
+					"name": "Andy Dalton",
+					"isKeeper": false,
+					"projectedPoints": 13.87,
+					"actualPoints": 22.74
+				},
+				{
+					"position": "WR",
+					"name": "Wes Welker",
+					"isKeeper": false,
+					"projectedPoints": 9.18,
+					"actualPoints": 19.8
+				},
+				{
+					"position": "WR",
+					"name": "Torrey Smith",
+					"isKeeper": false,
+					"projectedPoints": 9.96,
+					"actualPoints": 8.4
+				},
+				{
+					"position": "RB",
+					"name": "Ahmad Bradshaw",
+					"isKeeper": true,
+					"projectedPoints": 10.82,
+					"actualPoints": 18
+				},
+				{
+					"position": "RB",
+					"name": "Marshawn Lynch",
+					"isKeeper": true,
+					"projectedPoints": 13.3,
+					"actualPoints": 5.2
+				},
+				{
+					"position": "TE",
+					"name": "Joel Dreessen",
+					"isKeeper": false,
+					"projectedPoints": 4.75,
+					"actualPoints": 0
+				},
+				{
+					"position": "W/R",
+					"name": "BenJarvus Green-Ellis",
+					"isKeeper": false,
+					"projectedPoints": 12.7,
+					"actualPoints": 7
+				},
+				{
+					"position": "K",
+					"name": "Mason Crosby",
+					"isKeeper": false,
+					"projectedPoints": 8.04,
+					"actualPoints": 6
+				},
+				{
+					"position": "DEF",
+					"name": "Minnesota",
+					"isKeeper": false,
+					"projectedPoints": 9.22,
+					"actualPoints": 2
+				},
+				{
+					"position": "BN",
+					"name": "Jermichael Finley",
+					"isKeeper": false,
+					"projectedPoints": 7,
+					"actualPoints": 1.2
+				},
+				{
+					"position": "BN",
+					"name": "Drew Brees",
+					"isKeeper": true,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Robert Meachem",
+					"isKeeper": false,
+					"projectedPoints": 4.97,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Kendall Wright",
+					"isKeeper": false,
+					"projectedPoints": 4.84,
+					"actualPoints": 7.1
+				},
+				{
+					"position": "BN",
+					"name": "Jahvid Best",
+					"isKeeper": false,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Kevin Ogletree",
+					"isKeeper": false,
+					"projectedPoints": 2.58,
+					"actualPoints": 0
+				},
+				{
+					"position": "BN",
+					"name": "Chicago",
+					"isKeeper": false,
+					"projectedPoints": 0,
+					"actualPoints": 0
+				}
+			]
+		}
+	]
+}
