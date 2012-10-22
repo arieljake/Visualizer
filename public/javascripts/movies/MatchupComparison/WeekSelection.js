@@ -34,10 +34,12 @@ define(RequireImports.new()
 					.on("mouseover",function(d,i)
 					{
 						d3.select(this).select("rect").attr("fill","#FFC");
+						d3.select(this).select("text.weekLabel").attr("fill","#5D6938");
 					})
 					.on("mouseout",function(d,i)
 					{
 						d3.select(this).select("rect").attr("fill","#EEE");
+						d3.select(this).select("text.weekLabel").attr("fill","#999");
 					})
 					.on("click",function(d,i)
 					{
@@ -47,7 +49,7 @@ define(RequireImports.new()
 
 				self.weekGroups.append("rect")
 					.attr("fill","#EEE")
-					.attr("stroke","#000")
+					.attr("stroke","#999")
 					.attr("width",90)
 					.attr("height",90);
 
@@ -56,18 +58,21 @@ define(RequireImports.new()
 					{
 						return d;
 					})
-					.attr("fill","#CCC")
+					.attr("fill","#000")
 					.attr("font-size","40pt")
-					.attr("x",30)
-					.attr("y",60);
+					.attr("x",44)
+					.attr("y",67);
 
 				self.weekGroups.append("text")
+					.classed("weekLabel",1)
 					.text(function(d,i)
 					{
 						return "Week";
 					})
-					.attr("x",25)
-					.attr("y",35);
+					.attr("fill","#999")
+					.attr("font-size","14pt")
+					.attr("x",13)
+					.attr("y",30);
 			});
 		}
 

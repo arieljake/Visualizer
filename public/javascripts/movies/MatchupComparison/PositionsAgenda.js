@@ -80,17 +80,6 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.agendaGroups.selectAll("text")
-				.transition()
-				.duration(500)
-				.attr("fill", function(d,i)
-				{
-					if (d == position)
-						return "#F00";
-					else
-						return "#000";
-				});
-
 			self.agendaGroups.selectAll("rect")
 				.transition()
 				.duration(500)

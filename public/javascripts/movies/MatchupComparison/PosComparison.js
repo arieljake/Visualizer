@@ -19,11 +19,14 @@ define(RequireImports.new()
 			this.constants = {
 				bkgdWidth: 600,
 				bkgdFill: "#EEE",
+				teamGroupWidth: 300,
+				playerRowHeight: 50,
+				teamHeaderHeight: 40,
 				stats: [
 					{
 						label: "projected " + self.pos + " result",
 						fill: "#3C3",
-						y: 15,
+						y: 17,
 						calculate: function(team)
 						{
 							var teamPlayers = team.playerColl;
@@ -45,7 +48,7 @@ define(RequireImports.new()
 					{
 						label: "actual " + self.pos + " result",
 						fill: "#360",
-						y: 40,
+						y: 42,
 						calculate: function(team)
 						{
 							var teamPlayers = team.playerColl;
@@ -113,25 +116,19 @@ define(RequireImports.new()
 			self.vis = self.createVis();
 
 			self.teams[0].x = 0;
-			self.teams[0].y = 40;
+			self.teams[0].y = 20;
 			self.teams[0].opponent = self.teams[1];
 
 			self.teams[1].x = self.constants.bkgdWidth / 2;
-			self.teams[1].y = 40;
+			self.teams[1].y = 20;
 			self.teams[1].opponent = self.teams[0];
-
-			self.vis.append("rect")
-				.attr("width",self.constants.bkgdWidth)
-				.attr("height",175)
-				.attr("fill",self.constants.bkgdFill)
-				.attr("stroke","none");
 
 			self.vis.append("text").classed("title",1)
 				.text(self.pos + " Comparison")
 				.attr("font-size","18pt")
 				.attr("fill","#930")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,-3);
+					return self.writeTranslate(0,20);
 				})
 				.attr("opacity",0)
 				.transition()
@@ -139,17 +136,18 @@ define(RequireImports.new()
 				.attr("opacity",1);
 
 			self.vis.append("path")
-				.attr("d","M 0 0 L 0 0 z")
-				.attr("y",21)
-				.attr("x",0)
+				.attr("d","M 0 22 L 0 22 z")
 				.attr("fill","none")
 				.attr("stroke","#930")
 				.attr("stroke-width",2)
 				.transition()
 				.duration(1000)
-				.attr("d","M 0 0 L " + self.constants.bkgdWidth + " 0 z")
+				.attr("d","M 0 22 L " + self.constants.bkgdWidth + " 22 z")
 				.each("end",Transitions.cb(function()
 			{
+				self.contentSection = self.vis.append("g").classed("content",1)
+					.attr("transform", self.writeTranslate(0, 23));
+
 				self.callIn("showTeams",100,cb,self.teams);
 			}));
 		};
@@ -158,17 +156,24 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.teamGroups = self.vis.selectAll("g.team").data(teams).enter().append("g").classed("team",1)
+			self.teamGroups = self.contentSection.selectAll("g.team").data(teams).enter().append("g").classed("team",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(d.x, d.y);
+					return self.writeTranslate(d.x, 0);
 				});
 
-			self.teamGroups.append("text").classed("teamName",1)
+			self.teamGroups.append("rect")
+				.attr("width",self.constants.teamGroupWidth)
+				.attr("height",self.constants.teamHeaderHeight)
+				.attr("fill",self.constants.bkgdFill)
+				.attr("stroke","none");
+
+			self.teamGroups.append("text")
+				.classed("teamName",1)
 				.text(function(d,i){ return d.name; })
 				.attr("font-size","13pt")
 				.attr("opacity",.8)
 				.attr("fill","#333")
-				.attr("transform",self.writeTranslate(10,5));
+				.attr("transform",self.writeTranslate(10,20));
 
 			self.callIn("showPlayers",1000,cb);
 		};
@@ -179,8 +184,14 @@ define(RequireImports.new()
 
 			self.playerGroups = self.teamGroups.selectAll("g.player").data(function(d,i){ return d.playerColl.toArray(); }).enter().append("g").classed("player",1)
 				.attr("transform",function(d,i) {
-					return self.writeTranslate(0, 45 * (i+1));
+					return self.writeTranslate(0, self.constants.teamHeaderHeight + (self.constants.playerRowHeight * i));
 				});
+
+			self.playerGroups.append("rect")
+				.attr("width",self.constants.teamGroupWidth)
+				.attr("height",self.constants.playerRowHeight)
+				.attr("fill",self.constants.bkgdFill)
+				.attr("stroke","none");
 
 			self.callIn("showPlayerNames",100,cb);
 		};
@@ -270,12 +281,6 @@ define(RequireImports.new()
 					return self.writeTranslate(225, 15);
 				});
 
-			self.playerSummaryGroups.append("rect")
-				.attr("width",75)
-				.attr("height",50)
-				.attr("fill",self.constants.bkgdFill)
-				.attr("stroke","none");
-
 			self.playerSummaryGroups.append("text")
 				.text(function(d,i)
 				{
@@ -323,9 +328,9 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.posSummaryGroup = self.vis.append("g").classed("posSummaryGroup",1)
+			self.posSummaryGroup = self.contentSection.append("g").classed("posSummaryGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,176);
+					return self.writeTranslate(0,1 + self.constants.teamHeaderHeight + (self.constants.playerRowHeight * self.teams[0].playerColl.toArray().length));
 				});
 
 			self.posSummaryGroup.append("rect")
@@ -341,7 +346,7 @@ define(RequireImports.new()
 				.attr("font-size","13pt")
 				.attr("fill",function(d,i) { return d.fill; })
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0, d.y);
+					return self.writeTranslate(10, d.y);
 				});
 
 			self.valueGroups = self.posSummaryStatGroups.selectAll("g.value").data(self.teams).enter().append("g").classed("value",1)
@@ -374,7 +379,7 @@ define(RequireImports.new()
 				},function()
 				{
 					self.emit("end",{
-
+						
 					});
 				});
 			},4000);

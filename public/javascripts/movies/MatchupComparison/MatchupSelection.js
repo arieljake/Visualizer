@@ -35,10 +35,12 @@ define(RequireImports.new()
 					.on("mouseover",function(d,i)
 					{
 						d3.select(this).select("rect").attr("fill","#FFC");
+						d3.select(this).select("text.teamName").attr("fill","#5D6938");
 					})
 					.on("mouseout",function(d,i)
 					{
 						d3.select(this).select("rect").attr("fill","#EEE");
+						d3.select(this).select("text.teamName").attr("fill","#666");
 					})
 					.on("click",function(d,i)
 					{
@@ -53,10 +55,13 @@ define(RequireImports.new()
 					.attr("height",60);
 
 				self.matchupGroups.append("text")
+					.classed("teamName",1)
 					.text(function(d,i)
 					{
 						return d.teams[0].name;
 					})
+					.attr("fill","#666")
+					.attr("font-size","11pt")
 					.attr("x",10)
 					.attr("y",20);
 
@@ -65,16 +70,20 @@ define(RequireImports.new()
 					{
 						return "vs";
 					})
+					.attr("font-size","9pt")
 					.attr("x",10)
 					.attr("y",35);
 
 				self.matchupGroups.append("text")
+					.classed("teamName",1)
 					.text(function(d,i)
 					{
 						return d.teams[1].name;
 					})
+					.attr("fill","#666")
+					.attr("font-size","11pt")
 					.attr("x",10)
-					.attr("y",50);
+					.attr("y",52);
 			});
 		}
 
