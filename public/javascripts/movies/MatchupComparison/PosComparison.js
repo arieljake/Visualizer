@@ -14,6 +14,10 @@ define(RequireImports.new()
 			this.movie = movie;
 			this.pos = pos;
 			this.teams = this.createTeams(params);
+			this.constants = {
+				bkgdWidth: 600,
+				bkgdFill: "#EEE"
+			}
 		};
 
 		scene.prototype = new MovieClip(varName);
@@ -60,18 +64,18 @@ define(RequireImports.new()
 			var self = this;
 			self.vis = self.createVis();
 
-			self.teams[0].x = 5;
+			self.teams[0].x = 0;
 			self.teams[0].y = 40;
 			self.teams[0].opponent = self.teams[1];
 
-			self.teams[1].x = 225;
+			self.teams[1].x = self.constants.bkgdWidth / 2;
 			self.teams[1].y = 40;
 			self.teams[1].opponent = self.teams[0];
 
 			self.vis.append("rect")
-				.attr("width",430)
+				.attr("width",self.constants.bkgdWidth)
 				.attr("height",270)
-				.attr("fill","#EEE")
+				.attr("fill",self.constants.bkgdFill)
 				.attr("stroke","none");
 
 			self.vis.append("text").classed("title",1)
@@ -95,7 +99,7 @@ define(RequireImports.new()
 				.attr("stroke-width",2)
 				.transition()
 				.duration(1000)
-				.attr("d","M 0 0 L 430 0 z")
+				.attr("d","M 0 0 L " + self.constants.bkgdWidth + " 0 z")
 				.each("end",Transitions.cb(function()
 			{
 				self.callIn("showTeams",100,cb,self.teams);
@@ -113,8 +117,10 @@ define(RequireImports.new()
 
 			self.teamGroups.append("text").classed("teamName",1)
 				.text(function(d,i){ return d.name; })
-				.attr("font-size","11pt")
-				.attr("transform",self.writeTranslate(0,5));
+				.attr("font-size","13pt")
+				.attr("opacity",.8)
+				.attr("fill","#666")
+				.attr("transform",self.writeTranslate(10,5));
 
 			self.callIn("showPlayers",1000,cb);
 		};
@@ -125,8 +131,16 @@ define(RequireImports.new()
 
 			self.playerGroups = self.teamGroups.selectAll("g.player").data(function(d,i){ return d.playerColl.toArray(); }).enter().append("g").classed("player",1)
 				.attr("transform",function(d,i) {
-					return self.writeTranslate(0, 20);
+					return self.writeTranslate(0, 45 * (i+1));
 				});
+
+			self.callIn("showPlayerNames",100,cb);
+		};
+
+		scene.prototype.showPlayerNames = function(params,cb)
+		{
+			var self = this;
+
 			self.playerGroups.append("text")
 				.text("player: ")
 				.attr("font-size","9pt")
@@ -135,21 +149,17 @@ define(RequireImports.new()
 					return self.writeTranslate(10, 10);
 				});
 
-			setTimeout(function()
-			{
-				self.playerGroups.append("text")
-					.text(function(d,i) {
-						return d.getPlayerName();
-					})
-					.attr("font-size","9pt")
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(75, 10);
-					});
+			self.playerGroups.append("text")
+				.text(function(d,i) {
+					return d.getPlayerName();
+				})
+				.attr("font-size","9pt")
+				.attr("fill","#360")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(75, 10);
+				});
 
-				self.callIn("showProjectedPoints",1250,cb);
-
-			},750);
+			self.callIn("showProjectedPoints",1000,cb);
 		};
 
 		scene.prototype.showProjectedPoints = function(params,cb)
@@ -164,21 +174,17 @@ define(RequireImports.new()
 					return self.writeTranslate(10, 20);
 				});
 
-			setTimeout(function()
-			{
-				self.playerGroups.append("text")
-					.text(function(d,i) {
-						return d.getProjectedPoints()
-					})
-					.attr("font-size","9pt")
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(75, 20);
-					});
+			self.playerGroups.append("text")
+				.text(function(d,i) {
+					return d.getProjectedPoints()
+				})
+				.attr("font-size","9pt")
+				.attr("fill","#360")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(75, 20);
+				});
 
-				self.callIn("showActualPoints",1250,cb);
-
-			},750);
+			self.callIn("showActualPoints",1000,cb);
 		};
 
 		scene.prototype.showActualPoints = function(params,cb)
@@ -193,38 +199,36 @@ define(RequireImports.new()
 					return self.writeTranslate(10, 30);
 				});
 
-			setTimeout(function()
-			{
-				self.playerGroups.append("text")
-					.text(function(d,i) {
-						return d.getActualPoints()
-					})
-					.attr("font-size","9pt")
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(75, 30);
-					});
+			self.playerGroups.append("text")
+				.text(function(d,i) {
+					return d.getActualPoints()
+				})
+				.attr("font-size","9pt")
+				.attr("fill","#360")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(75, 30);
+				});
 
-				self.callIn("showPlayerSummary",1250,cb);
-
-			},750);
+			self.callIn("showPlayerSummary",1000,cb);
 		};
-
-		/**
-		 *
-		 * - start at point 0
-		 * - using rate (100 pixels/sec) * time (interval == 1000 ms), calculate max distance traveled (100 pixels)
-		 * - goto next point
-		 *   - if (no more points) then (done)
-		 *   - draw line towards next point with distance Min(100pixels,distanceToPoint1)
-		 *   - if (distanceToPoint1-100pixels LT 0) then (advance next point, goto next point)
-		 */
 
 		scene.prototype.showPlayerSummary = function(params,cb)
 		{
 			var self = this;
 
-			self.playerGroups.append("text")
+			self.playerSummaryGroups = self.playerGroups.append("g")
+				.classed("summary",1)
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(225, 15);
+				});
+
+			self.playerSummaryGroups.append("rect")
+				.attr("width",75)
+				.attr("height",50)
+				.attr("fill",self.constants.bkgdFill)
+				.attr("stroke","none");
+
+			self.playerSummaryGroups.append("text")
 				.text(function(d,i)
 				{
 					d.actualToProjectedValue = numFormat(Math.abs(d.getActualPoints() - d.getProjectedPoints()));
@@ -233,17 +237,17 @@ define(RequireImports.new()
 					return d.actualToProjectedPlusMinus + d.actualToProjectedValue;
 				})
 				.attr("text-anchor","middle")
-				.attr("font-size","20pt")
+				.attr("font-size","16pt")
 				.attr("fill","#360")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(90, 75);
+					return self.writeTranslate(0, 0);
 				})
 				.attr("opacity",0)
 				.transition()
 				.duration(1250)
 				.attr("opacity",1);
 
-			self.playerGroups.append("text")
+			self.playerSummaryGroups.append("text")
 				.text(function(d,i)
 				{
 					return d.actualToProjectedPlusMinus == "-" ? "under projected" : "over projected";
@@ -255,7 +259,7 @@ define(RequireImports.new()
 					return d.actualToProjectedPlusMinus == "-" ? "#F00" : "#000";
 				})
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(95, 90);
+					return self.writeTranslate(5, 15);
 				})
 				.attr("opacity",0)
 				.transition()
@@ -263,17 +267,7 @@ define(RequireImports.new()
 				.attr("opacity",1)
 				.each("end",Transitions.cb(function()
 			{
-				setTimeout(function()
-				{
-					var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
-					pressSpacebar.execute({
-						x: 110,
-						y: 160
-					},function()
-					{
-						self.showPosSummary();
-					});
-				},2000);
+				self.callIn("showPosSummary",1000,cb);
 			}));
 		};
 
@@ -281,26 +275,35 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.playerGroups.remove();
-			self.posSummaryGroup = self.vis.append("g").classed("posSummary",1);
-
-			self.posSummaryGroup.append("rect")
-				.attr("width",10)
-				.attr("height",10)
+			self.vis.append("text")
+				.text("projected " + self.pos + " result")
+				.attr("opacity",0)
+				.attr("font-size","13pt")
 				.attr("fill","#3C3")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(10,180);
-				});
+					return self.writeTranslate(0,200);
+				})
+				.transition()
+				.duration(100)
+				.delay(0)
+				.attr("opacity",1);
+
+			self.vis.append("text")
+				.text("actual " + self.pos + " result")
+				.attr("opacity",0)
+				.attr("font-size","13pt")
+				.attr("fill","#360")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(0, 225);
+				})
+				.transition()
+				.duration(100)
+				.delay(1000)
+				.attr("opacity",1);
+
+			self.posSummaryGroup = self.teamGroups.append("g").classed("posSummary",1);
 
 			self.posSummaryGroup.append("text")
-				.text("projected " + self.pos + " result")
-				.attr("font-size","18pt")
-				.attr("fill","#3C3")
-				.attr("transform", function(d,i) {
-					return self.writeTranslate(30,195);
-				});
-
-			self.posSummaryGroup.selectAll(".projected").data(self.teamGroups.data()).enter().append("text")
 				.text(function(d,i)
 				{
 					var teamPlayers = d.playerColl;
@@ -315,65 +318,56 @@ define(RequireImports.new()
 						return "";
 					}
 				})
+				.attr("opacity",0)
 				.attr("font-size","18pt")
 				.attr("fill","#3C3")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(d.x + 40,d.y + 60);
-				});
+					return self.writeTranslate(185,160);
+				})
+				.transition()
+				.duration(100)
+				.delay(500)
+				.attr("opacity",1);
 
+
+			self.posSummaryGroup.append("text")
+				.text(function(d,i)
+				{
+					var teamPlayers = d.playerColl;
+					var oppPlayers = d.opponent.playerColl;
+
+					if (teamPlayers.getPointsScored() > oppPlayers.getPointsScored())
+					{
+						return "+ " + numFormat(teamPlayers.getPointsScored() - oppPlayers.getPointsScored());
+					}
+					else
+					{
+						return "";
+					}
+				})
+				.attr("opacity",0)
+				.attr("font-size","18pt")
+				.attr("fill","#360")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(185,185);
+				})
+				.transition()
+				.duration(100)
+				.delay(1500)
+				.attr("opacity",1);
+
+			// DONE
 			setTimeout(function()
 			{
-				self.posSummaryGroup.append("rect")
-					.attr("width",10)
-					.attr("height",10)
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(10, 210);
-					});
-
-				self.posSummaryGroup.append("text")
-					.text("actual " + self.pos + " result")
-					.attr("font-size","18pt")
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(30, 225);
-					});
-
-				self.posSummaryGroup.selectAll(".projected").data(self.teamGroups.data()).enter().append("text")
-					.text(function(d,i)
-					{
-						var teamPlayers = d.playerColl;
-						var oppPlayers = d.opponent.playerColl;
-
-						if (teamPlayers.getPointsScored() > oppPlayers.getPointsScored())
-						{
-							return "+ " + numFormat(teamPlayers.getPointsScored() - oppPlayers.getPointsScored());
-						}
-						else
-						{
-							return "";
-						}
-					})
-					.attr("font-size","18pt")
-					.attr("fill","#360")
-					.attr("transform", function(d,i) {
-						return self.writeTranslate(d.x + 40, d.y + 100);
-					});
-
-				// DONE
-				setTimeout(function()
+				var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
+				pressSpacebar.execute({
+					x: 215,
+					y: 220
+				},function()
 				{
-					var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
-					pressSpacebar.execute({
-						x: 110,
-						y: 160
-					},function()
-					{
-						self.emit("end");
-					});
-				},2000);
-
-			},1500);
+					self.emit("end");
+				});
+			},4000);
 		};
 
 	})(window, "PosComparison");

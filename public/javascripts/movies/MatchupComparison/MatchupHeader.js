@@ -45,7 +45,7 @@ define(RequireImports.new()
 			var self = this;
 			var matchup = new Matchup(self.matchup);
 
-			self.matchupTitle = self.vis.append("text").text("Week " + matchup.getWeek());
+			self.matchupTitle = self.vis.append("text").text("Week " + matchup.getWeek() + " Matchup Comparison");
 		};
 
 		scene.prototype.drawVs = function()

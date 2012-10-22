@@ -23,7 +23,7 @@ define(RequireImports.new()
 			self.vis = self.createVis();
 
 			self.header = (new MatchupHeader(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,0);
-			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,400);
+			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,110);
 
 			self.header.execute(null,function()
 			{
@@ -37,7 +37,7 @@ define(RequireImports.new()
 
 						var posComparison = new PosComparison(self.movie,position,self.matchup);
 						posComparison.setVisParent(self.vis);
-						posComparison.setPosition(0,110);
+						posComparison.setPosition(60,110);
 
 						commands.push(posComparison);
 						commands.push(posComparison.getRemoveCommand());

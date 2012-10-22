@@ -66,7 +66,7 @@ define(RequireImports.new()
 				.attr("opacity",1)
 				.attr("transform",function(d,i)
 				{
-					return self.writeTranslate(60*i,0);
+					return self.writeTranslate(0,20*i);
 				})
 				.each("end", Transitions.cb(cb));
 		};
