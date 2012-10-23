@@ -451,12 +451,12 @@ define(RequireImports.new()
 					}
 					else
 					{
-						return "n/a";
+						return "none";
 					}
 				})
 				.attr("font-size","11pt")
 				.attr("fill","#000")
-				.attr("transform", self.writeTranslate(150, 20));
+				.attr("transform", self.writeTranslate(195, 20));
 
 			self.callIn("waitForUserFinish",750,cb);
 		};

@@ -8,6 +8,6 @@ require(RequireImports.new()
 	if (window.curMovie == undefined)
 	{
 		window.curMovie = new MatchupComparison("#movie");
-		window.curMovie.start();
+		window.curMovie.play();
 	}
 });

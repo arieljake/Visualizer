@@ -8,15 +8,27 @@ define(RequireImports.new()
 	{
 		var movie = context[movieName] = function (parentSelector)
 		{
+			var startupParams = {
+				name: movieName,
+				parentSelector: parentSelector,
+				width: 1024,
+				height: 768,
+				constants: {
+					positionOrder: ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"]
+				},
+				curSceneInDev: "^WeekSelection" // null // "WeekSelection"
+			};
+
+			Movie.call(this,startupParams);
+		};
+
+		movie.prototype = new Movie();
+
+		movie.prototype.getSceneFunctions = function()
+		{
 			var self = this;
 
-			self.parent = d3.select(parentSelector);
-			self.w = 2000;
-			self.h = 2000;
-			self.constants = {
-				positionOrder: ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"]
-			};
-			self.scenes = [
+			return [
 				(new WeekSelection(self)).setPosition(25,50).setResultId("selectedWeek"),
 				(new ClearMovieVis(self)),
 				function()
@@ -52,10 +64,15 @@ define(RequireImports.new()
 //					return (new MatchupSummary(self,self.data["selectedMatchup"])).setVisParent(self.vis).setPosition(25,50);
 //				}
 			];
-			self.curSceneInDev = "^WeekSelection";// null; //
 		};
 
-		movie.prototype = new Movie(movieName);
+		movie.prototype.play = function()
+		{
+			this.execute(null,function()
+			{
+				console.log("THE END");
+			});
+		}
 
 	})(window, "MatchupComparison");
 });
