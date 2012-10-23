@@ -171,7 +171,6 @@ define(RequireImports.new()
 				data.children.push(teamData);
 			});
 
-			console.dir(data);
 			return data;
 		}
 

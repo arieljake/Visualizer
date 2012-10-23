@@ -35,8 +35,8 @@ define(RequireImports.new()
 					.classed("posSummary",1);
 
 				var commands = [];
-				commands.push(new PosBoxScore(self.movie,self.posGroups,self.matchup).setVisParent(self.vis).setPosition(0,0).setResultId("posBoxScore"));
-				commands.push(new PosScoringCircles(self.movie).setVisParent(self.vis).setPosition(0,150));
+				commands.push(new PosBoxScore(self.movie,self.posGroups,self.matchup).setVisParent(self.vis).setPosition(0,10).setResultId("posBoxScore"));
+				commands.push(new PosScoringCircles(self.movie).setVisParent(self.vis).setPosition(0,230));
 
 				self.run(commands,cb);
 			}));

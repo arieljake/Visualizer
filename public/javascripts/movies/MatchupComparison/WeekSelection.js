@@ -3,6 +3,7 @@
 define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Metadata.js"])
+	.add("/js-lib/js/logging",["Log.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -62,6 +63,7 @@ define(RequireImports.new()
 					.on("click",function(d,i)
 					{
 						var selectedWeek = d;
+						Log.log("WeekSelection: " + selectedWeek);
 						self.emit("end",selectedWeek);
 					});
 

@@ -32,15 +32,20 @@ define(RequireImports.new()
 
 			self.target.append("text")
 				.text(team1PosPlayers.getPointsScored())
+				.attr("x",5)
 				.attr("y",35);
 
 			self.target.append("text")
 				.text(team2PosPlayers.getPointsScored())
+				.attr("x",5)
 				.attr("y",50);
 
 			if (self.comparison.actual.diff > 3)
 			{
 				self.target.classed("winner",1);
+
+				self.target.select("rect")
+					.attr("fill",self.movie.constants.yellowHi);
 
 				self.target.append("image")
 					.attr("xlink:href","/images/teams/" + this.comparison.actual.winner.id + ".png")

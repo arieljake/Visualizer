@@ -1,4 +1,4 @@
-var WebAppFactory = require("./lib/node-lib/express/WebAppFactory.js");
+var WebApp = require("./lib/node-lib/express/WebApp.js");
 var WebAppDelegate = require("./lib/node-lib/express/WebAppDelegate.js");
 var lib = require("./lib");
 var IDatabase = require("./lib/node-lib/interfaces/IDatabase.js");
@@ -14,27 +14,34 @@ var cacheDB = simpleDB;
 
 var webPort = 3000; // public: 3003
 
-WebAppFactory.createWebApp(new WebAppDelegate(
+new WebApp(new WebAppDelegate(
 	{
 		webPort: webPort,
 		socketPort: null,
-		webDir: "/Users/arieljake/Documents/Projects/Visualizer"
+		webDir: "/Users/arieljake/Documents/Projects/Visualizer",
+		enableSessions: true
 	},
 	{
-		configureRoutes: function ()
+		configureRoutes: function (server)
 		{
-			this.expressApp.get("/1", function(req,res) { res.redirect("/views/matchupComparison"); });
+			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(server);
+			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({})).attachToApp(server);
+			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(server);
+			var cacheRoute = (new lib.routes.CacheRoute(simpleDB,"/cache")).attachToApp(server);
 
-			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(this.expressApp);
-			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({})).attachToApp(this.expressApp);
-			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(this.expressApp);
-			var cacheRoute = (new lib.routes.CacheRoute(simpleDB,"/cache")).attachToApp(this.expressApp);
+			var categoryGroups = (new lib.routes.CategoryGroupsRoutes()).attachToApp(server);
+			var fantasyRoutes = (new lib.routes.FantasyRoutes(new FantasyDB("http://localhost:" + webPort + "/data/yahoo"),cacheDB)).attachToApp(server);
 
-			var categoryGroups = (new lib.routes.CategoryGroupsRoutes()).attachToApp(this.expressApp);
-			var fantasyRoutes = (new lib.routes.FantasyRoutes(new FantasyDB("http://localhost:" + webPort + "/data/yahoo"),cacheDB)).attachToApp(this.expressApp);
+			server.post("/logging", function(req,res)
+			{
+				mongoDB.collection("log").insert({
+					visualizerId: req.session.visualizerId,
+					timestamp: (new Date()).getTime(),
+					entry: req.body
+				});
+
+				res.send("1");
+			});
 		}
 	}
-),true,function(webApp)
-{
-
-});
+)).init().start();

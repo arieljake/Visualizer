@@ -80,17 +80,100 @@ define(RequireImports.new()
 			}));
 
 			var commands = [];
-			commands.push(new DelayCommand(self.getDuration(750)));
+			commands.push(new DelayCommand(self.getDuration(1500)));
 
 			self.posGroups.each(function(d,i)
 			{
 				var comparisonResult = new PosBoxScoreInning(self.movie,d,self.movie.data["comparison" + d],self.movie.data["selectedMatchup"],d3.select(this));
 				commands.push(comparisonResult);
-				commands.push(new DelayCommand(self.getDuration(1000)));
+				commands.push(new DelayCommand(self.getDuration(750)));
 			});
 
+			commands.push(new Command(self.printWinnersOutput,null,self));
+
 			self.run(commands,cb);
-		}
+		};
+
+		scene.prototype.printWinnersOutput = function(params,cb)
+		{
+			var self = this;
+
+			var lineY = 105;
+			var lineInc = 17;
+			var winner = self.matchup.getWinner();
+			var loser = self.matchup.getLoser();
+			var winnersLine;
+
+			function addWinnerLine(line)
+			{
+				self.vis.append("text")
+					.attr("transform",self.writeTranslate(200,lineY))
+					.attr("font-size","9pt")
+					.text(line);
+
+				lineY += lineInc;
+			}
+
+			var winningComparisons = [];
+			var teamScores = {};
+			teamScores[winner.getTeamId()] = 0;
+			teamScores[loser.getTeamId()] = 0;
+
+			self.posGroups.each(function(d,i)
+			{
+				var pos = d;
+				var comparison = self.movie.data["comparison" + pos];
+
+				if (comparison.actual.diff > 3)
+				{
+					winningComparisons.push(comparison);
+					teamScores[comparison.actual.winner.id] += comparison.actual.diff;
+				}
+			});
+
+			var team1WinnersScore = teamScores[winner.getTeamId()];
+			var team2WinnersScore = teamScores[loser.getTeamId()];
+			var winnerScoreDifference = Math.abs(team1WinnersScore-team2WinnersScore);
+
+			if (winningComparisons.length < 4 && winnerScoreDifference <= 5)
+			{
+				// LINE
+
+				winnersLine = winner.getTeamName() + " beat " + loser.getTeamName() +
+					" by " + numFormat(winner.getPointsScored() - loser.getPointsScored()) + " points.";
+
+				addWinnerLine(winnersLine);
+
+
+				// LINE
+
+				winnersLine = "If you only consider the " + winningComparisons.length + " out of 9 positions where there was a clear winner...";
+
+				addWinnerLine(winnersLine);
+
+
+				// LINE(S)
+
+				var winnersLines = _.map(_.keys(teamScores),function(teamId)
+				{
+					return self.matchup.getTeamById(teamId).getTeamName() + " scored " + numFormat(teamScores[teamId]) + " points.";
+				});
+
+				winnersLines.forEach(function(line)
+				{
+					addWinnerLine(line);
+				});
+
+
+				// LINE
+
+				winnersLine = "The difference between those two point totals is " + numFormat(winnerScoreDifference) + " points.";
+
+				addWinnerLine(winnersLine);
+			}
+
+			cb();
+		};
 
 	})(window, "PosBoxScore");
 });

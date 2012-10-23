@@ -47,7 +47,7 @@ define(RequireImports.new()
 										id: self.teams[0].id,
 										name: self.teams[0].name
 									},
-									diff: numFormat(teamProjection - oppProjection)
+									diff: parseFloat(numFormat(teamProjection - oppProjection))
 								};
 							}
 							else
@@ -57,7 +57,7 @@ define(RequireImports.new()
 										id: self.teams[1].id,
 										name: self.teams[1].name
 									},
-									diff: numFormat(oppProjection - teamProjection)
+									diff: parseFloat(numFormat(oppProjection - teamProjection))
 								};
 							}
 						}
@@ -82,7 +82,7 @@ define(RequireImports.new()
 										id: self.teams[0].id,
 										name: self.teams[0].name
 									},
-									diff: numFormat(teamScore - oppScore)
+									diff: parseFloat(numFormat(teamScore - oppScore))
 								}
 							}
 							else
@@ -92,7 +92,7 @@ define(RequireImports.new()
 										id: self.teams[1].id,
 										name: self.teams[1].name
 									},
-									diff: numFormat(oppScore - teamScore)
+									diff: parseFloat(numFormat(oppScore - teamScore))
 								}
 							}
 						}

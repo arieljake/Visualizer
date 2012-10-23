@@ -3,6 +3,7 @@
 define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
+	.add("/js-lib/js/logging",["Log.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -43,6 +44,7 @@ define(RequireImports.new()
 					.on("click",function(d,i)
 					{
 						var selectedMatchup = d;
+						Log.log("matchup selected: " + selectedMatchup.matchupId);
 						self.emit("end",selectedMatchup);
 					});
 

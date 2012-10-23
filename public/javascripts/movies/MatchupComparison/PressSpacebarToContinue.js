@@ -28,7 +28,7 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			if (self.movie.sceneInDevelopment(this))
+			if (self.movie.shortenTransitionsFor(this))
 			{
 				cb();
 				return;
