@@ -34,7 +34,7 @@ define(RequireImports.new()
 					})
 					.on("mouseover",function(d,i)
 					{
-						d3.select(this).select("rect").attr("fill","#FFC");
+						d3.select(this).select("rect").attr("fill",self.movie.constants.yellowHi);
 					})
 					.on("mouseout",function(d,i)
 					{

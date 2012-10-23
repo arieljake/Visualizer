@@ -3,7 +3,6 @@
 define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
-	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -69,7 +68,7 @@ define(RequireImports.new()
 				{
 					return self.writeTranslate(0,20*i);
 				})
-				.each("end", Transitions.cb(cb));
+				.each("end", self.transitionCB(cb));
 		};
 
 		scene.prototype.getPositions = function()
@@ -87,11 +86,11 @@ define(RequireImports.new()
 				.attr("fill", function(d,i)
 				{
 					if (d == position)
-						return "#F00";
+						return self.movie.constants.positionRed;
 					else
 						return "#EFEFEF";
 				})
-				.each("end",Transitions.cb(cb));
+				.each("end",self.transitionCB(cb));
 		};
 
 	})(window, "PositionsAgenda");

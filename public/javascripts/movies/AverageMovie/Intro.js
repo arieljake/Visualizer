@@ -82,7 +82,7 @@ define(RequireImports.new()
 						movie.textGroup.transition()
 							.duration(self.getDuration(1500))
 							.attr("opacity",1)
-							.each("end",Transitions.cb(function()
+							.each("end",self.transitionCB(function()
 							{
 								textGroup.append("text")
 									.text("we know their rankings and records...")
@@ -94,7 +94,7 @@ define(RequireImports.new()
 									.transition()
 									.duration(self.getDuration(1500))
 									.attr("opacity",1)
-									.each("end",Transitions.cb(function()
+									.each("end",self.transitionCB(function()
 									{
 										var showTeamRankings = new ShowTeamRankings(self.movie);
 										showTeamRankings.execute(null,function()
@@ -109,7 +109,7 @@ define(RequireImports.new()
 												.transition()
 												.duration(self.getDuration(1500))
 												.attr("opacity",1)
-												.each("end",Transitions.cb(cb));
+												.each("end",self.transitionCB(cb));
 										})
 									}));
 							}));

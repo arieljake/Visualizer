@@ -4,7 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/control",["Command.js"])
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/movies",["MovieClip.js","MovieSequence.js"])
-	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js","MatchupSummary.js"])
+	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js","MatchupSummary.js","PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -41,6 +41,10 @@ define(RequireImports.new()
 						posComparison.setResultId("comparison" + position);
 
 						commands.push(posComparison);
+						commands.push(new PressSpacebarToContinue(self.movie,self.vis,{
+							x: 350,
+							y: 10
+						}));
 						commands.push(posComparison.getRemoveCommand());
 					});
 

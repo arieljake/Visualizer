@@ -4,7 +4,6 @@ define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/control", ["Command.js","CommandSequence.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Matchups.js"])
-	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -86,7 +85,7 @@ define(RequireImports.new()
 					return 50 * i;
 				})
 				.attr("opacity",.5)
- 				.each("end",Transitions.cb(cb));
+ 				.each("end",self.transitionCB(cb));
 		};
 
 		scene.prototype.getMatchup = function(matchupIndex)
@@ -108,7 +107,7 @@ define(RequireImports.new()
 					else
 						return .5;
 				})
-				.each("end",Transitions.cb(cb));
+				.each("end",self.transitionCB(cb));
 		};
 
 	})(window, "MatchupsAgenda");

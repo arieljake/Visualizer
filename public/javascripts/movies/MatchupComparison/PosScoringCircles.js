@@ -43,7 +43,7 @@ define(RequireImports.new()
 				.transition()
 				.duration(self.getDuration(1000))
 				.attr("opacity",1)
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				self.vis.selectAll("text.explain").data(self.constants.explanations).enter().append("text").classed("explain",1)
 					.text(function(d){ return d; })

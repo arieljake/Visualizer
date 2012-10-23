@@ -4,7 +4,6 @@ define(RequireImports.new()
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/control", ["Command.js"])
 	.add("/js-lib/js/movies",["MovieClip.js"])
-	.add("/javascripts/movies/MatchupComparison",["PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -158,24 +157,25 @@ define(RequireImports.new()
 			self.vis.append("text").classed("title",1)
 				.text(self.pos + " Comparison")
 				.attr("font-size","18pt")
-				.attr("fill","#930")
+				.attr("fill",self.movie.constants.positionRed)
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(0,20);
 				})
 				.attr("opacity",0)
 				.transition()
 				.duration(self.getDuration(1000))
-				.attr("opacity",1);
+				.attr("opacity",1)
+				.each("end",self.transitionCB);
 
 			self.vis.append("path")
 				.attr("d","M 0 22 L 0 22 z")
 				.attr("fill","none")
-				.attr("stroke","#930")
+				.attr("stroke",self.movie.constants.positionRed)
 				.attr("stroke-width",2)
 				.transition()
 				.duration(self.getDuration(1000))
 				.attr("d","M 0 22 L " + self.constants.bkgdWidth + " 22 z")
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				self.contentSection = self.vis.append("g").classed("content",1)
 					.attr("transform", self.writeTranslate(0, 23));
@@ -205,7 +205,7 @@ define(RequireImports.new()
 				.attr("font-size","13pt")
 				.attr("opacity",.8)
 				.attr("fill","#333")
-				.attr("transform",self.writeTranslate(10,20));
+				.attr("transform",self.writeTranslate(10,22));
 
 			self.callIn("showPlayers",500,cb);
 		};
@@ -262,7 +262,7 @@ define(RequireImports.new()
 			self.projectedPointGroups = self.playerGroups.append("g")
 				.classed("actualPointGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(100, 25);
+					return self.writeTranslate(100, 35);
 				});
 
 			self.projectedPointGroups.append("text")
@@ -298,7 +298,7 @@ define(RequireImports.new()
 			self.actualPointGroups = self.playerGroups.append("g")
 				.classed("actualPointGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(200, 25);
+					return self.writeTranslate(200, 35);
 				});
 
 			self.actualPointGroups.append("text")
@@ -334,7 +334,7 @@ define(RequireImports.new()
 			self.playerSummaryGroups = self.playerGroups.append("g")
 				.classed("summary",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(325, 25);
+					return self.writeTranslate(325, 35);
 				});
 
 			self.playerSummaryGroups.append("text")
@@ -372,7 +372,7 @@ define(RequireImports.new()
 				.transition()
 				.duration(self.getDuration(1250))
 				.attr("opacity",1)
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				self.callIn("showPosStats",250,cb);
 			}))
@@ -458,30 +458,31 @@ define(RequireImports.new()
 				.attr("fill","#000")
 				.attr("transform", self.writeTranslate(195, 20));
 
-			self.callIn("waitForUserFinish",750,cb);
+			if (actualResult.diff > 3)
+			{
+				self.posWinnerGroup.select("rect")
+					.transition()
+					.duration(self.getDuration(250))
+					.attr("fill","#FFC");
+			}
+
+			self.callIn("finish",500,cb);
 		};
 
-		scene.prototype.waitForUserFinish = function(params,cb)
+		scene.prototype.finish = function(params,cb)
 		{
 			var self = this;
 
-			var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
-			pressSpacebar.execute({
-				x: 215,
-				y: 220
-			},function()
+			var results = {
+				position: self.pos
+			};
+
+			self.constants.stats.forEach(function(stat)
 			{
-				var results = {
-					position: self.pos
-				};
-
-				self.constants.stats.forEach(function(stat)
-				{
-					results[stat.name] = stat.calculate();
-				});
-
-				self.emit("end",results);
+				results[stat.name] = stat.calculate();
 			});
+
+			self.emit("end",results);
 		}
 
 	})(window, "PosComparison");

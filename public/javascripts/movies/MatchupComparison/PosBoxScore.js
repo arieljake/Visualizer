@@ -3,7 +3,6 @@
 define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/control",["DelayCommand.js"])
-	.add("/js-lib/js/graphs",["Transitions.js"])
 	.add("/javascripts/movies/MatchupComparison",["PosBoxScoreInning.js"])
 	.toArray(),function()
 {
@@ -28,7 +27,7 @@ define(RequireImports.new()
 			self.vis = self.createVis();
 
 			self.vis.append("text")
-				.text("Box Score")
+				.text("Positional Box Score")
 				.attr("font-size","14pt")
 				.attr("opacity",0)
 				.transition()
@@ -58,7 +57,7 @@ define(RequireImports.new()
 				.transition()
 				.duration(self.getDuration(1500))
 				.attr("x",0)
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				var teamRows = [
 					self.matchup.getTeam1().getTeamName(),

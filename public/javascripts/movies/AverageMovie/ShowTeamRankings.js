@@ -74,7 +74,7 @@ define(RequireImports.new()
 
 						return transform;
 					})
-					.each("end",Transitions.cb(cb));
+					.each("end",self.transitionCB(cb));
 			});
 		}
 

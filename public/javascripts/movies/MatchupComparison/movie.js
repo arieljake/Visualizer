@@ -14,9 +14,16 @@ define(RequireImports.new()
 				width: 1024,
 				height: 768,
 				constants: {
-					positionOrder: ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"]
+					positionOrder: ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"],
+					positionRed: "#FF4D4D",
+					yellowHi: "#FFC",
+					yellowHiGrayed: "#EEE",
+					weekBlue: "#00F",
+					weekBlueGrayed: "#333",
+					weekLightBlue: "#8087FF",
+					weekLightBlueGrayed: "#999"
 				},
-				curSceneInDev: "^WeekSelection" // null // "WeekSelection"
+				curSceneInDev: "null" // null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);

@@ -4,7 +4,6 @@ define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
 	.add("/js-lib/js/yahoo/10model/",["TeamPerformance.js"])
 	.add("/js-lib/js/yahoo/20datasets/",["Teams.js"])
-	.add("/js-lib/js/graphs",["Transitions.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -37,7 +36,7 @@ define(RequireImports.new()
 			self.vis.transition()
 				.duration(self.getDuration(1500))
 				.attr("opacity",1)
-				.each("end", Transitions.cb(cb));
+				.each("end", self.transitionCB(cb));
 		};
 
 		scene.prototype.drawTitle = function()

@@ -26,6 +26,26 @@ define(RequireImports.new()
 				self.title = self.vis.append("text").text("Which week do you want to review?");
 				self.weekGroups = self.vis.selectAll("g.week").data(self.data).enter().append("g").classed("week",1);
 
+				var mouseoverStyle = function(elem)
+				{
+					elem = _.isObject(elem) ? elem : this;
+
+					d3.select(elem).select("rect").attr("fill",self.movie.constants.yellowHi);
+					d3.select(elem).select("rect").attr("stroke",self.movie.constants.weekBlue);
+					d3.select(elem).select("text.weekLabel").attr("fill",self.movie.constants.weekLightBlue);
+					d3.select(elem).select("text.weekNo").attr("fill",self.movie.constants.weekBlue);
+				}
+
+				var mouseoutStyle = function(elem)
+				{
+					elem = _.isObject(elem) ? elem : this;
+
+					d3.select(elem).select("rect").attr("fill",self.movie.constants.yellowHiGrayed);
+					d3.select(elem).select("rect").attr("stroke",self.movie.constants.weekBlueGrayed);
+					d3.select(elem).select("text.weekLabel").attr("fill",self.movie.constants.weekLightBlueGrayed);
+					d3.select(elem).select("text.weekNo").attr("fill",self.movie.constants.weekBlueGrayed);
+				}
+
 				self.weekGroups
 					.attr("transform",function(d,i)
 					{
@@ -33,15 +53,11 @@ define(RequireImports.new()
 					})
 					.on("mouseover",function(d,i)
 					{
-						d3.select(this).select("rect").attr("fill","#FFC");
-						d3.select(this).select("text.weekLabel").attr("fill","#5D6938");
-						d3.select(this).select("text.weekNo").attr("fill","#00F");
+						mouseoverStyle(this);
 					})
 					.on("mouseout",function(d,i)
 					{
-						d3.select(this).select("rect").attr("fill","#EEE");
-						d3.select(this).select("text.weekLabel").attr("fill","#999");
-						d3.select(this).select("text.weekNo").attr("fill","#000");
+						mouseoutStyle(this);
 					})
 					.on("click",function(d,i)
 					{
@@ -50,8 +66,6 @@ define(RequireImports.new()
 					});
 
 				self.weekGroups.append("rect")
-					.attr("fill","#EEE")
-					.attr("stroke","#999")
 					.attr("width",90)
 					.attr("height",90)
 					.attr("rx",5);
@@ -62,7 +76,6 @@ define(RequireImports.new()
 					{
 						return d;
 					})
-					.attr("fill","#000")
 					.attr("font-size","40pt")
 					.attr("x",44)
 					.attr("y",67);
@@ -73,10 +86,11 @@ define(RequireImports.new()
 					{
 						return "Week";
 					})
-					.attr("fill","#999")
 					.attr("font-size","14pt")
 					.attr("x",13)
 					.attr("y",30);
+
+				self.weekGroups.each(mouseoutStyle);
 			});
 		}
 

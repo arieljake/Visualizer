@@ -26,7 +26,7 @@ define(RequireImports.new()
 				.transition()
 				.duration(self.getDuration(500))
 				.attr("fill", "#EFEFEF")
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				self.vis.attr("class","")
 					.classed(varName,1);

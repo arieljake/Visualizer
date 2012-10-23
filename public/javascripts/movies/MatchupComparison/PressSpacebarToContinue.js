@@ -6,14 +6,20 @@ define(RequireImports.new()
 {
 	(function (varContext, varName)
 	{
-		var scene = varContext[varName] = function (movie,visParent)
+		var scene = varContext[varName] = function (movie,visParent,params)
 		{
+			params = params || {};
+
 			this.movie = movie;
 			this.visParent = visParent;
-			this.constants = {
-				delayOut: 1750,
-				delayIn: 350
-			};
+			this.constants = {};
+			this.constants.delayOut = 1750;
+			this.constants.delayIn = 350;
+			this.constants.rectX = params.x || 0;
+			this.constants.rectY = params.y || 0;
+			this.constants.rectW = 200;
+			this.constants.rectH = 75;
+			this.constants.rectDist = (2*this.constants.rectW) + (2*this.constants.rectH)
 		};
 
 		scene.prototype = new MovieClip("PressSpacebarToContinue");
@@ -28,25 +34,17 @@ define(RequireImports.new()
 				return;
 			}
 
-			self.vis = self.createVis();
-
-			var rectX = params && params.x ? params.x : 0;
-			var rectY = params && params.y ? params.y : 0;
-			var rectW = 200;
-			var rectH = 75;
-			var rectDist = (2*rectW) + (2*rectH);
-
-			self.vis
+			self.vis = self.createVis()
 				.attr("opacity",0)
-				.attr("transform",self.writeTranslate(rectX,rectY));
+				.attr("transform",self.writeTranslate(this.constants.rectX,this.constants.rectY));
 
 			self.vis.append("rect")
 				.style("stroke-width",3)
 				.style("stroke","#00F")
 				.style("fill","#FFF")
-				.attr("width",rectW)
-				.attr("height",rectH)
-				.style("stroke-dasharray","" + (rectDist/40) + "," + (rectDist/40))
+				.attr("width",this.constants.rectW)
+				.attr("height",this.constants.rectH)
+				.style("stroke-dasharray","" + (this.constants.rectDist/40) + "," + (this.constants.rectDist/40))
 				.style("stroke-dashoffset",0);
 
 			self.vis.append("text")
@@ -102,7 +100,7 @@ define(RequireImports.new()
 			self.vis.transition()
 				.duration(self.constants.delayOut)
 				.attr("opacity",0)
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				if (cb)
 					cb();
@@ -118,7 +116,7 @@ define(RequireImports.new()
 			self.vis.transition()
 				.duration(self.constants.delayIn)
 				.attr("opacity",1)
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				if (cb)
 					cb();

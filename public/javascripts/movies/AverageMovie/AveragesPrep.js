@@ -36,7 +36,7 @@ define(RequireImports.new()
 			teamBkgd.transition()
 				.duration(self.getDuration(2000))
 				.attr("fill", function(d,i) { return teamColorFn(d.standing.team.winPct); })
-				.each("end",Transitions.cb(function()
+				.each("end",self.transitionCB(function()
 			{
 				textGroup.append("text")
 					.text("Now if we add points scored with matching colors...")
@@ -58,7 +58,7 @@ define(RequireImports.new()
 
 							return self.writeTranslate(x,y);
 						})
-						.each("end",Transitions.cb(function()
+						.each("end",self.transitionCB(function()
 					{
 						var teamPointsGroup = movie.teamPointsGroup = movie.vis.selectAll("g.teamPoints").data([movie.data.teams]).enter()
 							.append("g")
