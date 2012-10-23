@@ -12,7 +12,7 @@ var mongoDB = mongoskin.db(mongoURL);
 var simpleDB = new IDatabase(new SimpleDBService(mongoDB,"values"));
 var cacheDB = simpleDB;
 
-var webPort = 3000; // public: 3003
+var webPort = process.env.PORT || 3000; // public: 3003
 var viewLookup = {
 	"mc": "matchupComparison"
 }

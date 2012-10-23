@@ -1,6 +1,0 @@
-{
-	"query":"START n=node(*) RETURN n;",
-	"params": {
-		  
-	}
-}
