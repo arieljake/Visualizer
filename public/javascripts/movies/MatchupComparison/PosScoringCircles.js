@@ -37,7 +37,7 @@ define(RequireImports.new()
 				.value(function(d) { return d.size; });
 
 			self.vis.append("text")
-				.text("Scoring Breakdown per team")
+				.text("Scoring Breakdown")
 				.attr("font-size","14pt")
 				.attr("opacity",0)
 				.transition()

@@ -23,33 +23,42 @@ define(RequireImports.new()
 			self.vis = self.createVis();
 
 			self.header = (new MatchupHeader(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,0);
-			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,110);
+			self.agenda = (new PositionsAgenda(self.movie,self.matchup)).setVisParent(self.vis).setPosition(0,200);
 
 			self.header.execute(null,function()
 			{
-				self.agenda.execute(null,function()
+				self.vis.append("text")
+					.classed("title",1)
+					.text("Point Breakdown by position")
+					.attr("font-size","14pt")
+					.attr("transform",self.writeTranslate(0,170))
+					.attr("opacity",0)
+					.transition()
+					.duration(self.getDuration(1000))
+					.attr("opacity",1)
+					.each("end",self.transitionCB(function()
 				{
-					var commands = [];
-
-					self.agenda.getPositions().forEach(function(position)
+					self.agenda.execute(null,function()
 					{
-						commands.push(new Command(self.agenda.setActivePosition,position,self.agenda));
+						var commands = [];
 
-						var posComparison = new PosComparison(self.movie,position,self.matchup);
-						posComparison.setVisParent(self.vis);
-						posComparison.setPosition(110,110);
-						posComparison.setResultId("comparison" + position);
+						self.agenda.getPositions().forEach(function(position)
+						{
+							commands.push(new Command(self.agenda.setActivePosition,position,self.agenda));
 
-						commands.push(posComparison);
-						commands.push(new PressSpacebarToContinue(self.movie,self.vis,{
-							x: 350,
-							y: 10
-						}));
-						commands.push(posComparison.getRemoveCommand());
+							var posComparison = new PosComparison(self.movie,position,self.matchup);
+							posComparison.setVisParent(self.vis);
+							posComparison.setPosition(110,200);
+							posComparison.setResultId("comparison" + position);
+
+							commands.push(posComparison);
+							commands.push((new PressSpacebarToContinue(self.movie)));
+							commands.push(posComparison.getRemoveCommand());
+						});
+
+						self.run(commands,cb);
 					});
-
-					self.run(commands,cb);
-				});
+				}));
 			});
 		}
 

@@ -39,9 +39,8 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.agendaGroups = self.vis.selectAll("g.positionAgendaItem").data(self.data).enter().append("g").classed("positionAgendaItem",1);
-
-			self.agendaGroups
+			self.agendaGroups = self.vis.selectAll("g.positionAgendaItem").data(self.data).enter().append("g")
+				.classed("positionAgendaItem",1)
 				.attr("opacity",0);
 
 			self.agendaGroups.append("rect")
@@ -66,7 +65,7 @@ define(RequireImports.new()
 				.attr("opacity",1)
 				.attr("transform",function(d,i)
 				{
-					return self.writeTranslate(0,20*i);
+					return self.writeTranslate(0,30 + (20*i));
 				})
 				.each("end", self.transitionCB(cb));
 		};

@@ -3,7 +3,7 @@
 define(RequireImports.new()
 	.add("/js-lib/js/control",["DelayCommand.js"])
 	.add("/js-lib/js/movies",["MovieClip.js"])
-	.add("/javascripts/movies/MatchupComparison",["PosBoxScore.js","PosScoringCircles.js"])
+	.add("/javascripts/movies/MatchupComparison",["PosBoxScore.js","PosScoringCircles.js","PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -19,8 +19,11 @@ define(RequireImports.new()
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
+
 			self.vis = d3.select("g.PositionsAgenda");
 			self.posGroups = self.vis.selectAll("g.positionAgendaItem");
+
+			$("g.OneMatchupAllPositions text.title").remove();
 
 			self.posGroups.selectAll("rect")
 				.transition()
@@ -36,7 +39,14 @@ define(RequireImports.new()
 
 				var commands = [];
 				commands.push(new PosBoxScore(self.movie,self.posGroups,self.matchup).setVisParent(self.vis).setPosition(0,10).setResultId("posBoxScore"));
-				commands.push(new PosScoringCircles(self.movie).setVisParent(self.vis).setPosition(0,230));
+				commands.push(function()
+				{
+					var winnerLines = $("text.winnerLine");
+					var circlesY = (winnerLines.length > 0) ? 230 : 150;
+
+					return new PosScoringCircles(self.movie).setVisParent(self.vis).setPosition(0,circlesY)
+				});
+				commands.push(new PressSpacebarToContinue(self.movie));
 
 				self.run(commands,cb);
 			}));

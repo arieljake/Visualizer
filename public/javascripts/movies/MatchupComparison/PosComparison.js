@@ -159,7 +159,7 @@ define(RequireImports.new()
 				.attr("font-size","18pt")
 				.attr("fill",self.movie.constants.positionRed)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,20);
+					return self.writeTranslate(0,18);
 				})
 				.attr("opacity",0)
 				.transition()
@@ -207,7 +207,7 @@ define(RequireImports.new()
 				.attr("fill","#333")
 				.attr("transform",self.writeTranslate(10,22));
 
-			self.callIn("showPlayers",500,cb);
+			self.callIn("showPlayers",0,cb);
 		};
 
 		scene.prototype.showPlayers = function(params,cb)
@@ -282,12 +282,6 @@ define(RequireImports.new()
 					return self.writeTranslate(5, 15);
 				});
 
-			self.projectedPointGroups
-				.attr("opacity",0)
-				.transition()
-				.duration(self.getDuration(1250))
-				.attr("opacity",1);
-
 			self.showActualPoints(null,cb);
 		};
 
@@ -317,12 +311,6 @@ define(RequireImports.new()
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(5, 15);
 				});
-
-			self.actualPointGroups
-				.attr("opacity",0)
-				.transition()
-				.duration(self.getDuration(750))
-				.attr("opacity",1);
 
 			self.showPlayerSummary(null,cb);
 		};
@@ -367,15 +355,7 @@ define(RequireImports.new()
 					return self.writeTranslate(5, 15);
 				});
 
-			self.playerSummaryGroups
-				.attr("opacity",0)
-				.transition()
-				.duration(self.getDuration(1250))
-				.attr("opacity",1)
-				.each("end",self.transitionCB(function()
-			{
-				self.callIn("showPosStats",250,cb);
-			}))
+			self.callIn("showPosStats",0,cb);
 		};
 
 		scene.prototype.showPosStats = function(params,cb)
@@ -409,13 +389,13 @@ define(RequireImports.new()
 					var val = d.calculate();
 					return val.winner.name + " +" + val.diff;
 				})
-				.attr("font-size","11pt")
+				.attr("font-size","10pt")
 				.attr("fill",function(d,i) { return d.fill; })
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(150, d.y);
+					return self.writeTranslate(210, d.y);
 				});
 
-			self.callIn("showPosWinner",500,cb);
+			self.callIn("showPosWinner",0,cb);
 		};
 
 		scene.prototype.showPosWinner = function(params,cb)
@@ -454,15 +434,16 @@ define(RequireImports.new()
 						return "none";
 					}
 				})
-				.attr("font-size","11pt")
+				.attr("font-size","10pt")
 				.attr("fill","#000")
-				.attr("transform", self.writeTranslate(195, 20));
+				.attr("transform", self.writeTranslate(210, 20));
 
 			if (actualResult.diff > 3)
 			{
 				self.posWinnerGroup.select("rect")
 					.transition()
-					.duration(self.getDuration(250))
+					.duration(self.getDuration(500))
+					.delay(self.getDuration(1250))
 					.attr("fill","#FFC");
 			}
 

@@ -25,13 +25,19 @@ define(RequireImports.new()
 				self.data = matchups;
 				self.vis = self.createVis();
 
-				self.title = self.vis.append("text").text("Which week " + self.matchupParams.weekNo + " matchup do you want to review?");
+				self.vis.append("text")
+					.text("Menlo Park OG's Keeper League")
+					.attr("font-weight","bold");
+
+				self.vis.append("text")
+					.text("Which week " + self.matchupParams.weekNo + " matchup do you want to review?")
+					.attr("transform",self.writeTranslate(0,20));
 
 				self.matchupGroups = self.vis.selectAll("g.matchup").data(self.data).enter().append("g")
 					.classed("matchup",1)
 					.attr("transform",function(d,i)
 					{
-						return self.writeTranslate(0,20 + (80*i));
+						return self.writeTranslate(0,50 + (65*i));
 					})
 					.on("mouseover",function(d,i)
 					{
@@ -50,12 +56,12 @@ define(RequireImports.new()
 
 				self.matchupGroups.append("rect")
 					.attr("width",450)
-					.attr("height",80)
+					.attr("height",70)
 					.attr("y",1)
 					.attr("fill","#FFF");
 
 				self.matchupGroups.append("path")
-					.attr("d","M 0 80 L 450 80 z")
+					.attr("d","M 0 65 L 450 65 z")
 					.attr("stroke","#666");
 
 				self.matchupGroups.append("image")

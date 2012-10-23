@@ -24,7 +24,14 @@ define(RequireImports.new()
 				self.data = weeks;
 				self.vis = self.createVis();
 
-				self.title = self.vis.append("text").text("Which week do you want to review?");
+				self.vis.append("text")
+					.text("Menlo Park OG's Keeper League")
+					.attr("font-weight","bold");
+
+				self.vis.append("text")
+					.text("Which week do you want to review?")
+					.attr("transform",self.writeTranslate(0,20));
+
 				self.weekGroups = self.vis.selectAll("g.week").data(self.data).enter().append("g").classed("week",1);
 
 				var mouseoverStyle = function(elem)
@@ -50,7 +57,7 @@ define(RequireImports.new()
 				self.weekGroups
 					.attr("transform",function(d,i)
 					{
-						return self.writeTranslate(100*i,10);
+						return self.writeTranslate(100*i,50);
 					})
 					.on("mouseover",function(d,i)
 					{

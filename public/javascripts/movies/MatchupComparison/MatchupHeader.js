@@ -23,35 +23,32 @@ define(RequireImports.new()
 			self.vis = self.createVis();
 			self.vis.attr("opacity",0);
 
-			self.team1Group = self.vis.append("g").classed("team1",1)
-				.attr("transform",self.writeTranslate(0,30));
-			self.team2Group = self.vis.append("g").classed("team2",1)
-				.attr("transform",self.writeTranslate(250,30));
+			self.vis.append("image")
+				.attr("xlink:href","/images/icons/nflMatchup.png")
+				.attr("width",300)
+				.attr("height",200)
+				.attr("transform",self.writeTranslate(200,-50));
 
-			self.drawTitle();
+			self.team1Group = self.vis.append("g").classed("team1",1)
+				.attr("transform",self.writeTranslate(240,25));
+			self.team2Group = self.vis.append("g").classed("team2",1)
+				.attr("transform",self.writeTranslate(240,65));
+
+			var matchup = new Matchup(self.matchup);
+
+			self.matchupTitle = self.vis.append("text")
+				.text("Week " + matchup.getWeek() + " Matchup Comparison")
+				.attr("transform",self.writeTranslate(250,8))
+				.attr("font-weight","bold");
+
 			self.drawTeamGroup(self.team1Group,self.matchup.teams[0]);
 			self.drawTeamGroup(self.team2Group,self.matchup.teams[1]);
-			self.drawVs();
 
 			self.vis.transition()
 				.duration(self.getDuration(1500))
 				.attr("opacity",1)
 				.each("end", self.transitionCB(cb));
 		};
-
-		scene.prototype.drawTitle = function()
-		{
-			var self = this;
-			var matchup = new Matchup(self.matchup);
-
-			self.matchupTitle = self.vis.append("text").text("Week " + matchup.getWeek() + " Matchup Comparison");
-		};
-
-		scene.prototype.drawVs = function()
-		{
-			var self = this;
-			self.teamVs = self.vis.append("text").text("VS").attr("x",200).attr("y",50);
-		}
 
 		scene.prototype.drawTeamGroup = function(group,team)
 		{
@@ -71,8 +68,8 @@ define(RequireImports.new()
 				.attr("y",28);
 
 			group.append("image")
-				.attr("width","40px")
-				.attr("height","40px")
+				.attr("width",35)
+				.attr("height",35)
 				.attr("xlink:href","/images/teams/" + teamPerformance.getTeamId() + ".png");
 		}
 

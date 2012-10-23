@@ -29,11 +29,11 @@ define(RequireImports.new()
 			self.vis.append("text")
 				.text("Positional Box Score")
 				.attr("font-size","14pt")
+				.attr("transform",self.writeTranslate(0,-20))
 				.attr("opacity",0)
 				.transition()
 				.duration(self.getDuration(1000))
 				.attr("opacity",1);
-
 
 			self.posGroups.transition()
 				.duration(self.getDuration(1500))
@@ -107,6 +107,7 @@ define(RequireImports.new()
 			function addWinnerLine(line)
 			{
 				self.vis.append("text")
+					.classed("winnerLine",1)
 					.attr("transform",self.writeTranslate(200,lineY))
 					.attr("font-size","9pt")
 					.text(line);

@@ -13,6 +13,9 @@ var simpleDB = new IDatabase(new SimpleDBService(mongoDB,"values"));
 var cacheDB = simpleDB;
 
 var webPort = 3000; // public: 3003
+var viewLookup = {
+	"mc": "matchupComparison"
+}
 
 new WebApp(new WebAppDelegate(
 	{
@@ -25,23 +28,14 @@ new WebApp(new WebAppDelegate(
 		configureRoutes: function (server)
 		{
 			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(server);
-			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({})).attachToApp(server);
+			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({baseUrl: "/v",viewLookup: viewLookup})).attachToApp(server);
 			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(server);
 			var cacheRoute = (new lib.routes.CacheRoute(simpleDB,"/cache")).attachToApp(server);
+			var loggingRoute = (new lib.routes.LoggingRoute(mongoDB)).attachToApp(server);
 
 			var categoryGroups = (new lib.routes.CategoryGroupsRoutes()).attachToApp(server);
 			var fantasyRoutes = (new lib.routes.FantasyRoutes(new FantasyDB("http://localhost:" + webPort + "/data/yahoo"),cacheDB)).attachToApp(server);
 
-			server.post("/logging", function(req,res)
-			{
-				mongoDB.collection("log").insert({
-					visualizerId: req.session.visualizerId,
-					timestamp: (new Date()).getTime(),
-					entry: req.body
-				});
-
-				res.send("1");
-			});
 		}
 	}
 )).init().start();

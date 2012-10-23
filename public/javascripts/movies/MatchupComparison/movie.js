@@ -1,7 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
-	.add("/javascripts/movies/MatchupComparison", ["WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js"])
+	.add("/javascripts/movies/MatchupComparison", ["Intro.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js","TheEnd.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -23,7 +23,7 @@ define(RequireImports.new()
 					weekLightBlue: "#8087FF",
 					weekLightBlueGrayed: "#999"
 				},
-				curSceneInDev: "null" // null // "WeekSelection"
+				curSceneInDev: null // null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);
@@ -36,6 +36,7 @@ define(RequireImports.new()
 			var self = this;
 
 			return [
+
 				(new WeekSelection(self)).setPosition(25,50).setResultId("selectedWeek"),
 				(new ClearMovieVis(self)),
 				function()
@@ -45,11 +46,16 @@ define(RequireImports.new()
 				(new ClearMovieVis(self)),
 				function()
 				{
-					return (new OneMatchupAllPositions(self,self.data["selectedMatchup"])).setPosition(25,50);
+					return (new OneMatchupAllPositions(self,self.data["selectedMatchup"])).setPosition(100,50);
 				},
 				function()
 				{
 					return (new MatchupSummary(self,self.data["selectedMatchup"])).setVisParent(self.vis).setPosition(25,50);
+				},
+				(new ClearMovieVis(self)),
+				function()
+				{
+					return (new TheEnd(self).setVisParent(self.vis).setPosition(0,0));
 				}
 
 //				(new Command(function(params,cb)
@@ -69,6 +75,11 @@ define(RequireImports.new()
 //				function()
 //				{
 //					return (new MatchupSummary(self,self.data["selectedMatchup"])).setVisParent(self.vis).setPosition(25,50);
+//				},
+//				(new ClearMovieVis(self)),
+//				function()
+//				{
+//					return (new TheEnd(self).setVisParent(self.vis).setPosition(0,0));
 //				}
 			];
 		};

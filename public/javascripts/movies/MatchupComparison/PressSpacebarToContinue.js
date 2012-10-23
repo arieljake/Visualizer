@@ -6,27 +6,26 @@ define(RequireImports.new()
 {
 	(function (varContext, varName)
 	{
-		var scene = varContext[varName] = function (movie,visParent,params)
+		var scene = varContext[varName] = function (movie)
 		{
-			params = params || {};
-
 			this.movie = movie;
-			this.visParent = visParent;
 			this.constants = {};
 			this.constants.delayOut = 1750;
 			this.constants.delayIn = 350;
-			this.constants.rectX = params.x || 0;
-			this.constants.rectY = params.y || 0;
+			this.constants.rectX = 30;
+			this.constants.rectY = 30;
 			this.constants.rectW = 200;
 			this.constants.rectH = 75;
 			this.constants.rectDist = (2*this.constants.rectW) + (2*this.constants.rectH)
 		};
 
-		scene.prototype = new MovieClip("PressSpacebarToContinue");
+		scene.prototype = new MovieClip(varName);
 
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
+			var rectX = this.constants.rectX;
+			var rectY = this.constants.rectY;
 
 			if (self.movie.shortenTransitionsFor(this))
 			{
@@ -36,12 +35,12 @@ define(RequireImports.new()
 
 			self.vis = self.createVis()
 				.attr("opacity",0)
-				.attr("transform",self.writeTranslate(this.constants.rectX,this.constants.rectY));
+				.attr("transform",self.writeTranslate(rectX,rectY));
 
 			self.vis.append("rect")
 				.style("stroke-width",3)
 				.style("stroke","#00F")
-				.style("fill","#FFF")
+				.style("fill","none")
 				.attr("width",this.constants.rectW)
 				.attr("height",this.constants.rectH)
 				.style("stroke-dasharray","" + (this.constants.rectDist/40) + "," + (this.constants.rectDist/40))
@@ -54,10 +53,10 @@ define(RequireImports.new()
 				.attr("transform",self.writeTranslate(30,20));
 
 			self.vis.append("text")
-				.text("or click")
+				.text("or click anywhere")
 				.attr("font-size","16pt")
 				.attr("fill","#00F")
-				.attr("transform",self.writeTranslate(60,42));
+				.attr("transform",self.writeTranslate(15,42));
 
 			self.vis.append("text")
 				.text("to continue")
