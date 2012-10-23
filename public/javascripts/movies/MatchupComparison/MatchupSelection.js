@@ -24,23 +24,21 @@ define(RequireImports.new()
 				self.data = matchups;
 				self.vis = self.createVis();
 
-				self.title = self.vis.append("text").text("Which matchup do you want to review?");
-				self.matchupGroups = self.vis.selectAll("g.matchup").data(self.data).enter().append("g").classed("matchup",1);
+				self.title = self.vis.append("text").text("Which week " + self.matchupParams.weekNo + " matchup do you want to review?");
 
-				self.matchupGroups
+				self.matchupGroups = self.vis.selectAll("g.matchup").data(self.data).enter().append("g")
+					.classed("matchup",1)
 					.attr("transform",function(d,i)
 					{
-						return self.writeTranslate(200 * (Math.floor(i/3)),10 + (70*(i%3)));
+						return self.writeTranslate(0,20 + (80*i));
 					})
 					.on("mouseover",function(d,i)
 					{
 						d3.select(this).select("rect").attr("fill","#FFC");
-						d3.select(this).select("text.teamName").attr("fill","#5D6938");
 					})
 					.on("mouseout",function(d,i)
 					{
-						d3.select(this).select("rect").attr("fill","#EEE");
-						d3.select(this).select("text.teamName").attr("fill","#666");
+						d3.select(this).select("rect").attr("fill","#FFF");
 					})
 					.on("click",function(d,i)
 					{
@@ -49,10 +47,24 @@ define(RequireImports.new()
 					});
 
 				self.matchupGroups.append("rect")
-					.attr("fill","#EEE")
-					.attr("stroke","#000")
-					.attr("width",165)
-					.attr("height",60);
+					.attr("width",450)
+					.attr("height",80)
+					.attr("y",1)
+					.attr("fill","#FFF");
+
+				self.matchupGroups.append("path")
+					.attr("d","M 0 80 L 450 80 z")
+					.attr("stroke","#666");
+
+				self.matchupGroups.append("image")
+					.attr("xlink:href",function(d)
+					{
+						return "/images/teams/" + d.teams[0].id + ".png";
+					})
+					.attr("width",45)
+					.attr("height",45)
+					.attr("x",10)
+					.attr("y",10);
 
 				self.matchupGroups.append("text")
 					.classed("teamName",1)
@@ -60,19 +72,30 @@ define(RequireImports.new()
 					{
 						return d.teams[0].name;
 					})
-					.attr("fill","#666")
-					.attr("font-size","11pt")
-					.attr("x",10)
-					.attr("y",20);
+					.attr("fill","#000")
+					.attr("font-size","10pt")
+					.attr("x",65)
+					.attr("y",25);
 
 				self.matchupGroups.append("text")
 					.text(function(d,i)
 					{
 						return "vs";
 					})
-					.attr("font-size","9pt")
-					.attr("x",10)
-					.attr("y",35);
+					.attr("fill","#000")
+					.attr("font-size","11pt")
+					.attr("x",215)
+					.attr("y",45);
+
+				self.matchupGroups.append("image")
+					.attr("xlink:href",function(d)
+					{
+						return "/images/teams/" + d.teams[1].id + ".png";
+					})
+					.attr("width",45)
+					.attr("height",45)
+					.attr("x",245)
+					.attr("y",10);
 
 				self.matchupGroups.append("text")
 					.classed("teamName",1)
@@ -80,10 +103,10 @@ define(RequireImports.new()
 					{
 						return d.teams[1].name;
 					})
-					.attr("fill","#666")
-					.attr("font-size","11pt")
-					.attr("x",10)
-					.attr("y",52);
+					.attr("fill","#000")
+					.attr("font-size","10pt")
+					.attr("x",300)
+					.attr("y",25);
 			});
 		}
 

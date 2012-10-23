@@ -23,9 +23,10 @@ define(RequireImports.new()
 			var matchup = new Matchup(self.matchup);
 			var team1ActivePlayers = matchup.getTeam1().getActivePlayers().toPlayerCollection();
 			var team1Slots = team1ActivePlayers.getSlots();
-			var slotOrdering = ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"];
+			var slotOrdering = self.movie.constants.positionOrder;
 
 			self.data = _.sortBy(team1Slots,function(d) { return slotOrdering.indexOf(d.slot); });
+			self.movie.data.positions = self.data;
 			self.vis = self.createVis();
 
 			var commands = [];
@@ -45,10 +46,10 @@ define(RequireImports.new()
 				.attr("opacity",0);
 
 			self.agendaGroups.append("rect")
-				.attr("width",15)
-				.attr("height",15)
-				.attr("stroke","#000")
-				.attr("fill","#FFF");
+				.attr("width",10)
+				.attr("height",10)
+				.attr("fill","#EFEFEF")
+				.attr("y",2);
 
 			self.agendaGroups.append("text")
 				.text(function(d,i)
@@ -62,7 +63,7 @@ define(RequireImports.new()
 
 			self.agendaGroups
 				.transition()
-				.duration(1500)
+				.duration(self.getDuration(1500))
 				.attr("opacity",1)
 				.attr("transform",function(d,i)
 				{
@@ -82,13 +83,13 @@ define(RequireImports.new()
 
 			self.agendaGroups.selectAll("rect")
 				.transition()
-				.duration(500)
-				.attr("stroke", function(d,i)
+				.duration(self.getDuration(500))
+				.attr("fill", function(d,i)
 				{
 					if (d == position)
 						return "#F00";
 					else
-						return "#000";
+						return "#EFEFEF";
 				})
 				.each("end",Transitions.cb(cb));
 		};

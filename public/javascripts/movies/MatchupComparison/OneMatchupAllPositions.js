@@ -4,7 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/control",["Command.js"])
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/movies",["MovieClip.js","MovieSequence.js"])
-	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js"])
+	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js","MatchupSummary.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -37,15 +37,14 @@ define(RequireImports.new()
 
 						var posComparison = new PosComparison(self.movie,position,self.matchup);
 						posComparison.setVisParent(self.vis);
-						posComparison.setPosition(80,110);
+						posComparison.setPosition(110,110);
 						posComparison.setResultId("comparison" + position);
 
 						commands.push(posComparison);
 						commands.push(posComparison.getRemoveCommand());
 					});
 
-					var sequence = new MovieSequence(self.movie,commands);
-					sequence.execute(null,cb);
+					self.run(commands,cb);
 				});
 			});
 		}

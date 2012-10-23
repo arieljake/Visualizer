@@ -35,7 +35,7 @@ define(RequireImports.new()
 			self.drawVs();
 
 			self.vis.transition()
-				.duration(1500)
+				.duration(self.getDuration(1500))
 				.attr("opacity",1)
 				.each("end", Transitions.cb(cb));
 		};
@@ -71,24 +71,10 @@ define(RequireImports.new()
 				.attr("x",44)
 				.attr("y",28);
 
-//			group.append("rect")
-//				.attr("stroke","#000")
-//				.attr("fill","#EEE")
-//				.attr("rx",5)
-//				.attr("ry",5)
-//				.attr("width",40)
-//				.attr("height",40);
-
 			group.append("image")
 				.attr("width","40px")
 				.attr("height","40px")
 				.attr("xlink:href","/images/teams/" + teamPerformance.getTeamId() + ".png");
-
-//			group.append("text")
-//				.text(teamPerformance.getActivePlayers().toPlayerCollection().getPointsScored())
-//				.attr("font-size",16)
-//				.attr("x",10)
-//				.attr("y",20);
 		}
 
 	})(window, "MatchupHeader");

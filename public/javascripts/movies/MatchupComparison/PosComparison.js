@@ -16,59 +16,89 @@ define(RequireImports.new()
 			this.movie = movie;
 			this.pos = pos;
 			this.teams = this.createTeams(params);
-			this.constants = {
-				bkgdWidth: 600,
-				bkgdFill: "#EEE",
-				teamGroupWidth: 300,
-				playerRowHeight: 50,
-				teamHeaderHeight: 40,
-				stats: [
+			this.constants = {};
+			this.constants.bkgdFill = "#EEE";
+			this.constants.bkgdWidth = 800;
+			this.constants.teamGroupWidth = 399;
+			this.constants.teamHeaderHeight = 30;
+			this.constants.playerRowHeight = 80;
+			this.constants.posStatsHeight = 50;
+			this.constants.posWinnerHeight = 30;
+			this.constants.playerRowY = this.constants.teamHeaderHeight + 1;
+			this.constants.posStatsY = this.constants.playerRowY + (this.constants.playerRowHeight * self.teams[0].playerColl.toArray().length) + 1;
+			this.constants.posWinnerY = this.constants.posStatsY + this.constants.posStatsHeight + 1;
+			this.constants.stats = [
 					{
-						label: "projected " + self.pos + " result",
-						fill: "#3C3",
+						name: "projected",
+						label: "projected " + self.pos + " result:",
+						fill: "#333",
 						y: 17,
-						calculate: function(team)
+						calculate: function()
 						{
-							var teamPlayers = team.playerColl;
+							var teamPlayers = self.teams[0].playerColl;
 							var teamProjection = teamPlayers.getPointsProjected();
 
-							var oppPlayers = team.opponent.playerColl;
+							var oppPlayers = self.teams[1].playerColl;
 							var oppProjection = oppPlayers.getPointsProjected();
 
 							if (teamProjection > oppProjection)
 							{
-								return "+ " + numFormat(teamProjection - oppProjection);
+								return {
+									winner: {
+										id: self.teams[0].id,
+										name: self.teams[0].name
+									},
+									diff: numFormat(teamProjection - oppProjection)
+								};
 							}
 							else
 							{
-								return "";
+								return {
+									winner: {
+										id: self.teams[1].id,
+										name: self.teams[1].name
+									},
+									diff: numFormat(oppProjection - teamProjection)
+								};
 							}
 						}
 					},
 					{
-						label: "actual " + self.pos + " result",
-						fill: "#360",
+						name: "actual",
+						label: "actual " + self.pos + " result:",
+						fill: "#333",
 						y: 42,
-						calculate: function(team)
+						calculate: function()
 						{
-							var teamPlayers = team.playerColl;
+							var teamPlayers = self.teams[0].playerColl;
 							var teamScore = teamPlayers.getPointsScored();
 
-							var oppPlayers = team.opponent.playerColl;
+							var oppPlayers = self.teams[1].playerColl;
 							var oppScore = oppPlayers.getPointsScored();
 
 							if (teamScore > oppScore)
 							{
-								return "+ " + numFormat(teamScore - oppScore);
+								return {
+									winner: {
+										id: self.teams[0].id,
+										name: self.teams[0].name
+									},
+									diff: numFormat(teamScore - oppScore)
+								}
 							}
 							else
 							{
-								return "";
+								return {
+									winner: {
+										id: self.teams[1].id,
+										name: self.teams[1].name
+									},
+									diff: numFormat(oppScore - teamScore)
+								}
 							}
 						}
 					}
-				]
-			}
+				];
 		};
 
 		scene.prototype = new MovieClip(varName);
@@ -87,6 +117,7 @@ define(RequireImports.new()
 				var matchup = params;
 
 				var team1 = {
+					id: matchup.getTeam1().getTeamId(),
 					name: matchup.getTeam1().getTeamName(),
 					playerColl: matchup.getTeam1().getActivePlayers().toPlayerCollection().filter(function(item)
 					{
@@ -95,6 +126,7 @@ define(RequireImports.new()
 				};
 
 				var team2 = {
+					id: matchup.getTeam2().getTeamId(),
 					name: matchup.getTeam2().getTeamName(),
 					playerColl: matchup.getTeam2().getActivePlayers().toPlayerCollection().filter(function(item)
 					{
@@ -132,7 +164,7 @@ define(RequireImports.new()
 				})
 				.attr("opacity",0)
 				.transition()
-				.duration(1000)
+				.duration(self.getDuration(1000))
 				.attr("opacity",1);
 
 			self.vis.append("path")
@@ -141,14 +173,14 @@ define(RequireImports.new()
 				.attr("stroke","#930")
 				.attr("stroke-width",2)
 				.transition()
-				.duration(1000)
+				.duration(self.getDuration(1000))
 				.attr("d","M 0 22 L " + self.constants.bkgdWidth + " 22 z")
 				.each("end",Transitions.cb(function()
 			{
 				self.contentSection = self.vis.append("g").classed("content",1)
 					.attr("transform", self.writeTranslate(0, 23));
 
-				self.callIn("showTeams",100,cb,self.teams);
+				self.callIn("showTeams",500,cb,self.teams);
 			}));
 		};
 
@@ -175,7 +207,7 @@ define(RequireImports.new()
 				.attr("fill","#333")
 				.attr("transform",self.writeTranslate(10,20));
 
-			self.callIn("showPlayers",1000,cb);
+			self.callIn("showPlayers",500,cb);
 		};
 
 		scene.prototype.showPlayers = function(params,cb)
@@ -184,12 +216,12 @@ define(RequireImports.new()
 
 			self.playerGroups = self.teamGroups.selectAll("g.player").data(function(d,i){ return d.playerColl.toArray(); }).enter().append("g").classed("player",1)
 				.attr("transform",function(d,i) {
-					return self.writeTranslate(0, self.constants.teamHeaderHeight + (self.constants.playerRowHeight * i));
+					return self.writeTranslate(0, self.constants.teamHeaderHeight + (self.constants.playerRowHeight * i) + 1);
 				});
 
 			self.playerGroups.append("rect")
 				.attr("width",self.constants.teamGroupWidth)
-				.attr("height",self.constants.playerRowHeight)
+				.attr("height",self.constants.playerRowHeight-1)
 				.attr("fill",self.constants.bkgdFill)
 				.attr("stroke","none");
 
@@ -200,10 +232,11 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			self.playerGroups.append("text")
-				.text("player: ")
-				.attr("font-size","9pt")
-				.attr("fill","#3C3")
+			self.playerGroups.append("rect")
+				.attr("width",45)
+				.attr("height",45)
+				.attr("stroke","#666")
+				.attr("fill", "#3C3")
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(10, 10);
 				});
@@ -213,62 +246,85 @@ define(RequireImports.new()
 					return d.getPlayerName();
 				})
 				.attr("font-size","9pt")
+				.attr("font-weight","bold")
 				.attr("fill","#360")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(75, 10);
+					return self.writeTranslate(10, 70);
 				});
 
-			self.callIn("showProjectedPoints",1000,cb);
+			self.showProjectedPoints(null,cb);
 		};
 
 		scene.prototype.showProjectedPoints = function(params,cb)
 		{
 			var self = this;
 
-			self.playerGroups.append("text")
-				.text("projected: ")
-				.attr("font-size","9pt")
-				.attr("fill","#3C3")
+			self.projectedPointGroups = self.playerGroups.append("g")
+				.classed("actualPointGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(10, 20);
+					return self.writeTranslate(100, 25);
 				});
 
-			self.playerGroups.append("text")
+			self.projectedPointGroups.append("text")
 				.text(function(d,i) {
-					return d.getProjectedPoints()
+					return d.getProjectedPoints();
 				})
-				.attr("font-size","9pt")
+				.attr("font-size","16pt")
 				.attr("fill","#360")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(75, 20);
+					return self.writeTranslate(0, 0);
 				});
 
-			self.callIn("showActualPoints",1000,cb);
+			self.projectedPointGroups.append("text")
+				.text("projected")
+				.attr("font-size","8pt")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(5, 15);
+				});
+
+			self.projectedPointGroups
+				.attr("opacity",0)
+				.transition()
+				.duration(self.getDuration(1250))
+				.attr("opacity",1);
+
+			self.showActualPoints(null,cb);
 		};
 
 		scene.prototype.showActualPoints = function(params,cb)
 		{
 			var self = this;
 
-			self.playerGroups.append("text")
-				.text("actual: ")
-				.attr("font-size","9pt")
-				.attr("fill","#3C3")
+			self.actualPointGroups = self.playerGroups.append("g")
+				.classed("actualPointGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(10, 30);
+					return self.writeTranslate(200, 25);
 				});
 
-			self.playerGroups.append("text")
+			self.actualPointGroups.append("text")
 				.text(function(d,i) {
-					return d.getActualPoints()
+					return d.getActualPoints();
 				})
-				.attr("font-size","9pt")
+				.attr("font-size","16pt")
 				.attr("fill","#360")
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(75, 30);
+					return self.writeTranslate(0, 0);
 				});
 
-			self.callIn("showPlayerSummary",1000,cb);
+			self.actualPointGroups.append("text")
+				.text("scored")
+				.attr("font-size","8pt")
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(5, 15);
+				});
+
+			self.actualPointGroups
+				.attr("opacity",0)
+				.transition()
+				.duration(self.getDuration(750))
+				.attr("opacity",1);
+
+			self.showPlayerSummary(null,cb);
 		};
 
 		scene.prototype.showPlayerSummary = function(params,cb)
@@ -278,7 +334,7 @@ define(RequireImports.new()
 			self.playerSummaryGroups = self.playerGroups.append("g")
 				.classed("summary",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(225, 15);
+					return self.writeTranslate(325, 25);
 				});
 
 			self.playerSummaryGroups.append("text")
@@ -294,11 +350,7 @@ define(RequireImports.new()
 				.attr("fill","#360")
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(0, 0);
-				})
-				.attr("opacity",0)
-				.transition()
-				.duration(1250)
-				.attr("opacity",1);
+				});
 
 			self.playerSummaryGroups.append("text")
 				.text(function(d,i)
@@ -313,77 +365,124 @@ define(RequireImports.new()
 				})
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(5, 15);
-				})
+				});
+
+			self.playerSummaryGroups
 				.attr("opacity",0)
 				.transition()
-				.duration(1250)
+				.duration(self.getDuration(1250))
 				.attr("opacity",1)
 				.each("end",Transitions.cb(function()
 			{
-				self.callIn("showPosSummary",1000,cb);
-			}));
+				self.callIn("showPosStats",250,cb);
+			}))
 		};
 
-		scene.prototype.showPosSummary = function(params,cb)
+		scene.prototype.showPosStats = function(params,cb)
 		{
 			var self = this;
 
-			self.posSummaryGroup = self.contentSection.append("g").classed("posSummaryGroup",1)
+			self.posStatsGroup = self.contentSection.append("g").classed("posStatsGroup",1)
 				.attr("transform", function(d,i) {
-					return self.writeTranslate(0,1 + self.constants.teamHeaderHeight + (self.constants.playerRowHeight * self.teams[0].playerColl.toArray().length));
+					return self.writeTranslate(0,self.constants.posStatsY);
 				});
 
-			self.posSummaryGroup.append("rect")
+			self.posStatsGroup.append("rect")
 				.attr("width",self.constants.bkgdWidth)
-				.attr("height",50)
+				.attr("height",self.constants.posStatsHeight)
 				.attr("fill",self.constants.bkgdFill)
 				.attr("stroke","none");
 
-			self.posSummaryStatGroups = self.posSummaryGroup.selectAll("g.posSummaryStatGroup").data(self.constants.stats).enter().append("g").classed("posSummaryStatGroup",1);
+			self.posStatGroups = self.posStatsGroup.selectAll("g.posStatGroup").data(self.constants.stats).enter().append("g").classed("posSummaryStatGroup",1);
 
-			self.posSummaryStatGroups.append("text")
+			self.posStatGroups.append("text")
 				.text(function(d,i) { return d.label; })
-				.attr("font-size","13pt")
+				.attr("font-size","10pt")
+				.attr("font-weight","bold")
 				.attr("fill",function(d,i) { return d.fill; })
 				.attr("transform", function(d,i) {
 					return self.writeTranslate(10, d.y);
 				});
 
-			self.valueGroups = self.posSummaryStatGroups.selectAll("g.value").data(self.teams).enter().append("g").classed("value",1)
-				.attr("transform", function(d,i,j) {
-					var stat = self.constants.stats[j];
-					var team = self.teams[i];
-					return self.writeTranslate(team.x + 195, stat.y);
-				});
-
-			self.valueGroups.append("text")
-				.text(function(d,i,j) {
-					var stat = self.constants.stats[j];
-					var team = self.teams[i];
-					return stat.calculate(team);
+			self.posStatGroups.append("text")
+				.text(function(d,i) {
+					var val = d.calculate();
+					return val.winner.name + " +" + val.diff;
 				})
-				.attr("font-size","13pt")
-				.attr("fill",function(d,i,j){
-					var stat = self.constants.stats[j];
-					var team = self.teams[i];
-					return stat.fill;
+				.attr("font-size","11pt")
+				.attr("fill",function(d,i) { return d.fill; })
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(150, d.y);
 				});
 
-			// DONE
-			setTimeout(function()
-			{
-				var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
-				pressSpacebar.execute({
-					x: 215,
-					y: 220
-				},function()
-				{
-					self.emit("end",{
-						
-					});
-				});
-			},4000);
+			self.callIn("showPosWinner",500,cb);
 		};
+
+		scene.prototype.showPosWinner = function(params,cb)
+		{
+			var self = this;
+
+			self.posWinnerGroup = self.contentSection.append("g").classed("posWinnerGroup",1)
+				.attr("transform", function(d,i) {
+					return self.writeTranslate(0,self.constants.posWinnerY);
+				});
+
+			self.posWinnerGroup.append("rect")
+				.attr("width",self.constants.bkgdWidth)
+				.attr("height",self.constants.posWinnerHeight)
+				.attr("fill",self.constants.bkgdFill)
+				.attr("stroke","none");
+
+			self.posWinnerGroup.append("text")
+				.text(self.pos + " clear winner (>3 points): ")
+				.attr("font-size","10pt")
+				.attr("font-weight","bold")
+				.attr("fill","#000")
+				.attr("transform", self.writeTranslate(10, 20));
+
+			var actualResult = self.constants.stats[1].calculate();
+
+			self.posWinnerGroup.append("text")
+				.text(function(d,i)
+				{
+					if (actualResult.diff > 3)
+					{
+						return actualResult.winner.name;
+					}
+					else
+					{
+						return "n/a";
+					}
+				})
+				.attr("font-size","11pt")
+				.attr("fill","#000")
+				.attr("transform", self.writeTranslate(150, 20));
+
+			self.callIn("waitForUserFinish",750,cb);
+		};
+
+		scene.prototype.waitForUserFinish = function(params,cb)
+		{
+			var self = this;
+
+			var pressSpacebar = new PressSpacebarToContinue(self.movie,self.vis);
+			pressSpacebar.execute({
+				x: 215,
+				y: 220
+			},function()
+			{
+				var results = {
+					position: self.pos
+				};
+
+				self.constants.stats.forEach(function(stat)
+				{
+					results[stat.name] = stat.calculate();
+				});
+
+				self.emit("end",results);
+			});
+		}
 
 	})(window, "PosComparison");
 });

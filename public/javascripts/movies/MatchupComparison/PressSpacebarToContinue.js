@@ -21,6 +21,13 @@ define(RequireImports.new()
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
+
+			if (self.movie.sceneInDevelopment(this))
+			{
+				cb();
+				return;
+			}
+
 			self.vis = self.createVis();
 
 			var rectX = params && params.x ? params.x : 0;
