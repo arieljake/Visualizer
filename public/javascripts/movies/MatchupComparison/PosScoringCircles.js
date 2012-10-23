@@ -155,10 +155,15 @@ define(RequireImports.new()
 						return player.getSlot() == slot;
 					});
 
-					teamData.children.push({
-						name: slot,
-						size: activePlayers.getPointsScored()
-					});
+					var score = activePlayers.getPointsScored();
+
+					if (score > 0)
+					{
+						teamData.children.push({
+							name: slot,
+							size: score
+						});
+					}
 
 					activePlayers.filter(null);
 				});
