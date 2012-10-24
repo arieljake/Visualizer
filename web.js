@@ -27,6 +27,14 @@ new WebApp(new WebAppDelegate(
 	{
 		configureRoutes: function (server)
 		{
+			server.get("/logs", function(req,res)
+			{
+				mongoDB.collection("log").find().toArray(function(err,items)
+				{
+					res.send(items);
+				})
+			})
+
 			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(server);
 			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({baseUrl: "/v",viewLookup: viewLookup})).attachToApp(server);
 			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(server);
