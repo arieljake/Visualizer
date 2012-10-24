@@ -1,6 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
+	.add("/javascripts/movies/Logs", ["Viewer.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -24,8 +25,11 @@ define(RequireImports.new()
 		{
 			var self = this;
 
-			return [];
+			return [
+
+				(new Viewer(self))
+			];
 		};
 
-	})(window, "EmptyMovie");
+	})(window, "LogsMovie");
 });

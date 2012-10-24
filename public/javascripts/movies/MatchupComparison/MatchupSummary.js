@@ -3,6 +3,7 @@
 define(RequireImports.new()
 	.add("/js-lib/js/control",["DelayCommand.js"])
 	.add("/js-lib/js/movies",["MovieClip.js"])
+	.add("/js-lib/js/logging",["Log.js"])
 	.add("/javascripts/movies/MatchupComparison",["PosBoxScore.js","PosScoringCircles.js","PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
@@ -48,7 +49,11 @@ define(RequireImports.new()
 				});
 				commands.push(new PressSpacebarToContinue(self.movie));
 
-				self.run(commands,cb);
+				self.run(commands,function()
+				{
+					Log.log("MatchupSummary displayed");
+					cb();
+				});
 			}));
 		}
 

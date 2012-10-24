@@ -84,13 +84,5 @@ define(RequireImports.new()
 			];
 		};
 
-		movie.prototype.play = function()
-		{
-			this.execute(null,function()
-			{
-				console.log("THE END");
-			});
-		}
-
 	})(window, "MatchupComparison");
 });

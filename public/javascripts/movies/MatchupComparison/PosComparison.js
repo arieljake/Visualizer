@@ -4,6 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/control", ["Command.js"])
 	.add("/js-lib/js/movies",["MovieClip.js"])
+	.add("/js-lib/js/logging",["Log.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -462,6 +463,8 @@ define(RequireImports.new()
 			{
 				results[stat.name] = stat.calculate();
 			});
+
+			Log.log("PosComparison displayed for " + self.pos);
 
 			self.emit("end",results);
 		}

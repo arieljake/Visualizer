@@ -2,6 +2,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies",["MovieClip.js"])
+	.add("/js-lib/js/logging",["Log.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -33,6 +34,10 @@ define(RequireImports.new()
 				.classed("description",1)
 				.text("send feedback to: arieljake@yahoo.com")
 				.attr("transform",self.writeTranslate(302,330));
+
+			Log.log("TheEnd displayed");
+
+			cb();
 		}
 
 	})(window, "TheEnd");
