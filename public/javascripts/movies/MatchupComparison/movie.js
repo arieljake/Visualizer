@@ -1,6 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
+	.add("/js-lib/js/datasources",["HTTPService.js"])
 	.add("/javascripts/movies/MatchupComparison", ["Intro.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js","TheEnd.js"])
 	.toArray(), function ()
 {
@@ -8,11 +9,16 @@ define(RequireImports.new()
 	{
 		var movie = context[movieName] = function (parentSelector)
 		{
+			var simpleDB = (new HTTPService("/values")).toIDatabase();
+
 			var startupParams = {
 				name: movieName,
 				parentSelector: parentSelector,
 				width: 1024,
 				height: 768,
+				databases: {
+					notesDB: simpleDB
+				},
 				constants: {
 					positionOrder: ["QB","WR","WR1","WR2","RB","RB1","RB2","TE","W/R","K","DEF"],
 					positionRed: "#FF4D4D",
@@ -23,7 +29,7 @@ define(RequireImports.new()
 					weekLightBlue: "#8087FF",
 					weekLightBlueGrayed: "#999"
 				},
-				curSceneInDev: null // null // "WeekSelection"
+				curSceneInDev: "WeekSelection" // null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);

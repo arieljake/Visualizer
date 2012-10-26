@@ -27,7 +27,7 @@ define(RequireImports.new()
 			var rectX = this.constants.rectX;
 			var rectY = this.constants.rectY;
 
-			if (self.movie.shortenTransitionsFor(this))
+			if (self.movie.eliminateTransitionsFor(this))
 			{
 				cb();
 				return;

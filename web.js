@@ -3,14 +3,12 @@ var WebAppDelegate = require("./lib/node-lib/express/WebAppDelegate.js");
 var lib = require("./lib");
 var IDatabase = require("./lib/node-lib/interfaces/IDatabase.js");
 var FantasyDB = require("./lib/node-lib/yahoo/FantasyDB.js");
-var SimpleDBService = require("./lib/node-lib/datasources/SimpleDBService.js");
+var MongoKeyValueStore = require("./lib/node-lib/datasources/MongoKeyValueStore.js");
 
-var mongoskin = require("mongoskin");
-var mongoURL = process.env.MONGO_URI || 'mongodb://localhost:27017/finances';
-var mongoDB = mongoskin.db(mongoURL);
-
-var simpleDB = new IDatabase(new SimpleDBService(mongoDB,"values"));
-var cacheDB = simpleDB;
+var mongoRepo = new MongoKeyValueStore(process.env.MONGO_URI || 'mongodb://localhost:27017/finances',"values");
+var mongoDB = mongoRepo.mongoDB;
+var simpleDB = mongoRepo.toIDatabase();
+var cacheDB = mongoRepo.toIDatabase();
 
 var webPort = process.env.PORT || 3000; // public: 3003
 var viewLookup = {
