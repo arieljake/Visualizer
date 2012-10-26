@@ -33,33 +33,9 @@ new WebApp(new WebAppDelegate(
 				})
 			});
 
-			server.get("/m/:movieId", function(req,res)
-			{
-				var movieId = req.params["movieId"];
-				var movieFilename = "movie";
-
-				if (req.query["episode"])
-				{
-					movieFilename += ".episode-" + req.query["episode"];
-				}
-
-				movieFilename += ".js";
-
-				if (movieId.length <= 2)
-				{
-					movieId = viewLookup[movieId] || movieId;
-				}
-
-				var params = {
-					movieId: movieId,
-					movieFilename: movieFilename
-				}
-
-				res.render("simpleMovieView",{title: "",params: params});
-			})
-
 			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(server);
 			var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({baseUrl: "/v",viewLookup: viewLookup})).attachToApp(server);
+			var simpleMovieRenderRoute = (new lib.routes.SimpleMovieRoutes({baseUrl: "/m",viewLookup: viewLookup})).attachToApp(server);
 			var postBase64ImageRoute = (new lib.routes.PostBase64ImageRoute(__dirname + "/public/images/uploads/")).attachToApp(server);
 			var cacheRoute = (new lib.routes.CacheRoute(simpleDB,"/cache")).attachToApp(server);
 			var loggingRoute = (new lib.routes.LoggingRoute(mongoDB)).attachToApp(server);
