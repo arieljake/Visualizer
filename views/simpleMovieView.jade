@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div#movie
+
+  - jsonVal = "var movieParams = " + JSON.stringify(params) + ";";
+
+  script
+    !{jsonVal}
+
+  include ../public/javascripts/views/simpleMovieView.html

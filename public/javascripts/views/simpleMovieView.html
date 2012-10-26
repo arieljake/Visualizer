@@ -1,0 +1,20 @@
+<script type="text/javascript">
+
+	var movieId = movieParams.movieId;
+	var movieFilename = movieParams.movieFilename;
+	var movieConstructorId = movieId.charAt(0).toUpperCase() + movieId.slice(1);
+
+	require(RequireImports.new()
+		.add("/javascripts/movies/" + movieId, [movieFilename])
+		.toArray(), function()
+	{
+		if (window.curMovie == undefined)
+		{
+			var curMovieConstructor = window[movieConstructorId];
+
+			window.curMovie = new curMovieConstructor("#movie");
+			window.curMovie.play();
+		}
+	});
+
+</script>

@@ -31,6 +31,31 @@ new WebApp(new WebAppDelegate(
 				{
 					res.send(items);
 				})
+			});
+
+			server.get("/m/:movieId", function(req,res)
+			{
+				var movieId = req.params["movieId"];
+				var movieFilename = "movie";
+
+				if (req.query["episode"])
+				{
+					movieFilename += ".episode-" + req.query["episode"];
+				}
+
+				movieFilename += ".js";
+
+				if (movieId.length <= 2)
+				{
+					movieId = viewLookup[movieId] || movieId;
+				}
+
+				var params = {
+					movieId: movieId,
+					movieFilename: movieFilename
+				}
+
+				res.render("simpleMovieView",{title: "",params: params});
 			})
 
 			var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(server);
