@@ -27,8 +27,14 @@ define(RequireImports.new()
 				self.vis = self.createVis();
 				self.logEntryList = self.vis.append("g").classed("logEntryList",1).attr("transform",self.writeTranslate(0,25));
 
+				self.addFilter();
 				self.showPage(Math.ceil(self.data.length / self.constants.pageSize));
 			});
+		};
+
+		scene.prototype.addFilter = function()
+		{
+
 		};
 
 		scene.prototype.showPage = function(pageNo)
@@ -52,7 +58,7 @@ define(RequireImports.new()
 				})
 				.attr("transform",function(d,i)
 				{
-					return self.writeTranslate(10,25*i);
+					return self.writeTranslate(10,20*i);
 				});
 
 			logEntries.append("text")
@@ -66,7 +72,7 @@ define(RequireImports.new()
 				{
 					return new Date(d.timestamp).toDateString();
 				})
-				.attr("x",20);
+				.attr("x",30);
 
 			logEntries.each(self.appendLogOutput)
 		};
