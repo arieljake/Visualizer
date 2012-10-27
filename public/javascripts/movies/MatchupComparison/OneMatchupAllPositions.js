@@ -4,7 +4,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/control",["Command.js"])
 	.add("/js-lib/js/yahoo/10model/",["Matchup.js"])
 	.add("/js-lib/js/movies",["MovieClip.js","MovieSequence.js"])
-	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js","MatchupSummary.js","PressSpacebarToContinue.js","Notes.js"])
+	.add("/javascripts/movies/MatchupComparison",["MatchupHeader.js","PositionsAgenda.js","PosComparison.js","MatchupSummary.js","PressSpacebarToContinue.js"])
 	.toArray(),function()
 {
 	(function (varContext, varName)
@@ -27,8 +27,6 @@ define(RequireImports.new()
 
 			self.header.execute(null,function()
 			{
-				(new Notes(self.movie)).setPosition(650,0).execute();
-
 				self.vis.append("text")
 					.classed("title",1)
 					.text("Point Breakdown by position")
