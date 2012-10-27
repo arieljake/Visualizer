@@ -2,7 +2,7 @@
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
 	.add("/js-lib/js/datasources",["HTTPService.js"])
-	.add("/javascripts/movies/MatchupComparison", ["Intro.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js","TheEnd.js"])
+	.add("/javascripts/movies/MatchupComparison", ["EpisodeIntro.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","OneMatchupAllPositions.js","TheEnd.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -43,6 +43,7 @@ define(RequireImports.new()
 
 			return [
 
+				(new EpisodeIntro(self,1)),
 				(new WeekSelection(self)).setPosition(25,50).setResultId("selectedWeek"),
 				(new ClearMovieVis(self)),
 				function()

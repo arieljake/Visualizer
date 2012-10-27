@@ -3,7 +3,7 @@ define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
 	.add("/js-lib/js/datasources",["HTTPService.js"])
 	.add("/javascripts/movies/MatchupComparison", ["EpisodeIntro.js","WeekSelection.js","ClearMovieVis.js","MatchupSelection.js","TheEnd.js"])
-	.add("/javascripts/movies/MatchupComparison/episode-1", ["OneMatchupAllPositions.js"])
+	.add("/javascripts/movies/MatchupComparison/episode-notes", ["OneMatchupAllPositions.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)

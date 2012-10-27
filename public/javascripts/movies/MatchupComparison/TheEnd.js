@@ -33,7 +33,7 @@ define(RequireImports.new()
 			self.vis.append("text")
 				.classed("description",1)
 				.text("send feedback to: arieljake@yahoo.com")
-				.attr("transform",self.writeTranslate(302,330));
+				.attr("transform",self.writeTranslate(302,335));
 
 			Log.log("TheEnd displayed");
 
