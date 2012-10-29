@@ -72,7 +72,7 @@ define(RequireImports.new()
 						{
 							return d.id != team.id;
 						}).transition()
-							.duration(1500)
+							.duration(self.getDuration(1500))
 							.attr("opacity",0);
 
 						var selectedTeamGroup = self.teamGroups.filter(function(d,i)
@@ -81,12 +81,14 @@ define(RequireImports.new()
 						});
 
 						selectedTeamGroup.transition()
-							.duration(1500)
+							.duration(self.getDuration(1500))
 							.attr("transform",self.writeTranslate(10,self.movie.constants.lowerSectionY + 10))
 							.each("end",self.transitionCB(function()
 						{
 							selectedTeamGroup.select("text")
 								.attr("fill","#FFF");
+
+							cb(null,selectedTeamGroup.data()[0]);
 						}));
 					})
 				}))

@@ -1,7 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
-	.add("/javascripts/movies/Episode2", ["LeagueTitle.js","EpisodeIntro.js","Background.js","TeamSelection.js"])
+	.add("/javascripts/movies/Episode2", ["EpisodeIntro.js","LeagueTitle.js","TeamSelection.js","Episode1Control.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -19,7 +19,7 @@ define(RequireImports.new()
 				constants: {
 					lowerSectionY: 210
 				},
-				curSceneInDev: "TeamSelection" // null // "WeekSelection"
+				curSceneInDev: "PosScoringCircles" // "TeamSelection" // null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);
@@ -35,7 +35,8 @@ define(RequireImports.new()
 
 				(new EpisodeIntro(self,2)),
 				(new LeagueTitle(self)),
-				(new TeamSelection(self))
+				(new TeamSelection(self)).setResultId("selectedTeam"),
+				(new Episode1Control(self))
 			];
 		};
 
