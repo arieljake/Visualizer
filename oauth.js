@@ -2,47 +2,43 @@ var express = require('express')
 	, passport = require('passport')
 	, util = require('util')
 	, YahooStrategy = require('passport-yahoo-oauth').Strategy
-	, MongoStore = require('connect-mongo')(express);
+	, MongoStore = require('connect-mongo')(express)
+	, MongoKeyValueStore = require("./lib/node-lib/datasources/MongoKeyValueStore.js");
 
+var userDB = new MongoKeyValueStore("mongodb://localhost:27017/finances?auto_reconnect=true","users");
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete Yahoo profile is serialized
-//   and deserialized.
-passport.serializeUser(function(user, done) {
-	done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-	done(null, obj);
-});
-
-
-// Use the YahooStrategy within Passport.
-//   Strategies in passport require a `validate` function, which accept
-//   credentials (in this case, an OpenID identifier and profile), and invoke a
-//   callback with a user object.
 var yahooStrategy = new YahooStrategy({
 		consumerKey: "dj0yJmk9S1gzNjE4UmpqTTZDJmQ9WVdrOWJHNXVhV3MzTnpZbWNHbzlNVGt6TmpFMk5UazJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hZQ--",
 		consumerSecret: "bcc80fdae468c8a800e9fdd1a011284b7d68ced6",
 		callbackURL: 'http://localhost:3000/auth/yahoo/callback'
 	},
 	function(token, tokenSecret, profile, done) {
-		console.log("HI");
-		yahooStrategy.get = function(url,cb)
-		{
-			yahooStrategy._oauth.get(url, token, tokenSecret, cb);
-		}
-		return done(null, profile._raw);
+		profile._json.oauth = {
+			token: token,
+			tokenSecret: tokenSecret
+		};
+
+		return done(null, profile._json);
 	}
 );
 
+passport.serializeUser(function(user, done)
+{
+	userDB.set(user.profile.uri,user,function(err,result)
+	{
+		done(null, user);
+	});
+});
+
+passport.deserializeUser(function(user, done) {
+
+	userDB.get(user.profile.uri,function(err,data)
+	{
+		done(null, data);
+	});
+});
+
 passport.use(yahooStrategy);
-
-
 
 
 var app = express();
@@ -113,6 +109,25 @@ app.get('/logout', function(req, res){
 app.get('/test', function(req, res)
 {
 	yahooStrategy.get("http://query.yahooapis.com/v1/yql?q=select * from fantasysports.leagues where league_key='nfl.l.623546'", function (err, body, response)
+	{
+		if (err) { return res.send(err); }
+
+		try {
+			res.send(body);
+		} catch(e) {
+			res.send(e);
+		}
+	});
+});
+
+app.get('/test/standings', function(req, res)
+{
+	var user = req.session.passport.user;
+	var url = "http://query.yahooapis.com/v1/yql?q=select * from fantasysports.leagues.standings where league_key='nfl.l.623546'&format=json";
+	var token = user.oauth.token;
+	var tokenSecret = user.oauth.tokenSecret;
+
+	yahooStrategy._oauth.get(url, token, tokenSecret, function (err, body, response)
 	{
 		if (err) { return res.send(err); }
 
