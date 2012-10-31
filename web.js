@@ -1,3 +1,5 @@
+var _ = require("underscore");
+
 var WebApp = require("./lib/node-lib/express/WebApp.js");
 var lib = require("./lib");
 var IDatabase = require("./lib/node-lib/interfaces/IDatabase.js");
@@ -52,6 +54,14 @@ webApp.init({
 				res.send(items);
 			})
 		});
+
+		app.get("/user/profile/yahoo", function(req,res)
+		{
+			if (req.user)
+				res.send(req.user.profile);
+			else
+				res.send(null);
+		})
 
 		var simpleSaveRoute = (new lib.routes.SimpleSaveRoute(simpleDB,"/values")).attachToApp(app);
 		var simpleViewRenderRoute = (new lib.routes.SimpleViewRenderRoute({baseUrl: "/v",viewLookup: viewLookup})).attachToApp(app);

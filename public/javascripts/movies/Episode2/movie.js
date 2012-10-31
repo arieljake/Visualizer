@@ -1,7 +1,7 @@
 
 define(RequireImports.new()
 	.add("/js-lib/js/movies", ["Movie.js"])
-	.add("/javascripts/movies/Episode2", ["EpisodeIntro.js","LeagueTitle.js","TeamSelection.js","Episode1Control.js"])
+	.add("/javascripts/movies/Episode2", ["AuthorizeYahoo.js","EpisodeIntro.js","LeagueTitle.js","TeamSelection.js","Episode1Control.js"])
 	.toArray(), function ()
 {
 	(function (context, movieName)
@@ -33,6 +33,7 @@ define(RequireImports.new()
 
 			return [
 
+				(new AuthorizeYahoo(self)),
 				(new EpisodeIntro(self,2)),
 				(new LeagueTitle(self)),
 				(new TeamSelection(self)).setResultId("selectedTeam"),
