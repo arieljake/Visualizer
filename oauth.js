@@ -139,6 +139,25 @@ app.get('/test/standings', function(req, res)
 	});
 })
 
+app.get('/test/rosterStats', function(req, res)
+{
+	var user = req.session.passport.user;
+	var url = "http://query.yahooapis.com/v1/yql?q=select * from fantasysports.teams.roster.stats where team_key='nfl.l.623546.t.6' and week=7&format=json";
+	var token = user.oauth.token;
+	var tokenSecret = user.oauth.tokenSecret;
+
+	yahooStrategy._oauth.get(url, token, tokenSecret, function (err, body, response)
+	{
+		if (err) { return res.send(err); }
+
+		try {
+			res.send(body);
+		} catch(e) {
+			res.send(e);
+		}
+	});
+})
+
 app.listen(3000);
 
 

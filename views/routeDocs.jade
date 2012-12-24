@@ -1,0 +1,94 @@
+extends layout
+
+block content
+  span see http://www.mashery.com/product/io-docs
+  div.header
+    div.heading(id="resource") Resource
+    div.heading(id="details") Details
+    div.heading(id="params") Params
+  div.routes
+    each route in routes
+      div.route
+        span.verb !{route.verb}
+        span.path !{route.path}
+        span.isCached !{route.isCached ? "cached" : ""}
+        span.firstFnCall !{route.firstFnCall ? '> ' + route.firstFnCall : ""}
+        span.params
+          - if (route.params)
+            = _.keys(route.params)
+
+  style
+    body {
+      font: 13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;
+      border-left: 10px solid #CCC;
+      padding-top: 10px;
+    }
+
+    div {
+      padding-left: 5px;
+    }
+
+    div.header {
+      height: 30px;
+      color: #000;
+      font-weight: bold;
+      border-bottom: 1px solid #000;
+    }
+
+    div.heading {
+      display: inline;
+      position: absolute;
+    }
+
+    div#details {
+      left: 410px;
+    }
+
+    div#params {
+      left: 720px;
+    }
+
+    div.route {
+      position: relative;
+      border-bottom: 1px solid #CCC;
+      min-height: 75px;
+    }
+
+    div.route:hover {
+      background-color: #EEE;
+    }
+
+    div.route span {
+      color: #14C;
+    }
+
+    span.verb {
+      display: inline-block;
+      text-transform: uppercase;
+      padding-right: 10px;
+    }
+
+    span.path {
+      left: 20px;
+      padding-right: 10px;
+    }
+
+    span.isCached {
+      font-weight: bold;
+      color: #000 !important;
+      font-size: 9pt;
+    }
+
+    span.firstFnCall {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 400px;
+    }
+
+    span.params {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 700px;
+    }

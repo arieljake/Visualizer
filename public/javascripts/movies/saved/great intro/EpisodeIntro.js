@@ -26,48 +26,59 @@ define(RequireImports.new()
 				.append("feGaussianBlur")
 				.attr("stdDeviation",2.0);
 
-			self.introGroup = self.vis.append("g")
+			self.logoGroup = self.vis.append("g")
 				.classed("logoGroup",1)
 				.attr("id","logo")
-				.attr("opacity",1)
 				.style("filter","url(#logo_blur)")
+				.attr("opacity",0)
 				.attr("transform",self.writeTranslate(300,300));
 
-			var h1 = self.introGroup.append("text")
+			self.logoGroup.append("text")
 				.classed("express",1)
-				.attr("opacity",0)
 				.text("episode: " + self.episodeNo);
 
-			var h2 = self.introGroup.append("text")
+			self.logoGroup.append("text")
 				.classed("description",1)
-				.attr("opacity",0)
 				.text("positional strength analysis")
 				.attr("transform",self.writeTranslate(2,35));
+
+			self.logoGroup.transition()
+				.duration(self.getDuration(2000))
+				.attr("opacity",1)
+				.each("end", self.transitionCB(function()
+			{
+
+			}));
 
 			self.logoBlur.transition()
 				.duration(self.getDuration(2000))
 				.attr("stdDeviation",0)
 				.each("end", self.transitionCB(function()
 			{
-
+				self.callIn("moveLogoUp",0,cb);
 			}));
+		}
 
-			h1.transition()
-				.duration(self.getDuration(2000))
-				.attr("opacity",1);
+		scene.prototype.moveLogoUp = function(params,cb)
+		{
+			var self = this;
 
-			h2.transition()
-				.delay(1300)
-				.duration(self.getDuration(1700))
-				.attr("opacity",1)
-				.each("end", self.transitionCB(function()
+			self.logoGroup.transition()
+				.duration(self.getDuration(1500))
+				.attr("transform",self.writeTranslate(300,100));
+
+			setTimeout(function()
 			{
-				self.introGroup.transition()
-					.delay(500)
-					.duration(self.getDuration(1000))
-					.attr("opacity",0)
-					.each("end", self.transitionCB(cb));
-			}));
+				var background = (new Background(self.movie));
+				background.execute(null,function()
+				{
+					self.logoGroup.transition()
+						.duration(self.getDuration(1000))
+						.attr("opacity",0)
+						.each("end", self.transitionCB(cb));
+				});
+
+			},self.getDuration(1000));
 		}
 
 	})(window, "EpisodeIntro");

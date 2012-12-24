@@ -17,9 +17,9 @@ define(RequireImports.new()
 
 				},
 				constants: {
-					lowerSectionY: 210
+					lowerSectionY: 300
 				},
-				curSceneInDev: "PosScoringCircles" // "TeamSelection" // null // "WeekSelection"
+				curSceneInDev: null // "TeamSelection" // null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);
@@ -35,8 +35,6 @@ define(RequireImports.new()
 
 				(new AuthorizeYahoo(self)),
 				(new EpisodeIntro(self,2)),
-				(new LeagueTitle(self)),
-				(new TeamSelection(self)).setResultId("selectedTeam"),
 				(new Episode1Control(self))
 			];
 		};

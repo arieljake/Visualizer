@@ -12,6 +12,11 @@ define(RequireImports.new()
 		{
 			this.movie = movie;
 			this.matchupParams = matchupParams;
+
+			if (!matchupParams.weekNo)
+			{
+				throw "missing param weekNo";
+			}
 		};
 
 		scene.prototype = new MovieClip(varName);
@@ -19,8 +24,9 @@ define(RequireImports.new()
 		scene.prototype.execute = function(params,cb)
 		{
 			var self = this;
+			var weekNo = self.matchupParams.weekNo;
 
-			Matchups.get(self.matchupParams,function(err,matchups)
+			Matchups.getForWeek(weekNo,function(err,matchups)
 			{
 				self.data = matchups;
 				self.vis = self.createVis();

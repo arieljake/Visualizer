@@ -30,7 +30,7 @@ define(RequireImports.new()
 					weekLightBlue: "#8087FF",
 					weekLightBlueGrayed: "#999"
 				},
-				curSceneInDev: "WeekSelection" // null // "WeekSelection"
+				curSceneInDev: null // "WeekSelection"
 			};
 
 			Movie.call(this,startupParams);
